@@ -6,21 +6,21 @@ function Navigation() {
     <div className="fixed flex w-full  justify-center bg-primary z-50">
       <nav className="justify-between items-center flex max-w-screen-xl w-full">
         <Image src="/logo.png" width={110} height={87} />
-        <div className="links text-white flex items-center font-semibold">
+        <div className="text-white flex items-center font-semibold">
           <a className="mr-8 ml-8 text-[#35bfff]">Home</a>
           <a className="mr-8 ml-8">Game</a>
           <a className="mr-8 ml-8">Services</a>
           <a className="mr-8 ml-8">Shop</a>
         </div>
-        <div className="search w-80 relative">
+        <div className="relative flex items-center flex-row-reverse">
           <input
             type="search"
             placeholder="Search"
-            className="rounded-full bg-[#201e3c] text-white py-2 w-80 px-8 outline-none pl-10 font-semibold"
+            className="rounded-full bg-[#201e3c] text-white hidden lg:block py-2 w-80 px-8 outline-none pl-10 font-semibold lg:-ml-7"
           />
           <Icon
             type="icon-loupe"
-            className="absolute text-white left-3 top-1 text-xl cursor-pointer"
+            className="text-white text-2xl lg:text-base cursor-pointer"
           />
         </div>
 

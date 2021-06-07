@@ -1,4 +1,5 @@
 import FeaturedGames from '@components/Homepage/FeaturedGames';
+import GameExplorer from '@components/Homepage/GameExplorer';
 import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';
 import axios from 'axios';
@@ -23,6 +24,7 @@ export default function Home({ featured }) {
       <Navigation />
       <Hero />
       <FeaturedGames games={featured} />
+      <GameExplorer />
     </div>
   );
 }
