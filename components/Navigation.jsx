@@ -4,7 +4,7 @@ import Icon from './UI/Icon';
 function Navigation() {
   return (
     <div className="fixed flex w-full  justify-center bg-primary z-50">
-      <nav className="justify-between items-center flex max-w-screen-xl w-full">
+      <nav className="justify-between items-center flex max-w-screen-2xl w-full">
         <Image src="/logo.png" width={110} height={87} />
         <div className="text-white flex items-center font-semibold">
           <a className="mr-8 ml-8 text-[#35bfff]">Home</a>
@@ -16,7 +16,7 @@ function Navigation() {
           <input
             type="search"
             placeholder="Search"
-            className="rounded-full bg-[#201e3c] text-white hidden lg:block py-2 w-80 px-8 outline-none pl-10 font-semibold lg:-ml-7"
+            className="rounded-full bg-primaryLight text-white hidden lg:block py-2 w-80 px-8 outline-none pl-10 font-semibold lg:-ml-7"
           />
           <Icon
             type="icon-loupe"
