@@ -5,7 +5,11 @@ function Navigation() {
   return (
     <div className="fixed flex w-full  justify-center bg-primary z-50">
       <nav className="justify-between items-center flex max-w-screen-2xl w-full">
-        <Image src="/logo.png" width={110} height={87} />
+        <Image
+          src="https://links.savokos.com/gameportal/logo"
+          width={110}
+          height={87}
+        />
         <div className="text-white flex items-center font-semibold">
           <a className="mr-8 ml-8 text-[#35bfff]">Home</a>
           <a className="mr-8 ml-8">Game</a>

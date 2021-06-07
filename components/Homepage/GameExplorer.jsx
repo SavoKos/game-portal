@@ -1,10 +1,7 @@
 import Image from 'next/image';
 
 function GameExplorer({ games, gta }) {
-  console.log(games);
-  const background =
-    'https://res.cloudinary.com/demo/image/fetch/b_rgb:05021b,o_29/' +
-    gta.background_image_additional;
+  console.log(gta);
   return (
     <div className="bg-primary w-full flex justify-center flex-col max-w-screen-2xl m-auto">
       <div className="w-full m-auto mt-28">
@@ -16,7 +13,7 @@ function GameExplorer({ games, gta }) {
         <div
           className="w-60% h-[440px] shadow-white bg-primaryLight relative"
           style={{
-            backgroundImage: `url(${background})`,
+            backgroundImage: `url(${'https://links.savokos.com/gameportal/gtav-bg'})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
           }}
@@ -48,7 +45,11 @@ function GameExplorer({ games, gta }) {
             </button>
           </div>
           <div className="max-w-[400px] h-[510px] hidden md:block relative -top-1/4 shadow-white -left-3 bg-primaryLight explorer-gradient ">
-            <Image src={gta.background_image} layout="fill" objectFit="cover" />
+            <Image
+              src="https://links.savokos.com/gameportal/gtav-cover"
+              layout="fill"
+              objectFit="cover"
+            />
           </div>
         </div>
         {games.slice(7, 14).map(game => (
@@ -60,6 +61,7 @@ function GameExplorer({ games, gta }) {
               src={game.short_screenshots[1].image}
               className="hover-photo"
               layout="fill"
+              loading="eager"
               objectFit="cover"
             />
             <Image
