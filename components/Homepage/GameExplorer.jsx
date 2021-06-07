@@ -13,7 +13,7 @@ function GameExplorer({ games, gta }) {
         <div
           className="w-60% h-[440px] shadow-white bg-primaryLight relative"
           style={{
-            backgroundImage: `url(${'https://links.savokos.com/gameportal/gtav-bg'})`,
+            backgroundImage: `url(${'https://res.cloudinary.com/dicynt7ms/image/upload/b_rgb:05021b,o_29/v1623090955/game-portal/5f5a38a222252d996b18962806eed707_zqouax.jpg'})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
           }}
@@ -46,7 +46,7 @@ function GameExplorer({ games, gta }) {
           </div>
           <div className="max-w-[400px] h-[510px] hidden md:block relative -top-1/4 shadow-white -left-3 bg-primaryLight explorer-gradient ">
             <Image
-              src="https://links.savokos.com/gameportal/gtav-cover"
+              src="https://res.cloudinary.com/dicynt7ms/image/upload/c_scale,h_512/v1623091234/game-portal/84da2ac3fdfc6507807a1808595afb12_l0zxa0.jpg"
               layout="fill"
               objectFit="cover"
             />
