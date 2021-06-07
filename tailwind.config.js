@@ -8,7 +8,7 @@ module.exports = {
         primary: '#070426',
         primaryLight: '#201e3c',
         primaryLighter: '#090526',
-        capitalletter: '#35bfff',
+        seaBlue: '#35bfff',
       },
       inset: {
         '60%': '60%',

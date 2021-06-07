@@ -25,6 +25,11 @@ h1 {
   font-weight: 900;
 }
 
+h2 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
 p {
   font-size: 14px;
 }
@@ -88,4 +93,23 @@ h4 {
   transform: rotate(45deg) skew(10deg, 10deg);
   left: 1px;
   bottom: -10px;
+}
+
+.description {
+  width: 400px;
+  height: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-item .hover-photo {
+  display: none !important;
+}
+
+.game-item:hover .hover-photo {
+  display: block !important;
+}
+
+.game-item:hover .primary-photo {
+  display: none !important;
 }
