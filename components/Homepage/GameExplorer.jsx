@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 function GameExplorer({ games, gta }) {
-  console.log(gta);
+  console.log(games);
   return (
     <div className="bg-primary w-full flex justify-center flex-col max-w-screen-2xl m-auto">
       <div className="w-full m-auto mt-28">
@@ -46,7 +46,7 @@ function GameExplorer({ games, gta }) {
           </div>
           <div className="max-w-[400px] h-[510px] hidden md:block relative -top-1/4 shadow-white -left-3 bg-primaryLight explorer-gradient ">
             <Image
-              src="https://res.cloudinary.com/dicynt7ms/image/upload/c_scale,h_512/v1623091234/game-portal/84da2ac3fdfc6507807a1808595afb12_l0zxa0.jpg"
+              src="https://res.cloudinary.com/dicynt7ms/image/upload/c_scale,w_800,c_limit,q_100/v1623091234/game-portal/84da2ac3fdfc6507807a1808595afb12_l0zxa0.jpg"
               layout="fill"
               objectFit="cover"
             />
@@ -58,14 +58,14 @@ function GameExplorer({ games, gta }) {
             className="w-5/12 md:w-1/5 h-[440px] bg-primaryLight relative flex-wrap transform hover:scale-100 md:scale-90 md:hover:scale-105 shadow-white explorer-gradient flex-auto cursor-pointer  transition-all duration-300 game-item"
           >
             <Image
-              src={game.short_screenshots[1].image}
+              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${game.short_screenshots[1].image}`}
               className="hover-photo"
               layout="fill"
               loading="eager"
               objectFit="cover"
             />
             <Image
-              src={game.background_image}
+              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${game.background_image}`}
               layout="fill"
               objectFit="cover"
               className="primary-photo"

@@ -8,7 +8,11 @@ export default function FeaturedGames({ games }) {
           key={game.id}
           className="h-56 w-1/3 md:w-1/5 relative cursor-pointer flex-auto featured-gradient"
         >
-          <Image src={game.background_image} layout="fill" objectFit="cover" />
+          <Image
+            src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_500/${game.background_image}`}
+            layout="fill"
+            objectFit="cover"
+          />
           <h3 className="absolute bottom-3 left-3 z-10 text-base md:text-xl">
             {game.name}
           </h3>

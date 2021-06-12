@@ -6,7 +6,7 @@ function Navigation() {
     <div className="fixed flex w-full  justify-center bg-primary z-50">
       <nav className="justify-between items-center flex max-w-screen-2xl w-full">
         <Image
-          src="https://links.savokos.com/gameportal/logo"
+          src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png"
           width={110}
           height={87}
         />
