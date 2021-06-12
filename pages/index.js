@@ -3,7 +3,7 @@ import GameExplorer from '@components/Homepage/GameExplorer';
 import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // export const getInitialProps = async () => {
 //   // featured games
@@ -37,22 +37,29 @@ const fetchData = async () => {
   }
 };
 
-export default function Home({ gta, games }) {
-  useEffect(async () => {}, []);
+export default function Home() {
+  const [gtaData, setGtaData] = useState({});
+  const [gamesData, setGamesData] = useState([]);
+  useEffect(async () => {
+    const { gta, games } = await fetchData();
+    console.log(gta, games);
+    setGtaData(gta);
+    setGamesData(games);
+  }, []);
   return (
     <div className="bg-primary">
       <Navigation />
       <Hero />
-      <FeaturedGames games={games} />
-      <GameExplorer games={games} gta={gta} />
+      <FeaturedGames games={gamesData} />
+      <GameExplorer games={gamesData} gta={gtaData} />
     </div>
   );
 }
 
-export const getServerSideProps = async () => {
-  const data = await fetchData();
+// export const getServerSideProps = async () => {
+//   const data = await fetchData();
 
-  return {
-    props: data,
-  };
-};
+//   return {
+//     props: data,
+//   };
+// };

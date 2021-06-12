@@ -21,17 +21,17 @@ function GameExplorer({ games, gta }) {
           <div className="absolute -top-24 left-1/2 flex items-center">
             <h2 className="text-gray-700">RATING</h2>
             <div className="bg-seaBlue w-16 h-16 rounded-[50%] grid place-items-center mx-5">
-              <h3 className="text-white font-bold">{gta.rating}</h3>
+              <h3 className="text-white font-bold">{gta?.rating}</h3>
             </div>
           </div>
           <div className="text-white absolute right-0 w-1/2 top-3">
             <h4 className="font-semibold text-gray-400">
-              {gta.released.slice(0, 4)}
+              {gta?.released?.slice(0, 4)}
             </h4>
-            <h2 className="font-bold text-3xl uppercase my-5">{gta.name}</h2>
-            <p className="description">{gta.description_raw}</p>
+            <h2 className="font-bold text-3xl uppercase my-5">{gta?.name}</h2>
+            <p className="description">{gta?.description_raw}</p>
             <div className="flex max-w-[400px] flex-wrap items-center justify-center mt-4 font-poppins font-light">
-              {gta.tags.slice(0, 5).map(tag => (
+              {gta?.tags?.slice(0, 5).map(tag => (
                 <p
                   key={tag.id}
                   className="flex-auto w-1/3 m-1 rounded-3xl bg-white text-center bg-opacity-10 p-2 font-normal font-poppins cursor-pointer hover:bg-seaBlue transition-all duration-300"
@@ -52,7 +52,7 @@ function GameExplorer({ games, gta }) {
             />
           </div>
         </div>
-        {games.slice(7, 14).map(game => (
+        {games?.slice(7, 14).map(game => (
           <div
             key={game.id}
             className="w-5/12 md:w-1/5 h-[440px] bg-primaryLight relative flex-wrap transform hover:scale-100 md:scale-90 md:hover:scale-105 shadow-white explorer-gradient flex-auto cursor-pointer  transition-all duration-300 game-item"
