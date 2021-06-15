@@ -9,7 +9,7 @@ const fetchData = async () => {
     const [gta, games] = await Promise.all([
       fetch('gtavdata.json').then(res => res.json()),
       fetch(
-        'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&metacritic=80,100&dates=2015-01-01,2999-01-01'
+        'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&dates=2020-09-30,2999-01-01&platforms=18,1,7'
       ).then(res => res.json()),
     ]);
 

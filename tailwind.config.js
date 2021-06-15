@@ -49,6 +49,7 @@ module.exports = {
           'sans-serif',
         ],
       },
+      scale: { 101: '1.01' },
     },
   },
   variants: {
