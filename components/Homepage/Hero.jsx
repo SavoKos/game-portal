@@ -4,7 +4,7 @@ function Hero() {
   return (
     <div className="h-screen w-full overflow-hidden pointer-events-none z-10 relative">
       <Image
-        src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090716/game-portal/home-hero_zdjvsv.png"
+        src="https://res.cloudinary.com/dicynt7ms/image/upload/f_webp/v1623090716/game-portal/home-hero_zdjvsv.png"
         layout="fill"
         objectFit="cover"
       />

@@ -13,7 +13,7 @@ function GameExplorer({ games, gta }) {
         <div
           className="w-60% h-[440px] shadow-white bg-primaryLight relative"
           style={{
-            backgroundImage: `url(${'https://res.cloudinary.com/dicynt7ms/image/upload/b_rgb:05021b,o_29/v1623090955/game-portal/5f5a38a222252d996b18962806eed707_zqouax.jpg'})`,
+            backgroundImage: `url(${'https://res.cloudinary.com/dicynt7ms/image/upload/b_rgb:05021b,o_29,f_webp/v1623090955/game-portal/5f5a38a222252d996b18962806eed707_zqouax.jpg'})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
           }}
