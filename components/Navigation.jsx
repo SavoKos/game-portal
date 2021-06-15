@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import Image from 'next/image';
 import Icon from './UI/Icon';
 
@@ -7,8 +8,10 @@ function Navigation() {
       <nav className="justify-between items-center flex max-w-screen-2xl w-full">
         <Image
           src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png"
+          className="cursor-pointer"
           width={110}
           height={87}
+          onClick={() => Router.push('/')}
         />
         <div className="text-white flex items-center font-semibold">
           <a className="mr-8 ml-8 text-[#35bfff]">Home</a>
