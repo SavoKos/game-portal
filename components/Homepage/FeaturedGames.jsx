@@ -9,6 +9,7 @@ export default function FeaturedGames({ games }) {
           className="h-56 w-1/3 md:w-1/5 relative cursor-pointer flex-auto featured-gradient"
         >
           <Image
+            placeholder="blur"
             src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_500/${game.background_image}`}
             layout="fill"
             objectFit="cover"

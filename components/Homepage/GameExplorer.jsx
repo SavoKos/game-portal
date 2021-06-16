@@ -98,6 +98,7 @@ function GameExplorer({ games, gta }) {
           </div>
           <div className="max-w-[400px] h-[510px] hidden md:block relative -top-1/4 shadow-white -left-3 bg-primaryLight explorer-gradient ">
             <Image
+              placeholder="blur"
               src="https://res.cloudinary.com/dicynt7ms/image/upload/c_scale,w_800,c_limit,q_100/v1623091234/game-portal/84da2ac3fdfc6507807a1808595afb12_l0zxa0.jpg"
               layout="fill"
               objectFit="cover"
@@ -112,6 +113,7 @@ function GameExplorer({ games, gta }) {
           >
             {gamePlatforms(game.platforms)}
             <Image
+              placeholder="blur"
               src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${
                 game.short_screenshots[1]?.image ||
                 game.short_screenshots[0]?.image
@@ -122,6 +124,7 @@ function GameExplorer({ games, gta }) {
               objectFit="cover"
             />
             <Image
+              placeholder="blur"
               src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${game.background_image}`}
               layout="fill"
               objectFit="cover"
