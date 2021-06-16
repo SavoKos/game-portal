@@ -113,3 +113,8 @@ h4 {
 .game-item:hover .primary-photo {
   display: none !important;
 }
+
+.sidebarActive {
+  transform: translateX(0);
+  transition: all ease 0.3s;
+}

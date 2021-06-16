@@ -76,7 +76,7 @@ function GameExplorer({ games, gta }) {
               <Stars rating={+Math.trunc(gta?.rating)} />
             </div>
           </div>
-          <div className="text-white absolute right-0 w-full md:w-1/2 top-3 md:block grid place-items-center">
+          <div className="text-white absolute right-0 w-full lg:w-1/2 top-3 lg:block grid place-items-center">
             <h4 className="font-semibold text-gray-400">
               {gta?.released?.slice(0, 4)}
             </h4>
@@ -96,7 +96,7 @@ function GameExplorer({ games, gta }) {
               More Info
             </button>
           </div>
-          <div className="max-w-[400px] h-[510px] hidden md:block relative -top-1/4 shadow-white -left-3 bg-primaryLight explorer-gradient ">
+          <div className="max-w-[400px] h-[510px] hidden lg:block relative -top-1/4 shadow-white -left-3 bg-primaryLight explorer-gradient ">
             <Image
               src="https://res.cloudinary.com/dicynt7ms/image/upload/c_scale,w_800,c_limit,q_100/v1623091234/game-portal/84da2ac3fdfc6507807a1808595afb12_l0zxa0.jpg"
               layout="fill"

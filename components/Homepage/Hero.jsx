@@ -1,8 +1,12 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 function Hero() {
   return (
-    <div className="h-screen w-full overflow-hidden pointer-events-none z-10 relative">
+    <div
+      className="h-screen w-full overflow-hidden pointer-events-none z-10 relative"
+      id="hero"
+    >
       <Image
         src="https://res.cloudinary.com/dicynt7ms/image/upload/f_webp/v1623090716/game-portal/home-hero_zdjvsv.png"
         layout="fill"
