@@ -68,7 +68,7 @@ function GameExplorer({ games, gta }) {
           }}
         >
           <div className="absolute -top-24 md:left-1/2 left-0 flex items-center">
-            <h2 className="text-gray-700">RATING</h2>
+            <h2 className="text-gray-700 text-2xl md:text-3xl">RATING</h2>
             <div className="bg-seaBlue w-16 h-16 rounded-[50%] grid place-items-center mx-5">
               <h3 className="text-white font-bold">{gta?.rating}</h3>
             </div>
@@ -81,7 +81,9 @@ function GameExplorer({ games, gta }) {
               {gta?.released?.slice(0, 4)}
             </h4>
             <h2 className="font-bold text-3xl uppercase my-5">{gta?.name}</h2>
-            <p className="description">{gta?.description_raw}</p>
+            <p className="description w-11/12 md:w-96">
+              {gta?.description_raw}
+            </p>
             <div className="flex max-w-[400px] flex-wrap items-center justify-center mt-4 font-poppins font-light">
               {gta?.tags?.slice(0, 5).map(tag => (
                 <p

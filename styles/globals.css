@@ -96,7 +96,6 @@ h4 {
 }
 
 .description {
-  width: 400px;
   height: 66px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -117,4 +116,14 @@ h4 {
 .sidebarActive {
   transform: translateX(0);
   transition: all ease 0.3s;
+}
+
+.error-bg {
+  background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/v1623851827/game-portal/errorBg_lnrwfj.png');
+  background-position: center;
+}
+
+#hero {
+  background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/f_webp/v1623090716/game-portal/home-hero_zdjvsv.png');
+  background-position: center;
 }

@@ -31,7 +31,7 @@ export default function Home() {
   }, []);
   return (
     <div className="bg-primary">
-      <Navigation />
+      <Navigation active="home" />
       <Hero />
       <FeaturedGames games={gamesData} />
       <GameExplorer games={gamesData} gta={gtaData} />

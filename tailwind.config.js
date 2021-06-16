@@ -17,6 +17,7 @@ module.exports = {
       spacing: {
         '60%': '60%',
       },
+      width: { '32rem': '32rem' },
       fontFamily: {
         poppins: [
           'Poppins',
@@ -50,6 +51,7 @@ module.exports = {
         ],
       },
       scale: { 101: '1.01' },
+      fontSize: { '21rem': '21rem', '12rem': '12rem' },
     },
   },
   variants: {

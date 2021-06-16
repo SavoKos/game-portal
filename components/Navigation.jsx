@@ -2,8 +2,9 @@ import Router from 'next/router';
 import Image from 'next/image';
 import Icon from './UI/Icon';
 import { useEffect, useState } from 'react';
+import NavItems from './NavItems';
 
-function Navigation() {
+function Navigation({ className = '', active }) {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => scrollHandler(), []);
@@ -18,6 +19,8 @@ function Navigation() {
 
     const observer = new IntersectionObserver(callback, options);
     const target = document.querySelector('#hero');
+    if (!target) return;
+
     let options = {
       root: null,
       threshold: 0.1,
@@ -30,7 +33,7 @@ function Navigation() {
     <div
       className={`fixed flex w-full  justify-center bg-primary z-50 ${
         isScrolled ? 'bg-opacity-80' : 'bg-opacity-0'
-      }`}
+      }${className}`}
     >
       <nav className="justify-between items-center flex max-w-screen-lg w-full px-7">
         <Image
@@ -40,11 +43,8 @@ function Navigation() {
           height={87}
           onClick={() => Router.push('/')}
         />
-        <div className="text-white items-center font-semibold hidden md:flex">
-          <a className="mr-8 ml-8 text-[#35bfff]">Home</a>
-          <a className="mr-8 ml-8">Game</a>
-          <a className="mr-8 ml-8">Services</a>
-          <a className="mr-8 ml-8">Shop</a>
+        <div className="text-white items-center font-semibold hidden md:flex space-x-10">
+          <NavItems active={active} />
         </div>
         <div className="relative flex items-center flex-row-reverse">
           <input
@@ -77,10 +77,7 @@ function Navigation() {
           }`}
         >
           <div className="text-white items-center text-3xl flex flex-col h-2/5 justify-between">
-            <a className="text-[#35bfff]">Home</a>
-            <a>Game</a>
-            <a>Services</a>
-            <a>Shop</a>
+            <NavItems active={active} />
           </div>
           <Icon
             type="icon-searchclose"

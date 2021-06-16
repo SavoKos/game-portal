@@ -7,7 +7,7 @@ function Stars({ rating = null }) {
   const starsArray = new Array(5).fill(
     <Icon
       type="icon-Halfstarssvg"
-      className="text-[#535068] text-2xl"
+      className="text-[#535068] text-xl md:text-2xl"
       key={uuid()}
     />
   );
@@ -17,7 +17,7 @@ function Stars({ rating = null }) {
       <Icon
         key={i}
         type="icon-Halfstarssvg"
-        className="text-seaBlue text-2xl"
+        className="text-seaBlue text-xl md:text-2xl"
       />
     );
 
