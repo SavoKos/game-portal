@@ -1,32 +1,24 @@
 import Navigation from '@components/Navigation';
 import Image from 'next/image';
 import Router from 'next/router';
+import styled from 'styled-components';
 
 function error({ errorCode = '404' }) {
   const displayErrorCode = () => {
     const errorCodeArray = errorCode.split('');
-    console.log(errorCodeArray);
     return errorCodeArray.map((digit, i) => {
       return (
-        <h1
-          key={i}
-          className={`font-poppins text-12rem lg:text-21rem font-semibold  relative ${
-            i === 0 && 'z-0'
-          }  ${i === 1 && 'text-seaBlue z-20'} ${i === 2 && 'z-20'}`}
-        >
+        <S.ErrorDigit digitInx={i} key={i}>
           {digit}
-        </h1>
+        </S.ErrorDigit>
       );
     });
   };
 
   return (
-    <div className="bg-primary h-screen error-bg relative flex items-center justify-center">
+    <S.ErrorPageContainer>
       <Navigation className=" self-start" />
-      <div
-        className="relative flex lg:w-32rem h-3/5 items-center text-white justify-center"
-        style={{ minWidth: '24rem' }}
-      >
+      <S.MainContent>
         <Image
           src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623853800/game-portal/pngkit_assassin-png_503045_gbeww0.png"
           layout="fill"
@@ -34,19 +26,93 @@ function error({ errorCode = '404' }) {
           className="z-10"
         />
         {displayErrorCode()}
-        <div className="absolute -right-10 top-4 text-right tracking-wider">
-          <h1 className="font-normal">Oops!</h1>
-          <h5 className="text-gray-400 font-bold tracking-wider">Error</h5>
-        </div>
-        <button
-          className="absolute -bottom-10 text-lg border border-white px-8 py-2 rounded-full cursor-pointer"
-          onClick={() => Router.push('/')}
-        >
-          Home page
-        </button>
-      </div>
-    </div>
+        <S.ErrorText>
+          <h1>Oops!</h1>
+          <h5>Error</h5>
+        </S.ErrorText>
+        <button onClick={() => Router.push('/')}>Home page</button>
+      </S.MainContent>
+    </S.ErrorPageContainer>
   );
 }
+
+// -------------------------------------------------- styling ----------------------------------------------
+const S = {};
+S.ErrorPageContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.primary};
+  height: 100vh;
+  background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/v1623851827/game-portal/errorBg_lnrwfj.png');
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+S.MainContent = styled.div`
+  min-width: 24rem;
+  position: relative;
+  display: flex;
+  height: 60%;
+  align-items: center;
+  color: #fff;
+  justify-content: center;
+
+  button {
+    position: absolute;
+    bottom: -2.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    border: 1px solid #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+
+  @media (min-width: 1024px) {
+    width: 32rem;
+  }
+`;
+
+S.ErrorText = styled.div`
+  position: absolute;
+  right: -2.5rem;
+  top: 1rem;
+  text-align: right;
+  letter-spacing: 0.05em;
+
+  h1 {
+    font-weight: 400;
+  }
+
+  h5 {
+    color: rgb(156, 163, 175);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+`;
+
+S.ErrorDigit = styled.h1`
+  font-family: ${({ theme }) => theme.fontFamily.poppins};
+  font-size: 12rem;
+  font-weight: 600;
+  position: relative;
+  &::first-of-type {
+    z-index: 0;
+  }
+
+  &:nth-of-type(2) {
+    color: ${({ theme }) => theme.colors.seaBlue};
+    z-index: 20;
+  }
+
+  &:nth-of-type(3) {
+    z-index: 20;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 21rem;
+  }
+`;
 
 export default error;

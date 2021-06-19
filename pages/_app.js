@@ -1,9 +1,10 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import SCTheme from '../SCTheme';
 
 function Application({ Component, pageProps }) {
   return (
-    <>
+    <SCTheme>
       <Head>
         <title>Game Portal</title>
         <meta charSet="UTF-8" />
@@ -23,7 +24,7 @@ function Application({ Component, pageProps }) {
         <meta property="article:publisher" content="https://savokos.com" />
       </Head>
       <Component {...pageProps} />
-    </>
+    </SCTheme>
   );
 }
 

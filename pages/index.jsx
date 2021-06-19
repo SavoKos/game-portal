@@ -3,6 +3,7 @@ import GameExplorer from '@components/Homepage/GameExplorer';
 import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const fetchData = async () => {
   try {
@@ -29,12 +30,19 @@ export default function Home() {
     setGtaData(gta);
     setGamesData(games);
   }, []);
+
   return (
-    <div className="bg-primary">
+    <S.PageContainer>
       <Navigation active="home" />
       <Hero />
       <FeaturedGames games={gamesData} />
       <GameExplorer games={gamesData} gta={gtaData} />
-    </div>
+    </S.PageContainer>
   );
 }
+
+// -------------------------------------------------- styling ----------------------------------------------
+const S = {};
+S.PageContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.primary};
+`;
