@@ -23,7 +23,7 @@ const S = {};
 S.FeaturedContainer = styled.div`
   background-color: #000;
   width: 100%;
-  margin-top: -9rem;
+  margin-top: -6rem;
   display: flex;
   align-items: center;
   color: #fff;
