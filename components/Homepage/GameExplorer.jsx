@@ -6,8 +6,12 @@ import AliceCarousel from 'react-alice-carousel';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-function GameExplorer({ games, gta }) {
+function GameExplorer({
+  games,
+  customGameData: { gtav, cyberpunk, valhalla },
+}) {
   const [isCarouselIntersecting, setIsCarouselIntersecting] = useState(false);
+  console.log(gtav, cyberpunk);
 
   const carouselIntersectingHandler = () => {
     const callback = (entries, _) => {
@@ -18,6 +22,7 @@ function GameExplorer({ games, gta }) {
       });
     };
 
+    console.log(gtav?.description_raw);
     const options = {
       root: null,
       threshold: 0.2,
@@ -92,20 +97,20 @@ function GameExplorer({ games, gta }) {
         <div className="absolute -top-24 lg:left-1/2 left-0 flex items-center">
           <h2 className="text-gray-700 text-2xl md:text-3xl">RATING</h2>
           <div className="bg-seaBlue w-16 h-16 rounded-[50%] grid place-items-center mx-5">
-            <h3 className="text-white font-bold">{gta?.rating}</h3>
+            <h3 className="text-white font-bold">{gtav?.rating}</h3>
           </div>
           <div>
-            <Stars rating={+Math.trunc(gta?.rating)} />
+            <Stars rating={+Math.trunc(gtav?.rating)} />
           </div>
         </div>
         <div className="text-white absolute right-0 w-full lg:w-1/2 top-3 lg:block grid place-items-center">
           <h4 className="font-semibold text-gray-400">
-            {gta?.released?.slice(0, 4)}
+            {gtav?.released?.slice(0, 4)}
           </h4>
-          <h2 className="font-bold text-3xl uppercase my-5">{gta?.name}</h2>
-          <p className="description w-11/12 md:w-96">{gta?.description_raw}</p>
+          <h2 className="font-bold text-3xl uppercase my-5">{gtav?.name}</h2>
+          <p className="description w-11/12 md:w-96">{gtav?.description_raw}</p>
           <div className="flex max-w-[400px] flex-wrap items-center justify-center mt-4 font-poppins font-light">
-            {gta?.tags?.slice(0, 5).map(tag => (
+            {gtav?.tags?.slice(0, 5).map(tag => (
               <p
                 key={tag.id}
                 className="flex-auto w-1/3 m-1 rounded-3xl bg-white text-center bg-opacity-10 p-2 font-normal font-poppins cursor-pointer hover:bg-seaBlue transition-all duration-300"
@@ -169,20 +174,20 @@ function GameExplorer({ games, gta }) {
         <div className="absolute -top-24 md:left-1/2 left-0 flex items-center">
           <h2 className="text-gray-700 text-2xl md:text-3xl">RATING</h2>
           <div className="bg-seaBlue w-16 h-16 rounded-[50%] grid place-items-center mx-5">
-            <h3 className="text-white font-bold">{gta?.rating}</h3>
+            <h3 className="text-white font-bold">{gtav?.rating}</h3>
           </div>
           <div>
-            <Stars rating={+Math.trunc(gta?.rating)} />
+            <Stars rating={+Math.trunc(gtav?.rating)} />
           </div>
         </div>
         <div className="text-white absolute right-0 w-full lg:w-1/2 top-3 lg:block grid place-items-center">
           <h4 className="font-semibold text-gray-400">
-            {gta?.released?.slice(0, 4)}
+            {gtav?.released?.slice(0, 4)}
           </h4>
-          <h2 className="font-bold text-3xl uppercase my-5">{gta?.name}</h2>
-          <p className="description w-11/12 md:w-96">{gta?.description_raw}</p>
+          <h2 className="font-bold text-3xl uppercase my-5">{gtav?.name}</h2>
+          <p className="description w-11/12 md:w-96">{gtav?.description_raw}</p>
           <div className="flex max-w-[400px] flex-wrap items-center justify-center mt-4 font-poppins font-light">
-            {gta?.tags?.slice(0, 5).map(tag => (
+            {gtav?.tags?.slice(0, 5).map(tag => (
               <p
                 key={tag.id}
                 className="flex-auto w-1/3 m-1 rounded-3xl bg-white text-center bg-opacity-10 p-2 font-normal font-poppins cursor-pointer hover:bg-seaBlue transition-all duration-300"

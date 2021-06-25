@@ -4,10 +4,35 @@ import { v4 as uuid } from 'uuid';
 
 function Stars({ rating = null }) {
   if (!rating) return '';
+  console.log(rating);
 
-  const starsArray = new Array(5).fill(
-    <S.RatingStar type="icon-Halfstarssvg" className="star gray" key={uuid()} />
-  );
+  const starsArray = [
+    <S.RatingStar
+      type="icon-Halfstarssvg"
+      className="star gray"
+      key={uuid()}
+    />,
+    <S.RatingStar
+      type="icon-Halfstarssvg"
+      className="star gray"
+      key={uuid()}
+    />,
+    <S.RatingStar
+      type="icon-Halfstarssvg"
+      className="star gray"
+      key={uuid()}
+    />,
+    <S.RatingStar
+      type="icon-Halfstarssvg"
+      className="star gray"
+      key={uuid()}
+    />,
+    <S.RatingStar
+      type="icon-Halfstarssvg"
+      className="star gray"
+      key={uuid()}
+    />,
+  ];
 
   for (let i = 0; i < rating; i++)
     starsArray[i] = (

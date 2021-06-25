@@ -23,7 +23,7 @@ const S = {};
 S.FeaturedContainer = styled.div`
   background-color: #000;
   width: 100%;
-  margin-top: -7rem;
+  margin-top: -2rem;
   display: flex;
   align-items: center;
   color: #fff;
@@ -31,6 +31,10 @@ S.FeaturedContainer = styled.div`
   z-index: 0;
   flex-wrap: wrap;
   height: 14rem;
+
+  @media (min-width: 768px) and (min-height: 800px) {
+    margin-top: -9rem;
+  }
 `;
 
 S.FeaturedGame = styled.div`
