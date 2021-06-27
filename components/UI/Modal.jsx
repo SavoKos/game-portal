@@ -15,7 +15,11 @@ class Modal extends Component {
   render() {
     return (
       <>
-        <S.Modal className={this.props.active && 'active' + ' modal'}>
+        <S.Modal
+          className={
+            this.props.active && 'active' + ' modal ' + this.props.className
+          }
+        >
           <Icon
             type="icon-searchclose"
             className="close-modal"
@@ -50,13 +54,23 @@ S.Modal = styled.div`
   align-items: center;
   justify-content: center;
 
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  iframe {
+    z-index: 2;
+  }
+
   @media (max-width: 1200px) {
     width: 80%;
   }
 
   @media (max-width: 768px) {
     width: 90%;
-    padding: 40px;
 
     h1 {
       font-size: 22px;

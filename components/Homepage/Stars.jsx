@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 
 function Stars({ rating = null }) {
   if (!rating) return '';
-  console.log(rating);
 
   const starsArray = [
     <S.RatingStar

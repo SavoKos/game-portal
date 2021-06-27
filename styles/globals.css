@@ -68,9 +68,7 @@ h4 {
 }
 
 .description {
-  height: 66px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  letter-spacing: 1px;
 }
 
 .game-item .hover-photo {

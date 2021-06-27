@@ -15,13 +15,14 @@ function Hero() {
 // -------------------------------------------------- styling ----------------------------------------------
 const S = {};
 S.HeroContainer = styled.div`
-  height: 100vh;
+  min-height: 90vh;
   width: 100%;
   overflow: hidden;
   z-index: 10;
   position: relative;
   background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/f_webp/v1623090716/game-portal/home-hero_zdjvsv.png');
-  background-position: center;
+  background-position: bottom;
+  pointer-events: none;
 `;
 
 S.Hero = styled.div`

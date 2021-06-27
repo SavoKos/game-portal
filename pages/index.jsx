@@ -5,18 +5,19 @@ import Navigation from '@components/Navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GameTrailer from '@components/Homepage/GameTrailer';
+import Spinner from '@components/UI/Spinner';
 
 const fetchData = async () => {
   try {
-    const [customGameData, games] = await Promise.all([
-      fetch('/customGameData.json').then(res => res.json()),
+    const [customGamesData, games] = await Promise.all([
+      fetch('/customGamesData.json').then(res => res.json()),
       fetch(
-        'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&dates=2020-09-30,2999-01-01&platforms=18,1,7'
+        'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&dates=2020-09-30,2999-01-01&platforms=18,1,7&page_size=28'
       ).then(res => res.json()),
     ]);
 
     return {
-      fetchedCustomGameData: customGameData,
+      fetchedCustomGamesData: customGamesData,
       games: games.results,
     };
   } catch (error) {
@@ -25,21 +26,31 @@ const fetchData = async () => {
 };
 
 export default function Home() {
-  const [customGameData, setCustomGameData] = useState({});
+  const [customGamesData, setCustomGamesData] = useState({});
   const [gamesData, setGamesData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(async () => {
-    const { fetchedCustomGameData, games } = await fetchData();
-    setCustomGameData(fetchedCustomGameData);
+    const { fetchedCustomGamesData, games } = await fetchData();
+    setLoading(false);
+    setCustomGamesData(fetchedCustomGamesData);
     setGamesData(games);
   }, []);
+
+  if (loading)
+    return (
+      <S.LoadingScreen>
+        <Spinner />
+      </S.LoadingScreen>
+    );
 
   return (
     <S.PageContainer>
       <Navigation active="home" />
       <Hero />
       <FeaturedGames games={gamesData} />
-      <GameExplorer games={gamesData} customGameData={customGameData} />
-      <GameTrailer customGameData={customGameData} />
+      <GameExplorer games={gamesData} customGamesData={customGamesData} />
+      <GameTrailer customGamesData={customGamesData} />
     </S.PageContainer>
   );
 }
@@ -48,4 +59,12 @@ export default function Home() {
 const S = {};
 S.PageContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
+`;
+
+S.LoadingScreen = styled.div`
+  background-color: ${({ theme }) => theme.colors.primary};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 `;

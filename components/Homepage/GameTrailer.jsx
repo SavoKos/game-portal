@@ -1,12 +1,35 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GameTrailerItem from './GameTrailerItem';
 
-function GameTrailer({ customGameData: { gtav, cyberpunk, valhalla } }) {
-  return (
-    <S.VideoContainer>
-      <GameTrailerItem game={cyberpunk} />
-    </S.VideoContainer>
-  );
+function GameTrailer({ customGamesData: { gtav, cyberpunk, valhalla } }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  console.log(currentSlide);
+  const carouselItems = [
+    <GameTrailerItem
+      game={gtav}
+      changeSlide={setCurrentSlide}
+      currentSlide={currentSlide}
+    />,
+    <GameTrailerItem
+      game={cyberpunk}
+      changeSlide={setCurrentSlide}
+      currentSlide={currentSlide}
+    />,
+    <GameTrailerItem
+      game={valhalla}
+      changeSlide={setCurrentSlide}
+      currentSlide={currentSlide}
+    />,
+  ];
+
+  const displayCarouselItem = () => {
+    if (currentSlide < carouselItems.length) return carouselItems[currentSlide];
+    setCurrentSlide(carouselItems.length - 1);
+  };
+
+  return <S.VideoContainer>{displayCarouselItem()}</S.VideoContainer>;
 }
 
 export default GameTrailer;
