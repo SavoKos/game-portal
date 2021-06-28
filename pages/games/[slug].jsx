@@ -39,7 +39,7 @@ function Game({ game, errorCode }) {
           }`}
         >
           {src => (
-            <img
+            <Image
               src={src}
               alt="an image"
               className="hero-img"
