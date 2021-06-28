@@ -8,7 +8,10 @@ import styled from 'styled-components';
 function Navigation({ className = '', active }) {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  useEffect(() => scrollHandler(), []);
+  const target = document.querySelector('#hero');
+  useEffect(() => {
+    if (target) scrollHandler();
+  }, []);
 
   const scrollHandler = e => {
     const callback = (entries, _) => {
@@ -19,8 +22,6 @@ function Navigation({ className = '', active }) {
     };
 
     const observer = new IntersectionObserver(callback, options);
-    const target = document.querySelector('#hero');
-    if (!target) return;
 
     let options = {
       root: null,

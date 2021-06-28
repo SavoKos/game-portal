@@ -31,7 +31,7 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
   };
 
   const trailerThumbnailSrc = () =>
-    'https://res.cloudinary.com/dicynt7ms/image/upload/v1624636050/game-portal/' +
+    'https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,w_1500/v1624636050/game-portal/' +
     game?.trailer_thumbnail;
 
   return (
@@ -42,7 +42,7 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
         )}
         <S.PlayBtn onClick={() => setIsModalActive(true)}>
           <Image
-            src="https://res.cloudinary.com/dicynt7ms/image/upload/v1624627114/game-portal/play-btn_dnzyqo.png"
+            src="https://res.cloudinary.com/dicynt7ms/image/upload/c_limit/v1624627114/game-portal/play-btn_dnzyqo.png"
             objectFit="cover"
             width={150}
             height={150}

@@ -2,6 +2,7 @@ import Icon from '@components/UI/Icon';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Stars from './Stars';
+import Link from 'next/link';
 
 function GameExplorerItem({ games, customGameData }) {
   // returns label "NEW" if game is 10 months old or younger
@@ -57,7 +58,7 @@ function GameExplorerItem({ games, customGameData }) {
       <S.FeaturedGame
         className="shadow-white"
         style={{
-          backgroundImage: `url(${`https://res.cloudinary.com/dicynt7ms/image/upload/b_rgb:05021b,o_29,f_webp/v1623090955/game-portal/${customGameData?.background}`})`,
+          backgroundImage: `url(${`https://res.cloudinary.com/dicynt7ms/image/upload/b_rgb:05021b,o_29,f_webp,w_1200/v1623090955/game-portal/${customGameData?.background}`})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
@@ -80,44 +81,44 @@ function GameExplorerItem({ games, customGameData }) {
               <S.Tag key={tag.id}>{tag.name}</S.Tag>
             ))}
           </S.TagsContainer>
-          <S.MoreInfoBtn className="shadow-white">More Info</S.MoreInfoBtn>
+          <Link href={'/games/' + customGameData?.slug || ''}>
+            <S.MoreInfoBtn className="shadow-white">More Info</S.MoreInfoBtn>
+          </Link>
         </S.GameInfo>
-        <S.HoverImage className="explorer-gradient shadow-white">
+        <S.CoverImage className="explorer-gradient shadow-white">
           <Image
-            src={`https://res.cloudinary.com/dicynt7ms/image/upload/c_scale,c_limit,q_100/v1623091234/game-portal/${customGameData?.cover}`}
+            src={`https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_1000/v1623091234/game-portal/${customGameData?.cover}`}
             layout="fill"
             objectFit="cover"
           />
-        </S.HoverImage>
+        </S.CoverImage>
       </S.FeaturedGame>
       {/* List of featured games */}
       {games?.map(game => (
-        <div
-          key={game.id}
-          className="w-5/12 lg:w-1/5 h-[440px] bg-primaryLight relative flex-wrap transform hover:scale-100 lg:scale-90 lg:hover:scale-101 shadow-white explorer-gradient flex-auto cursor-pointer  transition-all duration-300 game-item"
-        >
-          {gamePlatforms(game.platforms)}
-          <Image
-            src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${
-              game.short_screenshots[1]?.image ||
-              game.short_screenshots[0]?.image
-            }`}
-            className="hover-photo"
-            layout="fill"
-            loading="eager"
-            objectFit="cover"
-          />
-          <Image
-            src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${game.background_image}`}
-            layout="fill"
-            objectFit="cover"
-            className="primary-photo"
-          />
-          <h5 className="absolute bottom-5 left-5 z-10 md:text-xl text-white font-bold text-xl font-poppins">
-            {game.name}
-          </h5>
-          {newGameCheck(+new Date(game.released))}
-        </div>
+        <Link href={'/games/' + game.slug || ''} key={game.id}>
+          <div className="w-5/12 lg:w-1/5 h-[440px] bg-primaryLight relative flex-wrap transform hover:scale-100 lg:scale-90 lg:hover:scale-101 shadow-white explorer-gradient flex-auto cursor-pointer  transition-all duration-300 game-item">
+            {gamePlatforms(game.platforms)}
+            <Image
+              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${
+                game.short_screenshots[1]?.image ||
+                game.short_screenshots[0]?.image
+              }`}
+              className="hover-photo"
+              layout="fill"
+              objectFit="cover"
+            />
+            <Image
+              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${game.background_image}`}
+              layout="fill"
+              objectFit="cover"
+              className="primary-photo"
+            />
+            <h5 className="absolute bottom-5 left-5 z-10 md:text-xl text-white font-bold text-xl font-poppins">
+              {game.name}
+            </h5>
+            {newGameCheck(+new Date(game.released))}
+          </div>
+        </Link>
       ))}
     </S.GameExplorerItem>
   );
@@ -262,7 +263,7 @@ S.MoreInfoBtn = styled.button`
   margin-top: 1.25rem;
 `;
 
-S.HoverImage = styled.div`
+S.CoverImage = styled.div`
   max-width: 400px;
   height: 510px;
   display: none;

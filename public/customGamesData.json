@@ -730,6 +730,7 @@
     "trailer_thumbnail": "a07f4c2dab611d69357f20f32435b1a2_foe0q0.jpg"
   },
   "farcry6": {
+    "slug": "far-cry-6",
     "released": "2021-10-07",
     "name_original": "Far Cry 6",
     "background_image": "https://media.rawg.io/media/games/5dd/5dd4d2dd986d2826800bc37fff64aa4f.jpg",
@@ -870,6 +871,7 @@
     "background": "51ea0a1c3aaa4b310cefd4ceec1ab75b_szn5sf.jpg"
   },
   "reddeadredemption2": {
+    "slug": "red-dead-redemption-2",
     "released": "2018-10-26",
     "name_original": "Red Dead Redemption 2",
     "background_image": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",

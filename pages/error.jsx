@@ -3,7 +3,8 @@ import Image from 'next/image';
 import Router from 'next/router';
 import styled from 'styled-components';
 
-function error({ errorCode = '404' }) {
+function error({ errorCode }) {
+  console.log(errorCode);
   const displayErrorCode = () => {
     const errorCodeArray = errorCode.split('');
     return errorCodeArray.map((digit, i) => {
@@ -35,6 +36,12 @@ function error({ errorCode = '404' }) {
     </S.ErrorPageContainer>
   );
 }
+
+error.getInitialProps = ({ query: { errorCode } }) => {
+  return {
+    errorCode: errorCode || '404',
+  };
+};
 
 // -------------------------------------------------- styling ----------------------------------------------
 const S = {};
