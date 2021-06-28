@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Icon from '@components/UI/Icon';
 import Modal from '@components/UI/Modal';
 import Stars from './Stars';
+import Link from 'next/link';
 import { useState } from 'react';
 
 function GameTrailerItem({ game, changeSlide, currentSlide }) {
@@ -14,10 +15,12 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
     const fullTitle = game?.name_original;
     const splittedTitle = fullTitle?.slice(fullTitle?.lastIndexOf(' ') + 1);
     return (
-      <h2>
-        {fullTitle?.slice(0, fullTitle?.indexOf(splittedTitle))}
-        <span>{splittedTitle}</span>
-      </h2>
+      <Link href={'/games/' + game?.slug || ''}>
+        <h2>
+          {fullTitle?.slice(0, fullTitle?.indexOf(splittedTitle))}
+          <span>{splittedTitle}</span>
+        </h2>
+      </Link>
     );
   };
 
@@ -233,6 +236,7 @@ S.Details = styled.div`
     font-size: 35px;
     font-weight: 400;
     margin: 20px 0;
+    cursor: pointer;
   }
 
   .description {

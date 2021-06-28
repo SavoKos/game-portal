@@ -5,6 +5,7 @@ const theme = {
   colors: {
     primary: 'rgb(7, 4, 38)',
     primaryOpacity90: 'rgba(7, 4, 38, 0.9)',
+    primaryOpacity50: 'rgba(7, 4, 38, 0.5)',
     primaryLight: '#201e3c',
     primaryLighter: '#090526',
     seaBlue: '#35bfff',

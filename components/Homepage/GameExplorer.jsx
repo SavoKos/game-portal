@@ -102,9 +102,10 @@ S.GameExplorerContainer = styled.div`
   }
 
   .carousel-nav-btn {
-    color: #fff;
+    color: #d9d9d9;
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.seaBlue + 'd1'};
+    border: 2px solid #d9d9d9;
+    background-color: transparent;
     padding: 0.75rem;
     border-radius: 50%;
     font-size: 1.5rem;

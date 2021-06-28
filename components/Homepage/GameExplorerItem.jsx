@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import Stars from './Stars';
 import Link from 'next/link';
+import OptimizedImage from '@components/OptimizedImage';
 
 function GameExplorerItem({ games, customGameData }) {
   // returns label "NEW" if game is 10 months old or younger
@@ -86,10 +87,11 @@ function GameExplorerItem({ games, customGameData }) {
           </Link>
         </S.GameInfo>
         <S.CoverImage className="explorer-gradient shadow-white">
-          <Image
-            src={`https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_1000/v1623091234/game-portal/${customGameData?.cover}`}
+          <OptimizedImage
             layout="fill"
             objectFit="cover"
+            img={`https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_1000/v1623091234/game-portal/${customGameData?.cover}`}
+            placeholder={`https://res.cloudinary.com/dicynt7ms/image/upload/w_100,q_10/v1623091234/game-portal/${customGameData?.cover} `}
           />
         </S.CoverImage>
       </S.FeaturedGame>
@@ -97,7 +99,10 @@ function GameExplorerItem({ games, customGameData }) {
       {games?.map(game => (
         <Link href={'/games/' + game.slug || ''} key={game.id}>
           <div className="w-5/12 lg:w-1/5 h-[440px] bg-primaryLight relative flex-wrap transform hover:scale-100 lg:scale-90 lg:hover:scale-101 shadow-white explorer-gradient flex-auto cursor-pointer  transition-all duration-300 game-item">
-            {gamePlatforms(game.platforms)}
+            <S.LabelsContainer>
+              {gamePlatforms(game.platforms)}
+              {newGameCheck(+new Date(game.released))}
+            </S.LabelsContainer>
             <Image
               src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${
                 game.short_screenshots[1]?.image ||
@@ -116,7 +121,6 @@ function GameExplorerItem({ games, customGameData }) {
             <h5 className="absolute bottom-5 left-5 z-10 md:text-xl text-white font-bold text-xl font-poppins">
               {game.name}
             </h5>
-            {newGameCheck(+new Date(game.released))}
           </div>
         </Link>
       ))}
@@ -277,25 +281,26 @@ S.CoverImage = styled.div`
   }
 `;
 
-S.NewLabel = styled.div`
+S.LabelsContainer = styled.div`
   position: absolute;
-  right: 1.25rem;
+  left: 1.25rem;
   top: 1.25rem;
-  background-color: rgba(5, 150, 105);
   z-index: 10;
+`;
+
+S.NewLabel = styled.div`
+  background-color: rgba(5, 150, 105);
   border-radius: 1.5rem;
   padding: 0.5rem 1.5rem;
+  width: fit-content;
+  margin-top: 0.5rem;
   color: #fff;
   font-weight: 600;
   display: block;
 `;
 
 S.PlatformContainer = styled.div`
-  position: absolute;
-  left: 1.25rem;
-  top: 1.25rem;
   background-color: rgba(17, 24, 39, 0.5);
-  z-index: 10;
   border-radius: 1.5rem;
   display: flex;
   align-items: center;

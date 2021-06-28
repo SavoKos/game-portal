@@ -8,8 +8,9 @@ import styled from 'styled-components';
 function Navigation({ className = '', active }) {
   const [sidebarActive, setSidebarActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const target = document.querySelector('#hero');
+  const [target, setTarget] = useState(null);
   useEffect(() => {
+    setTarget(document?.querySelector('#hero'));
     if (target) scrollHandler();
   }, []);
 
