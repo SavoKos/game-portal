@@ -1,23 +1,18 @@
 import Spinner from '@components/UI/Spinner';
 import Router from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Navigation from '@components/Navigation';
 import Image from 'next/image';
-import ProgressiveImage from 'react-progressive-image';
+
 function Game({ game, errorCode }) {
-  const [loading, setLoading] = useState(true);
-  console.log(game.gameDetails);
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
-  console.log(errorCode);
 
   useEffect(() => {
-    console.log(errorCode);
     if (isError) Router.push('/error');
-    setLoading(false);
   }, []);
 
-  if (loading || isError)
+  if (isError)
     return (
       <S.Error>
         <Spinner />
@@ -28,57 +23,51 @@ function Game({ game, errorCode }) {
     <S.PageContainer>
       <Navigation />
       <S.Hero id="hero">
-        <ProgressiveImage
+        <Image
           src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_1280/${
             game.gameDetails.background_image ||
             game.gameDetails.background_image_additional
           }`}
-          placeholder={`https://res.cloudinary.com/demo/image/fetch/q_10:444,w_100/${
-            game.gameDetails.background_image ||
-            game.gameDetails.background_image_additional
-          }`}
-        >
-          {src => (
-            <Image
-              src={src}
-              alt="an image"
-              className="hero-img"
-              objectFit="cover"
-              layout="fill"
-              objectPosition="top"
-            />
-          )}
-        </ProgressiveImage>
-
+          alt="an image"
+          className="hero-img"
+          objectFit="cover"
+          layout="fill"
+          objectPosition="top"
+        />
         <S.HeroContent></S.HeroContent>
       </S.Hero>
     </S.PageContainer>
   );
 }
 
-Game.getInitialProps = async ({ query: { slug } }) => {
-  const APIKey = 'ffc0c5b2524a475993fa130a0f55334c';
-  const [gameDetails, franchise, trailers] = await Promise.all([
-    fetch(
-      encodeURI(`https://api.rawg.io/api/games/${slug}?key=${APIKey}`)
-    ).then(res => res.json()),
-    fetch(
-      encodeURI(
-        `https://api.rawg.io/api/games/${slug}/game-series?key=${APIKey}`
-      )
-    ).then(res => res.json()),
-    fetch(
-      encodeURI(`https://api.rawg.io/api/games/${slug}/movies?key=${APIKey}`)
-    ).then(res => res.json()),
-  ]);
+export const getServerSideProps = async ({ query: { slug } }) => {
+  try {
+    const APIKey = 'ffc0c5b2524a475993fa130a0f55334c';
+    const [gameDetails, franchise, trailers] = await Promise.all([
+      fetch(
+        encodeURI(`https://api.rawg.io/api/games/${slug}?key=${APIKey}`)
+      ).then(res => res.json()),
+      fetch(
+        encodeURI(
+          `https://api.rawg.io/api/games/${slug}/game-series?key=${APIKey}`
+        )
+      ).then(res => res.json()),
+      fetch(
+        encodeURI(`https://api.rawg.io/api/games/${slug}/movies?key=${APIKey}`)
+      ).then(res => res.json()),
+    ]);
 
-  const isError = typeof gameDetails === 'object' ? false : true;
-  if (isError) return { errorCode: 404 };
+    if (!gameDetails.name) return { props: { errorCode: 404 } };
 
-  return {
-    game: { gameDetails, franchise, trailers },
-    errorCode: 200,
-  };
+    return {
+      props: {
+        game: { gameDetails, franchise, trailers },
+        errorCode: 200,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // -------------------------------------------------- styling ----------------------------------------------

@@ -4,7 +4,6 @@ import Router from 'next/router';
 import styled from 'styled-components';
 
 function error({ errorCode }) {
-  console.log(errorCode);
   const displayErrorCode = () => {
     const errorCodeArray = errorCode.split('');
     return errorCodeArray.map((digit, i) => {
