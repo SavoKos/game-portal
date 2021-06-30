@@ -66,7 +66,7 @@ export const getServerSideProps = async ({ query: { slug } }) => {
       },
     };
   } catch (error) {
-    console.log(error);
+    return { props: error };
   }
 };
 
