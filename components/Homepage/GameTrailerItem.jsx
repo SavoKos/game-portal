@@ -38,7 +38,7 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
     game?.trailer_thumbnail;
 
   return (
-    <S.GameTrailerItem className="animate__animated animate__jello">
+    <S.GameTrailerItem>
       <S.Image>
         {game?.trailer_thumbnail && (
           <Image src={trailerThumbnailSrc()} objectFit="cover" layout="fill" />

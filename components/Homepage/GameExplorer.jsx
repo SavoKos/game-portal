@@ -8,6 +8,7 @@ import GameExplorerItem from './GameExplorerItem';
 
 function GameExplorer({ games, customGamesData }) {
   const [isCarouselIntersecting, setIsCarouselIntersecting] = useState(false);
+  console.log(isCarouselIntersecting);
 
   const carouselIntersectingHandler = () => {
     const callback = (entries, _) => {
@@ -21,6 +22,7 @@ function GameExplorer({ games, customGamesData }) {
     const screenWidth =
       window.innerWidth || document.querySelector('body').clientWidth;
     const threshold = screenWidth > 1000 ? 0.5 : 0.2;
+    console.log(threshold);
 
     const options = {
       root: null,

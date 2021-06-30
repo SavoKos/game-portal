@@ -1,21 +1,23 @@
 import Router from 'next/router';
+import styled from 'styled-components';
 
 function NavItems({ active }) {
   return (
     <>
-      <a
-        className={(active === 'home' && 'text-[#35bfff]') || ''}
-        onClick={() => Router.push('/')}
-      >
+      <S.NavItem active={active === 'home'} onClick={() => Router.push('/')}>
         Home
-      </a>
-      <a className={(active === 'game' && 'text-[#35bfff]') || ''}>Game</a>
-      <a className={(active === 'services' && 'text-[#35bfff]') || ''}>
-        Services
-      </a>
-      <a className={(active === 'shop' && 'text-[#35bfff]') || ''}>Shop</a>
+      </S.NavItem>
+      <S.NavItem active={active === 'game'}>Game</S.NavItem>
+      <S.NavItem active={active === 'services'}>Services</S.NavItem>
+      <S.NavItem active={active === 'shop'}>Shop</S.NavItem>
     </>
   );
 }
+
+// -------------------------------------------------- styling ----------------------------------------------
+const S = {};
+S.NavItem = styled.a`
+  color: ${({ active, theme }) => (active ? theme.colors.seaBlue : '#fff')};
+`;
 
 export default NavItems;

@@ -3,9 +3,8 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import Stars from './Stars';
 import Link from 'next/link';
-import OptimizedImage from '@components/OptimizedImage';
 
-function GameExplorerItem({ games, customGameData }) {
+function GameExplorerItems({ games, customGameData }) {
   // returns label "NEW" if game is 10 months old or younger
   const newGameCheck = (date = 1000) => {
     // 1 month has 2629743 sec
@@ -55,7 +54,7 @@ function GameExplorerItem({ games, customGameData }) {
   };
 
   return (
-    <S.GameExplorerItem>
+    <S.GameExplorerItems>
       <S.FeaturedGame
         className="shadow-white"
         style={{
@@ -87,18 +86,17 @@ function GameExplorerItem({ games, customGameData }) {
           </Link>
         </S.GameInfo>
         <S.CoverImage className="explorer-gradient shadow-white">
-          <OptimizedImage
+          <Image
             layout="fill"
             objectFit="cover"
-            img={`https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_1000/v1623091234/game-portal/${customGameData?.cover}`}
-            placeholder={`https://res.cloudinary.com/dicynt7ms/image/upload/w_100,q_10/v1623091234/game-portal/${customGameData?.cover} `}
+            src={`https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_1000/v1623091234/game-portal/${customGameData?.cover}`}
           />
         </S.CoverImage>
       </S.FeaturedGame>
       {/* List of featured games */}
       {games?.map(game => (
         <Link href={'/games/' + game.slug || ''} key={game.id}>
-          <div className="w-5/12 lg:w-1/5 h-[440px] bg-primaryLight relative flex-wrap transform hover:scale-100 lg:scale-90 lg:hover:scale-101 shadow-white explorer-gradient flex-auto cursor-pointer  transition-all duration-300 game-item">
+          <S.GameExplorerItem className="shadow-white explorer-gradient game-item">
             <S.LabelsContainer>
               {gamePlatforms(game.platforms)}
               {newGameCheck(+new Date(game.released))}
@@ -118,20 +116,18 @@ function GameExplorerItem({ games, customGameData }) {
               objectFit="cover"
               className="primary-photo"
             />
-            <h5 className="absolute bottom-5 left-5 z-10 md:text-xl text-white font-bold text-xl font-poppins">
-              {game.name}
-            </h5>
-          </div>
+            <h3 className="game-name">{game.name}</h3>
+          </S.GameExplorerItem>
         </Link>
       ))}
-    </S.GameExplorerItem>
+    </S.GameExplorerItems>
   );
 }
 
 // -------------------------------------------------- styling ----------------------------------------------
 const S = {};
 
-S.GameExplorerItem = styled.div`
+S.GameExplorerItems = styled.div`
   flex-wrap: wrap;
   padding-bottom: 11rem;
   justify-content: center;
@@ -256,8 +252,6 @@ S.Tag = styled.p`
   }
 `;
 
-// className="max-w-[400px] h-[510px] hidden lg:block relative -top-1/4 shadow-white -left-3 bg-primaryLight"
-
 S.MoreInfoBtn = styled.button`
   background-color: ${({ theme }) => theme.colors.seaBlue};
   outline: 0;
@@ -265,6 +259,8 @@ S.MoreInfoBtn = styled.button`
   font-weight: 600;
   border-radius: 1.5rem;
   margin-top: 1.25rem;
+  border: 0;
+  color: #fff;
 `;
 
 S.CoverImage = styled.div`
@@ -310,11 +306,45 @@ S.PlatformContainer = styled.div`
   font-weight: 600;
 
   .anticon {
-    margin-right: 0.25rem;
-    margin-left: 0.25rem;
+    margin: 0.25rem;
     font-size: 1.125rem;
+    line-height: 0;
+  }
+`;
+
+S.GameExplorerItem = styled.div`
+  width: 50%;
+  height: 250px;
+  background-color: ${({ theme }) => theme.colors.primaryLight};
+  position: relative;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  cursor: pointer;
+  transition: all ease 0.3s;
+
+  &:hover {
+    transform: scale(1);
+  }
+
+  @media (min-width: 1024px) {
+    height: 440px;
+    width: 20%;
+    transform: scale(0.9);
+
+    &:hover {
+      transform: scale(1.01);
+    }
+  }
+
+  .game-name {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 10;
+    color: #fff;
+    font-size: 1.25rem;
     line-height: 1.75rem;
   }
 `;
 
-export default GameExplorerItem;
+export default GameExplorerItems;

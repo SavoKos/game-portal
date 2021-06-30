@@ -17,13 +17,13 @@ function error({ errorCode }) {
 
   return (
     <S.ErrorPageContainer>
-      <Navigation className=" self-start" />
+      <Navigation className="navigation" />
       <S.MainContent>
         <Image
           src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623853800/game-portal/pngkit_assassin-png_503045_gbeww0.png"
           layout="fill"
           objectFit="cover"
-          className="z-10"
+          className="hero-bg"
         />
         {displayErrorCode()}
         <S.ErrorText>
@@ -53,6 +53,10 @@ S.ErrorPageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .navigation {
+    align-self: flex-start;
+  }
 `;
 
 S.MainContent = styled.div`
@@ -63,6 +67,10 @@ S.MainContent = styled.div`
   align-items: center;
   color: #fff;
   justify-content: center;
+
+  .hero-img {
+    z-index: 10;
+  }
 
   button {
     position: absolute;

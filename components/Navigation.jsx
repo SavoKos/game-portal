@@ -42,7 +42,7 @@ function Navigation({ className = '', active }) {
           height={87}
           onClick={() => Router.push('/')}
         />
-        <S.NavItems className="space-x-10">
+        <S.NavItems>
           <NavItems active={active} />
         </S.NavItems>
         <S.RightSideNav>
@@ -140,7 +140,9 @@ S.RightSideNav = styled.div`
     background-color: ${({ theme }) => theme.colors.primaryLight};
     color: #fff;
     display: none;
-    padding: 0.5rem 2rem;
+    padding: 0.7rem 2rem;
+    border: 0;
+    font-size: 16px;
     width: 20rem;
     outline: none;
     padding-left: 2.5rem;
@@ -156,6 +158,7 @@ S.RightSideNav = styled.div`
     .anticon.loupe {
       font-size: 1rem;
       line-height: 1.5rem;
+      line-height: 0;
     }
 
     .anticon.menu {

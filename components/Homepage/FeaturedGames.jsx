@@ -45,8 +45,8 @@ S.FeaturedGame = styled.div`
 
   h3 {
     position: absolute;
-    bottom: 0.75rem;
-    left: 0.75rem;
+    bottom: 1rem;
+    left: 1rem;
     z-index: 10;
     font-size: 1rem;
     line-height: 1.5rem;

@@ -30,7 +30,6 @@ function Application({ Component, pageProps }) {
       <Head>
         <title>Game Portal</title>
         <meta charSet="UTF-8" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Game Portal. Place " />
         <meta
