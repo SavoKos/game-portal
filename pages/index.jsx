@@ -29,7 +29,11 @@ export const getStaticProps = async () => {
     ]);
 
     return {
-      props: { fetchedCustomGamesData: customGamesData, games: games.results },
+      props: {
+        fetchedCustomGamesData: customGamesData,
+        games: games.results,
+        fallback: false,
+      },
     };
   } catch (error) {
     return {
