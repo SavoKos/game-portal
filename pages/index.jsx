@@ -11,7 +11,8 @@ export default function Home() {
   const [gamesData, setGamesData] = useState([]);
 
   useEffect(async () => {
-    const { fetchedCustomGamesData, games } = await fetchData();
+    const { fetchedCustomGamesData, games, error } = await fetchData();
+    console.log(error);
     setCustomGamesData(fetchedCustomGamesData);
     setGamesData(games);
   }, []);
@@ -30,9 +31,7 @@ export default function Home() {
 const fetchData = async () => {
   try {
     const [customGamesData, games] = await Promise.all([
-      fetch('http://localhost:3000/customGamesData.json').then(res =>
-        res.json()
-      ),
+      fetch('/customGamesData.json').then(res => res.json()),
       fetch(
         'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&dates=2020-09-30,2999-01-01&platforms=18,1,7&page_size=28'
       ).then(res => res.json()),
