@@ -4,20 +4,30 @@ import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';
 import styled from 'styled-components';
 import GameTrailer from '@components/Homepage/GameTrailer';
+import { useEffect, useState } from 'react';
 
-export default function Home({ fetchedCustomGamesData, games }) {
+export default function Home() {
+  const [customGamesData, setCustomGamesData] = useState({});
+  const [gamesData, setGamesData] = useState([]);
+
+  useEffect(async () => {
+    const { fetchedCustomGamesData, games } = await fetchData();
+    setCustomGamesData(fetchedCustomGamesData);
+    setGamesData(games);
+  }, []);
+
   return (
     <S.PageContainer>
       <Navigation active="home" />
       <Hero />
-      <FeaturedGames games={games} />
-      <GameExplorer games={games} customGamesData={fetchedCustomGamesData} />
-      <GameTrailer customGamesData={fetchedCustomGamesData} />
+      <FeaturedGames games={gamesData} />
+      <GameExplorer games={gamesData} customGamesData={customGamesData} />
+      <GameTrailer customGamesData={customGamesData} />
     </S.PageContainer>
   );
 }
 
-export const getStaticProps = async () => {
+const fetchData = async () => {
   try {
     const [customGamesData, games] = await Promise.all([
       fetch('http://localhost:3000/customGamesData.json').then(res =>
@@ -29,17 +39,12 @@ export const getStaticProps = async () => {
     ]);
 
     return {
-      props: {
-        fetchedCustomGamesData: customGamesData,
-        games: games.results,
-        fallback: false,
-      },
+      fetchedCustomGamesData: customGamesData,
+      games: games.results,
     };
   } catch (error) {
     return {
-      props: {
-        error,
-      },
+      error,
     };
   }
 };
