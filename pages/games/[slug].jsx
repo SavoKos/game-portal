@@ -39,7 +39,7 @@ function Game({ game, errorCode }) {
           objectPosition="top"
         />
         <S.HeroContent>
-          <S.CoverImage bgImg={game?.gameDetails?.background_image}>
+          <S.CoverImage>
             <Image
               src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_1200/${game?.gameDetails?.background_image}`}
               alt={`${game?.gameDetails?.name_original} image`}
@@ -175,10 +175,6 @@ S.HeroContent = styled.div`
 S.CoverImage = styled.div`
   position: relative;
   width: 100%;
-  /* background-image: url(${({ bgImg }) =>
-    `https://res.cloudinary.com/demo/image/fetch/c_limit,w_400,q_1,e_blur:1000/${bgImg}`});
-  background-position: center;
-  background-size: cover; */
   width: 350px;
   height: 100%;
   flex: none;

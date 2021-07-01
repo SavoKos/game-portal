@@ -61,7 +61,7 @@ S.NavContainer = styled.div`
   width: 100%;
   justify-content: center;
   z-index: 50;
-  background-color: transparent};
+  background-color: transparent;
 `;
 
 S.Nav = styled.div`

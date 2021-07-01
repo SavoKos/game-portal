@@ -39,7 +39,7 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
 
   return (
     <S.GameTrailerItem>
-      <S.Image bgImg={game?.trailer_thumbnail}>
+      <S.Image>
         {game?.trailer_thumbnail && (
           <Image src={trailerThumbnailSrc()} objectFit="cover" layout="fill" />
         )}
@@ -121,10 +121,6 @@ S.Image = styled.div`
   position: relative;
   width: 90%;
   min-height: 400px;
-  /* background-size: cover;
-  background-position: center;
-  background-image: url(${({ bgImg }) =>
-    `https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,w_500,e_blur:1000,q_1/v1624636050/game-portal/${bgImg}`}); */
 
   @media (min-width: 1024px) {
     min-height: 650px;
