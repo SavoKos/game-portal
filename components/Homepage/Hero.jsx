@@ -6,7 +6,8 @@ function Hero() {
       <S.Hero>
         <h3>GAME PORTAL</h3>
         <S.Triangle />
-        <h4>Place to find your favorite games</h4>
+        <h4 className="game-portal">Game Portal</h4>
+        <h4>Discover your next favorite game</h4>
       </S.Hero>
     </S.HeroContainer>
   );
@@ -27,14 +28,23 @@ S.HeroContainer = styled.div`
 
 S.Hero = styled.div`
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
 
+  .game-portal {
+    font-weight: 700;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
   h3 {
     font-weight: 700;
     text-align: center;
+    margin-bottom: 1rem;
   }
 `;
 
