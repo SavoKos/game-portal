@@ -223,6 +223,7 @@ S.GameInfo = styled.div`
 
   .description {
     width: 90%;
+    font-size: 16px;
     @media (min-width: 768px) {
       width: 24rem;
     }

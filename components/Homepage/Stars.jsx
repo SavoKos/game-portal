@@ -2,7 +2,7 @@ import Icon from '@components/UI/Icon';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
-function Stars({ rating = null }) {
+function Stars({ rating = null, className }) {
   if (!rating) return '';
 
   const starsArray = [

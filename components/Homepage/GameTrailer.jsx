@@ -39,7 +39,7 @@ const S = {};
 
 S.VideoContainer = styled.div`
   padding: 5rem 0;
-  background-color: ${({ theme }) => theme.colors.primaryLight};
+  background-color: ${({ theme }) => theme.colors.primaryLighterBlue};
   display: flex;
   align-items: center;
 

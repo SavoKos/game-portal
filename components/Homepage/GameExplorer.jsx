@@ -1,5 +1,4 @@
 import Icon from '@components/UI/Icon';
-
 import 'react-alice-carousel/lib/alice-carousel.css';
 import AliceCarousel from 'react-alice-carousel';
 import { useEffect, useState } from 'react';
@@ -13,7 +12,6 @@ function GameExplorer({ games, customGamesData }) {
   const carouselIntersectingHandler = () => {
     const callback = (entries, _) => {
       entries.forEach(ent => {
-        console.log(ent.isIntersecting);
         if (ent.isIntersecting) return setIsCarouselIntersecting(true);
         setIsCarouselIntersecting(false);
       });
@@ -22,11 +20,10 @@ function GameExplorer({ games, customGamesData }) {
     const screenWidth =
       window.innerWidth || document.querySelector('body').clientWidth;
     const threshold = screenWidth > 1000 ? 0.5 : 0.2;
-    console.log(threshold);
 
     const options = {
       root: null,
-      threshold: threshold,
+      threshold,
     };
 
     const observer = new IntersectionObserver(callback, options);
@@ -35,7 +32,10 @@ function GameExplorer({ games, customGamesData }) {
 
     observer.observe(target);
   };
-  useEffect(() => carouselIntersectingHandler);
+
+  useEffect(() => {
+    carouselIntersectingHandler();
+  }, []);
 
   const carouselItems = [
     <GameExplorerItem

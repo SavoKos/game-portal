@@ -7,6 +7,7 @@ const theme = {
     primaryOpacity90: 'rgba(7, 4, 38, 0.9)',
     primaryOpacity50: 'rgba(7, 4, 38, 0.5)',
     primaryLight: '#201e3c',
+    primaryLighterBlue: '#110e39',
     primaryLighter: '#090526',
     seaBlue: '#35bfff',
   },

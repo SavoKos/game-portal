@@ -1,13 +1,16 @@
 import Spinner from '@components/UI/Spinner';
 import Router from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Navigation from '@components/Navigation';
 import Image from 'next/image';
+import Stars from '@components/Homepage/Stars';
+import Link from 'next/link';
 
 function Game({ game, errorCode }) {
-  const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
+  const [fullDesc, setFullDesc] = useState(false);
 
+  const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
   useEffect(() => {
     if (isError) Router.push('/error');
   }, []);
@@ -25,8 +28,8 @@ function Game({ game, errorCode }) {
       <S.Hero id="hero">
         <Image
           src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_1280/${
-            game.gameDetails.background_image ||
-            game.gameDetails.background_image_additional
+            game?.gameDetails?.background_image ||
+            game?.gameDetails?.background_image_additional
           }`}
           priority
           alt={`${game?.gameDetails?.name_original} image`}
@@ -35,7 +38,49 @@ function Game({ game, errorCode }) {
           layout="fill"
           objectPosition="top"
         />
-        <S.HeroContent></S.HeroContent>
+        <S.HeroContent>
+          <S.CoverImage bgImg={game?.gameDetails?.background_image}>
+            <Image
+              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_1200/${game?.gameDetails?.background_image}`}
+              alt={`${game?.gameDetails?.name_original} image`}
+              objectFit="cover"
+              layout="fill"
+            />
+          </S.CoverImage>
+          <S.Details fullDesc={fullDesc}>
+            <h1>{game?.gameDetails?.name_original}</h1>
+            {game?.gameDetails?.playtime ? (
+              <p>AVERAGE PLAYTIME: {game?.gameDetails?.playtime} HOURS</p>
+            ) : (
+              ''
+            )}
+            <S.Stars>
+              <Stars
+                rating={+Math.trunc(game?.gameDetails?.rating)}
+                className="stars"
+              />
+            </S.Stars>
+            <p className="description">{game?.gameDetails?.description_raw}</p>
+            <span
+              className="truncate-text"
+              onClick={() => setFullDesc(prevValue => !prevValue)}
+            >
+              {fullDesc ? 'Show less' : 'Show more'}
+            </span>
+            <S.Tags>
+              {game?.gameDetails?.tags?.map(tag => (
+                <p className="tag" key={tag.id}>
+                  {tag.name}
+                </p>
+              ))}
+            </S.Tags>
+            {game?.gameDetails?.website && (
+              <Link href={game?.gameDetails?.website}>
+                <h4 className="official-website">Official Website</h4>
+              </Link>
+            )}
+          </S.Details>
+        </S.HeroContent>
       </S.Hero>
     </S.PageContainer>
   );
@@ -112,11 +157,100 @@ S.Hero = styled.div`
     width: 100%;
     object-position: top;
     height: 100%;
+    pointer-events: none;
   }
 `;
 
 S.HeroContent = styled.div`
   display: flex;
   align-items: center;
+  padding: 0 20rem;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  height: 35rem;
+  margin-top: 10rem;
 `;
+
+S.CoverImage = styled.div`
+  position: relative;
+  width: 100%;
+  background-image: url(${({ bgImg }) =>
+    `https://res.cloudinary.com/demo/image/fetch/c_limit,w_400,q_1,e_blur:1000/${bgImg}`});
+  background-position: center;
+  background-size: cover;
+  width: 350px;
+  height: 100%;
+  flex: none;
+`;
+
+S.Details = styled.div`
+  color: #fff;
+  height: 100%;
+  margin-left: 3rem;
+
+  .official-website {
+    margin-top: 2rem;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    width: fit-content;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .truncate-text {
+    color: ${({ theme }) => theme.colors.seaBlue};
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  p {
+    overflow: hidden;
+    max-height: ${({ fullDesc }) => (fullDesc ? 'none' : '8rem')};
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: ${({ fullDesc }) => (fullDesc ? 'none' : '4')};
+  }
+
+  h1 {
+    text-transform: uppercase;
+  }
+`;
+
+S.Stars = styled.div`
+  margin: 1rem 0;
+`;
+
+S.Tags = styled.div`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-family: ${({ theme }) => theme.fontFamily.poppins};
+  font-weight: 300;
+  margin: 1rem 0;
+
+  .tag {
+    flex: 1 1 auto;
+    font-family: ${({ theme }) => theme.fontFamily.poppins};
+    margin: 0.15rem;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-weight: 400;
+    transition: all ease 0.3s;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.seaBlue};
+    }
+  }
+`;
+
 export default Game;

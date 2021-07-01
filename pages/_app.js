@@ -2,8 +2,7 @@ import '../styles/globals.css';
 import Head from 'next/head';
 import SCTheme from '../SCTheme';
 import Router from 'next/router';
-import Spinner from '@components/UI/Spinner';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import NProgress from 'nprogress';
 

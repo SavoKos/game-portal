@@ -7,33 +7,9 @@ import styled from 'styled-components';
 
 function Navigation({ className = '', active }) {
   const [sidebarActive, setSidebarActive] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [target, setTarget] = useState(null);
-  useEffect(() => {
-    setTarget(document?.querySelector('#hero'));
-    if (target) scrollHandler();
-  }, []);
-
-  const scrollHandler = e => {
-    const callback = (entries, _) => {
-      entries.forEach(ent => {
-        if (!ent.isIntersecting) setIsScrolled(true);
-        if (ent.isIntersecting) setIsScrolled(false);
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-
-    let options = {
-      root: null,
-      threshold: 0.1,
-    };
-
-    observer.observe(target);
-  };
 
   return (
-    <S.NavContainer className={className} isScrolled={isScrolled}>
+    <S.NavContainer className={className}>
       <S.Nav>
         <Image
           src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png"
@@ -85,8 +61,7 @@ S.NavContainer = styled.div`
   width: 100%;
   justify-content: center;
   z-index: 50;
-  background-color: ${({ theme, isScrolled }) =>
-    isScrolled ? theme.colors.primary : 'transparent'};
+  background-color: transparent};
 `;
 
 S.Nav = styled.div`
