@@ -17,7 +17,7 @@ export default function Home({ fetchedCustomGamesData, games }) {
   );
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   try {
     const [customGamesData, games] = await Promise.all([
       fetch(`${VERCEL_URL}/customGamesData.json`).then(res => res.json()),
