@@ -85,7 +85,10 @@ function GameExplorerItems({ games, customGameData }) {
             <S.MoreInfoBtn className="shadow-white">More Info</S.MoreInfoBtn>
           </Link>
         </S.GameInfo>
-        <S.CoverImage className="explorer-gradient shadow-white">
+        <S.CoverImage
+          className="explorer-gradient shadow-white"
+          bgImg={customGameData?.cover}
+        >
           <Image
             layout="fill"
             objectFit="cover"
@@ -96,7 +99,10 @@ function GameExplorerItems({ games, customGameData }) {
       {/* List of featured games */}
       {games?.map(game => (
         <Link href={'/games/' + game.slug || ''} key={game.id}>
-          <S.GameExplorerItem className="shadow-white explorer-gradient game-item">
+          <S.GameExplorerItem
+            className="shadow-white explorer-gradient game-item"
+            bgImg={game.background_image}
+          >
             <S.LabelsContainer>
               {gamePlatforms(game.platforms)}
               {newGameCheck(+new Date(game.released))}
@@ -271,6 +277,10 @@ S.CoverImage = styled.div`
   top: -25%;
   left: -0.75rem;
   background-color: ${({ theme }) => theme.colors.primaryLight};
+  background-position: center;
+  background-size: cover;
+  background-image: url(${({ bgImg }) =>
+    `https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_500,e_blur:1000,q_1/v1623091234/game-portal/${bgImg}`});
 
   @media (min-width: 1024px) {
     display: block;
@@ -321,6 +331,11 @@ S.GameExplorerItem = styled.div`
   flex: 1 1 auto;
   cursor: pointer;
   transition: all ease 0.3s;
+
+  background-size: cover;
+  background-position: center;
+  background-image: url(${({ bgImg }) =>
+    `https://res.cloudinary.com/demo/image/fetch/c_limit,w_700,e_blur:1000,q_1/${bgImg}`});
 
   &:hover {
     transform: scale(1);

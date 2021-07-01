@@ -7,7 +7,7 @@ export default function FeaturedGames({ games }) {
     <S.FeaturedContainer>
       {games?.slice(0, 5).map(game => (
         <Link key={game.id} href={'/games/' + game.slug}>
-          <S.FeaturedGame>
+          <S.FeaturedGame bgImg={game.background_image}>
             <Image
               src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_600,h_400/${game.background_image}`}
               layout="fill"
@@ -42,6 +42,10 @@ S.FeaturedGame = styled.div`
   position: relative;
   cursor: pointer;
   flex: 1 1 auto;
+  background-image: url(${({ bgImg }) =>
+    `https://res.cloudinary.com/demo/image/fetch/c_limit,w_500,e_blur:1000,q_1/${bgImg}`});
+  background-position: center;
+  background-size: cover;
 
   h3 {
     position: absolute;

@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import NProgress from 'nprogress';
 
 function Application({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false);
   NProgress.configure({ showSpinner: false });
   useEffect(() => {
     const handleStart = () => NProgress.start();

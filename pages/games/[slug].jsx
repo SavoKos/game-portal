@@ -28,7 +28,8 @@ function Game({ game, errorCode }) {
             game.gameDetails.background_image ||
             game.gameDetails.background_image_additional
           }`}
-          alt="an image"
+          priority
+          alt={`${game?.gameDetails?.name_original} image`}
           className="hero-img"
           objectFit="cover"
           layout="fill"
@@ -42,18 +43,19 @@ function Game({ game, errorCode }) {
 
 export const getServerSideProps = async ({ query: { slug } }) => {
   try {
-    const APIKey = 'ffc0c5b2524a475993fa130a0f55334c';
+    const API_KEY = process.env.API_KEY;
+    console.log(API_KEY);
     const [gameDetails, franchise, trailers] = await Promise.all([
       fetch(
-        encodeURI(`https://api.rawg.io/api/games/${slug}?key=${APIKey}`)
+        encodeURI(`https://api.rawg.io/api/games/${slug}?key=${API_KEY}`)
       ).then(res => res.json()),
       fetch(
         encodeURI(
-          `https://api.rawg.io/api/games/${slug}/game-series?key=${APIKey}`
+          `https://api.rawg.io/api/games/${slug}/game-series?key=${API_KEY}`
         )
       ).then(res => res.json()),
       fetch(
-        encodeURI(`https://api.rawg.io/api/games/${slug}/movies?key=${APIKey}`)
+        encodeURI(`https://api.rawg.io/api/games/${slug}/movies?key=${API_KEY}`)
       ).then(res => res.json()),
     ]);
 

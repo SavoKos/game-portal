@@ -17,7 +17,6 @@ export default function Home({ fetchedCustomGamesData, games }) {
   );
 }
 
-console.log(process.env);
 export const getStaticProps = async () => {
   try {
     const hostname =
