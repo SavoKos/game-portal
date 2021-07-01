@@ -20,9 +20,7 @@ export default function Home({ fetchedCustomGamesData, games }) {
 export const getStaticProps = async () => {
   try {
     const [customGamesData, games] = await Promise.all([
-      fetch('http://localhost:3000/customGamesData.json').then(res =>
-        res.json()
-      ),
+      fetch('/customGamesData.json').then(res => res.json()),
       fetch(
         'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&dates=2020-09-30,2999-01-01&platforms=18,1,7&page_size=28'
       ).then(res => res.json()),
