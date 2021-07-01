@@ -175,10 +175,10 @@ S.HeroContent = styled.div`
 S.CoverImage = styled.div`
   position: relative;
   width: 100%;
-  background-image: url(${({ bgImg }) =>
+  /* background-image: url(${({ bgImg }) =>
     `https://res.cloudinary.com/demo/image/fetch/c_limit,w_400,q_1,e_blur:1000/${bgImg}`});
   background-position: center;
-  background-size: cover;
+  background-size: cover; */
   width: 350px;
   height: 100%;
   flex: none;

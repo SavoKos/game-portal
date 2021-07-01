@@ -278,10 +278,10 @@ S.CoverImage = styled.div`
   top: -25%;
   left: -0.75rem;
   background-color: ${({ theme }) => theme.colors.primaryLight};
-  background-position: center;
+  /* background-position: center;
   background-size: cover;
   background-image: url(${({ bgImg }) =>
-    `https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_500,e_blur:1000,q_1/v1623091234/game-portal/${bgImg}`});
+    `https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,h_500,e_blur:1000,q_1/v1623091234/game-portal/${bgImg}`}); */
 
   @media (min-width: 1024px) {
     display: block;
@@ -333,10 +333,10 @@ S.GameExplorerItem = styled.div`
   cursor: pointer;
   transition: all ease 0.3s;
 
-  background-size: cover;
+  /* background-size: cover;
   background-position: center;
   background-image: url(${({ bgImg }) =>
-    `https://res.cloudinary.com/demo/image/fetch/c_limit,w_700,e_blur:1000,q_1/${bgImg}`});
+    `https://res.cloudinary.com/demo/image/fetch/c_limit,w_700,e_blur:1000,q_1/${bgImg}`}); */
 
   &:hover {
     transform: scale(1);
