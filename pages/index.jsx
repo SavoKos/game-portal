@@ -4,46 +4,42 @@ import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';
 import styled from 'styled-components';
 import GameTrailer from '@components/Homepage/GameTrailer';
-import { useEffect, useState } from 'react';
 
-export default function Home() {
-  const [customGamesData, setCustomGamesData] = useState({});
-  const [gamesData, setGamesData] = useState([]);
-
-  useEffect(async () => {
-    const { fetchedCustomGamesData, games, error } = await fetchData();
-    console.log(error);
-    setCustomGamesData(fetchedCustomGamesData);
-    setGamesData(games);
-  }, []);
-
+export default function Home({ fetchedCustomGamesData, games }) {
   return (
     <S.PageContainer>
       <Navigation active="home" />
       <Hero />
-      <FeaturedGames games={gamesData} />
-      <GameExplorer games={gamesData} customGamesData={customGamesData} />
-      <GameTrailer customGamesData={customGamesData} />
+      <FeaturedGames games={games} />
+      <GameExplorer games={games} customGamesData={fetchedCustomGamesData} />
+      <GameTrailer customGamesData={fetchedCustomGamesData} />
     </S.PageContainer>
   );
 }
 
-const fetchData = async () => {
+export const getStaticProps = async () => {
   try {
     const [customGamesData, games] = await Promise.all([
-      fetch('/customGamesData.json').then(res => res.json()),
+      fetch('http://localhost:3000/customGamesData.json').then(res =>
+        res.json()
+      ),
       fetch(
         'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&dates=2020-09-30,2999-01-01&platforms=18,1,7&page_size=28'
       ).then(res => res.json()),
     ]);
 
     return {
-      fetchedCustomGamesData: customGamesData,
-      games: games.results,
+      props: {
+        fetchedCustomGamesData: customGamesData,
+        games: games.results,
+        fallback: false,
+      },
     };
   } catch (error) {
     return {
-      error,
+      props: {
+        error,
+      },
     };
   }
 };
