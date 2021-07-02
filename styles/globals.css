@@ -87,18 +87,6 @@ p {
   font-weight: 300;
 }
 
-.game-item .hover-photo {
-  display: none !important;
-}
-
-.game-item:hover .hover-photo {
-  display: block !important;
-}
-
-.game-item:hover .primary-photo {
-  display: none !important;
-}
-
 .alice-carousel__next-btn,
 .alice-carousel__prev-btn {
   top: 50%;

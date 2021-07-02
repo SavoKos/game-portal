@@ -127,18 +127,23 @@ S.RightSideNav = styled.div`
     padding-left: 2.5rem;
     font-weight: 600;
     transition: all ease 0.3s;
-
-    &:hover,
-    &:focus {
-      color: ${({ theme }) => theme.colors.primary};
-      &::placeholder {
-        color: ${({ theme }) => theme.colors.primary};
-      }
-      background-color: #fff;
-    }
   }
 
   @media (min-width: 1024px) {
+    &:hover,
+    &:focus {
+      input {
+        color: ${({ theme }) => theme.colors.primary};
+        &::placeholder {
+          color: ${({ theme }) => theme.colors.primary};
+        }
+        background-color: #fff;
+      }
+
+      .anticon.loupe {
+        color: ${({ theme }) => theme.colors.primary};
+      }
+    }
     input {
       display: block;
       margin-left: -1.75rem;

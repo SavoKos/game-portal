@@ -96,20 +96,11 @@ function GameExplorerItems({ games, customGameData }) {
       {/* List of featured games */}
       {games?.map(game => (
         <Link href={'/games/' + game.slug || ''} key={game.id}>
-          <S.GameExplorerItem className="shadow-white explorer-gradient game-item">
+          <S.GameExplorerItem className="shadow-white explorer-gradient">
             <S.LabelsContainer>
               {gamePlatforms(game.platforms)}
               {newGameCheck(+new Date(game.released))}
             </S.LabelsContainer>
-            <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_300,h_400,q_100/${
-                game.short_screenshots[1]?.image ||
-                game.short_screenshots[0]?.image
-              }`}
-              className="hover-photo"
-              layout="fill"
-              objectFit="cover"
-            />
             <Image
               src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_300,h_400,q_100/${game.background_image}`}
               layout="fill"
@@ -325,18 +316,18 @@ S.GameExplorerItem = styled.div`
   cursor: pointer;
   transition: all ease 0.3s;
 
-  &:hover {
-    transform: scale(1);
+  .primary-photo {
+    transition: all ease 0.3s;
+  }
+
+  &:hover .primary-photo {
+    transform: scale(1.5);
   }
 
   @media (min-width: 1024px) {
     height: 440px;
     width: 20%;
     transform: scale(0.9);
-
-    &:hover {
-      transform: scale(1.01);
-    }
   }
 
   .game-name {
