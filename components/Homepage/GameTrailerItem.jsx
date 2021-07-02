@@ -67,7 +67,11 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
         closeModal={() => setIsModalActive(false)}
         className="trailer"
       >
-        <h1 className="loading">Loading...</h1>
+        <h1 className="loading">
+          {game.trailer
+            ? 'Loading...'
+            : 'We could not find trailer for this game'}
+        </h1>
         <iframe
           src={(isModalActive && game.trailer) || ''}
           title="YouTube video player"

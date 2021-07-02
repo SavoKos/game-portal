@@ -175,7 +175,7 @@ S.HeroContent = styled.div`
 S.CoverImage = styled.div`
   position: relative;
   width: 100%;
-  width: 350px;
+  width: 400px;
   height: 100%;
   flex: none;
   opacity: 0.8;

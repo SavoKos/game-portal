@@ -61,7 +61,7 @@ S.NavContainer = styled.div`
   width: 100%;
   justify-content: center;
   z-index: 50;
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.colors.primary + 'f2'};
 `;
 
 S.Nav = styled.div`
@@ -70,10 +70,14 @@ S.Nav = styled.div`
   display: flex;
   max-width: 1024px;
   width: 100%;
-  padding: 0 1.75rem;
+  padding: 0 0.5rem;
 
   .logo {
     cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 1.75rem;
   }
 `;
 
@@ -122,6 +126,16 @@ S.RightSideNav = styled.div`
     outline: none;
     padding-left: 2.5rem;
     font-weight: 600;
+    transition: all ease 0.3s;
+
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.colors.primary};
+      &::placeholder {
+        color: ${({ theme }) => theme.colors.primary};
+      }
+      background-color: #fff;
+    }
   }
 
   @media (min-width: 1024px) {
