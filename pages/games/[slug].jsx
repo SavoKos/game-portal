@@ -27,7 +27,7 @@ function Game({ game, errorCode }) {
       <Navigation />
       <S.Hero id="hero">
         <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_1280/${
+          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1280/${
             game?.gameDetails?.background_image ||
             game?.gameDetails?.background_image_additional
           }`}
@@ -39,9 +39,9 @@ function Game({ game, errorCode }) {
           objectPosition="top"
         />
         <S.HeroContent>
-          <S.CoverImage>
+          <S.CoverImage className="explorer-gradient">
             <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_1200/${game?.gameDetails?.background_image}`}
+              src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${game?.gameDetails?.background_image}`}
               alt={`${game?.gameDetails?.name_original} image`}
               objectFit="cover"
               layout="fill"
@@ -178,6 +178,7 @@ S.CoverImage = styled.div`
   width: 350px;
   height: 100%;
   flex: none;
+  opacity: 0.8;
 `;
 
 S.Details = styled.div`

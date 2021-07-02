@@ -58,7 +58,7 @@ function GameExplorerItems({ games, customGameData }) {
       <S.FeaturedGame
         className="shadow-white"
         style={{
-          backgroundImage: `url(${`https://res.cloudinary.com/dicynt7ms/image/upload/b_rgb:05021b,o_29,f_webp,w_1200/v1623090955/game-portal/${customGameData?.background}`})`,
+          backgroundImage: `url(${`https://res.cloudinary.com/dicynt7ms/image/upload/b_rgb:05021b,o_29,f_webp,w_1000,h_500,c_fill/v1623090955/game-portal/${customGameData?.background}`})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
@@ -89,7 +89,7 @@ function GameExplorerItems({ games, customGameData }) {
           <Image
             layout="fill"
             objectFit="cover"
-            src={`https://res.cloudinary.com/dicynt7ms/image/upload/c_limit,w_900/v1623091234/game-portal/${customGameData?.cover}`}
+            src={`https://res.cloudinary.com/dicynt7ms/image/upload/c_fill,w_400,h_600,q_100/v1623091234/game-portal/${customGameData?.cover}`}
           />
         </S.CoverImage>
       </S.FeaturedGame>
@@ -102,7 +102,7 @@ function GameExplorerItems({ games, customGameData }) {
               {newGameCheck(+new Date(game.released))}
             </S.LabelsContainer>
             <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${
+              src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_300,h_400,q_100/${
                 game.short_screenshots[1]?.image ||
                 game.short_screenshots[0]?.image
               }`}
@@ -111,7 +111,7 @@ function GameExplorerItems({ games, customGameData }) {
               objectFit="cover"
             />
             <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_700/${game.background_image}`}
+              src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_300,h_400,q_100/${game.background_image}`}
               layout="fill"
               objectFit="cover"
               className="primary-photo"
@@ -262,6 +262,8 @@ S.MoreInfoBtn = styled.button`
   margin-top: 1.25rem;
   border: 0;
   color: #fff;
+  cursor: pointer;
+  font-size: 18px;
 `;
 
 S.CoverImage = styled.div`

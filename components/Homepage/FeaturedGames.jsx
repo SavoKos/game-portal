@@ -9,7 +9,7 @@ export default function FeaturedGames({ games }) {
         <Link key={game.id} href={'/games/' + game.slug}>
           <S.FeaturedGame>
             <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_limit,w_600,h_400/${game.background_image}`}
+              src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_300,g_north/${game.background_image}`}
               layout="fill"
               objectFit="cover"
             />
@@ -26,7 +26,7 @@ const S = {};
 S.FeaturedContainer = styled.div`
   background-color: #000;
   width: 100%;
-  margin-top: -10rem;
+  margin-top: -9rem;
   display: flex;
   align-items: center;
   color: #fff;

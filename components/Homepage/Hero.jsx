@@ -21,7 +21,7 @@ S.HeroContainer = styled.div`
   overflow: hidden;
   z-index: 10;
   position: relative;
-  background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/f_webp/v1623090716/game-portal/home-hero_zdjvsv.png');
+  background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/f_webp/v1625241368/game-portal/Grouqwfqfwfqwp_1_mwpith.png');
   background-position: bottom;
   pointer-events: none;
 `;

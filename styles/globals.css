@@ -45,23 +45,21 @@ p {
   font-weight: 400;
 }
 
-.featured-gradient::after {
+.featured-gradient::after,
+.explorer-gradient::after,
+.primary-inside-gradient::after {
   position: absolute;
   content: '';
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
+}
+.featured-gradient::after {
   background: linear-gradient(to bottom, rgba(255, 0, 0, 0) 0%, #070426 100%);
 }
 
 .explorer-gradient::after {
-  position: absolute;
-  content: '';
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
   background: linear-gradient(to bottom, rgba(255, 0, 0, 0) 0%, #000000 100%);
 }
 
