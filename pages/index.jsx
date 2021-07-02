@@ -4,16 +4,24 @@ import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';
 import styled from 'styled-components';
 import GameTrailer from '@components/Homepage/GameTrailer';
+import Layout from '@components/Layout';
 
 export default function Home({ fetchedCustomGamesData, games }) {
   return (
-    <S.PageContainer>
-      <Navigation active="home" />
-      <Hero />
-      <FeaturedGames games={games} />
-      <GameExplorer games={games} customGamesData={fetchedCustomGamesData} />
-      <GameTrailer customGamesData={fetchedCustomGamesData} />
-    </S.PageContainer>
+    <Layout
+      title="Game portal - Discover your next favorite game."
+      url="https://gameportal.savokos.com"
+      description="Game Portal - Place where you will discover your next favorite game"
+      image="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png"
+    >
+      <S.PageContainer>
+        <Navigation active="home" />
+        <Hero />
+        <FeaturedGames games={games} />
+        <GameExplorer games={games} customGamesData={fetchedCustomGamesData} />
+        <GameTrailer customGamesData={fetchedCustomGamesData} />
+      </S.PageContainer>
+    </Layout>
   );
 }
 

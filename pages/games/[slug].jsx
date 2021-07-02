@@ -6,6 +6,7 @@ import Navigation from '@components/Navigation';
 import Image from 'next/image';
 import Stars from '@components/Homepage/Stars';
 import Link from 'next/link';
+import Layout from '@components/Layout';
 
 function Game({ game, errorCode }) {
   const [fullDesc, setFullDesc] = useState(false);
@@ -22,67 +23,79 @@ function Game({ game, errorCode }) {
       </S.Error>
     );
 
+  const coverImage = `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${game?.gameDetails?.background_image}`;
+  const currentUrl = `https://gameportal.savokos.com/games/${game?.gameDetails?.slug}`;
+  const title = game?.gameDetails?.name_original + ' - Game Portal';
   return (
-    <S.PageContainer>
-      <Navigation />
-      <S.Hero id="hero">
-        <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1280/${
-            game?.gameDetails?.background_image ||
-            game?.gameDetails?.background_image_additional
-          }`}
-          priority
-          alt={`${game?.gameDetails?.name_original} image`}
-          className="hero-img"
-          objectFit="cover"
-          layout="fill"
-          objectPosition="top"
-        />
-        <S.HeroContent>
-          <S.CoverImage className="explorer-gradient">
-            <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${game?.gameDetails?.background_image}`}
-              alt={`${game?.gameDetails?.name_original} image`}
-              objectFit="cover"
-              layout="fill"
-            />
-          </S.CoverImage>
-          <S.Details fullDesc={fullDesc}>
-            <h1>{game?.gameDetails?.name_original}</h1>
-            {game?.gameDetails?.playtime ? (
-              <p>AVERAGE PLAYTIME: {game?.gameDetails?.playtime} HOURS</p>
-            ) : (
-              ''
-            )}
-            <S.Stars>
-              <Stars
-                rating={+Math.trunc(game?.gameDetails?.rating)}
-                className="stars"
+    <Layout
+      title={title}
+      url={currentUrl}
+      description={game?.gameDetails?.description_raw.slice(0, 130) + '...'}
+      image={coverImage}
+    >
+      <S.PageContainer>
+        <Navigation />
+        <S.Hero id="hero">
+          <Image
+            src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1280/${
+              game?.gameDetails?.background_image ||
+              game?.gameDetails?.background_image_additional
+            }`}
+            priority
+            alt={`${game?.gameDetails?.name_original} image`}
+            className="hero-img"
+            objectFit="cover"
+            layout="fill"
+            objectPosition="top"
+          />
+          <S.HeroContent>
+            <S.CoverImage className="explorer-gradient">
+              <Image
+                src={coverImage}
+                alt={`${game?.gameDetails?.name_original} image`}
+                objectFit="cover"
+                layout="fill"
               />
-            </S.Stars>
-            <p className="description">{game?.gameDetails?.description_raw}</p>
-            <span
-              className="truncate-text"
-              onClick={() => setFullDesc(prevValue => !prevValue)}
-            >
-              {fullDesc ? 'Show less' : 'Show more'}
-            </span>
-            <S.Tags>
-              {game?.gameDetails?.tags?.map(tag => (
-                <p className="tag" key={tag.id}>
-                  {tag.name}
-                </p>
-              ))}
-            </S.Tags>
-            {game?.gameDetails?.website && (
-              <Link href={game?.gameDetails?.website}>
-                <h4 className="official-website">Official Website</h4>
-              </Link>
-            )}
-          </S.Details>
-        </S.HeroContent>
-      </S.Hero>
-    </S.PageContainer>
+            </S.CoverImage>
+            <S.Details fullDesc={fullDesc}>
+              <h1>{game?.gameDetails?.name_original}</h1>
+              {game?.gameDetails?.playtime ? (
+                <p>AVERAGE PLAYTIME: {game?.gameDetails?.playtime} HOURS</p>
+              ) : (
+                ''
+              )}
+              <S.Stars>
+                <Stars
+                  rating={+Math.trunc(game?.gameDetails?.rating)}
+                  className="stars"
+                />
+              </S.Stars>
+              <p className="description">
+                {game?.gameDetails?.description_raw}
+              </p>
+              <span
+                className="truncate-text"
+                onClick={() => setFullDesc(prevValue => !prevValue)}
+              >
+                {fullDesc ? 'Show less' : 'Show more'}
+              </span>
+              <S.Tags>
+                {game?.gameDetails?.tags?.map(tag => (
+                  <p className="tag" key={tag.id}>
+                    {tag.name}
+                  </p>
+                ))}
+              </S.Tags>
+              {game?.gameDetails?.website && (
+                <Link href={game?.gameDetails?.website}>
+                  <h4 className="official-website">Official Website</h4>
+                </Link>
+              )}
+            </S.Details>
+          </S.HeroContent>
+        </S.Hero>
+      </S.PageContainer>
+    </Layout>
   );
 }
 
