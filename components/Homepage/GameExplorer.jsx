@@ -104,13 +104,18 @@ S.GameExplorerContainer = styled.div`
   }
 
   .carousel-nav-btn {
-    color: #d9d9d9;
+    color: #9ca3af;
     cursor: pointer;
-    border: 2px solid #d9d9d9;
+    border: 2px solid #9ca3af;
     background-color: transparent;
-    padding: 0.75rem;
     border-radius: 50%;
-    font-size: 1.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+
+    @media (min-width: 768px) {
+      padding: 0.75rem;
+      font-size: 1.5rem;
+    }
   }
 
   @media (min-width: 1536px) {
@@ -132,9 +137,14 @@ S.TitleContainer = styled.div`
   h1 {
     color: #fff;
     margin-top: 0;
+    margin-left: 1rem;
 
     span {
       color: ${({ theme }) => theme.colors.seaBlue};
+    }
+
+    @media (min-width: 1024px) {
+      margin-left: 0;
     }
   }
 

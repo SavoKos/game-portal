@@ -10,6 +10,7 @@ import Layout from '@components/Layout';
 
 function Game({ game, errorCode }) {
   const [fullDesc, setFullDesc] = useState(false);
+  console.log(game.screenshots);
 
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
   useEffect(() => {
@@ -70,9 +71,11 @@ function Game({ game, errorCode }) {
                   className="stars"
                 />
               </S.Stars>
-              <p className="description">
-                {game?.gameDetails?.description_raw}
-              </p>
+              <div>
+                <p className="description">
+                  {game?.gameDetails?.description_raw}
+                </p>
+              </div>
               <span
                 className="truncate-text"
                 onClick={() => setFullDesc(prevValue => !prevValue)}
@@ -94,6 +97,11 @@ function Game({ game, errorCode }) {
             </S.Details>
           </S.HeroContent>
         </S.Hero>
+        <S.MainDetails>
+          <S.Screenshots>
+            <h1>Screenshot</h1>
+          </S.Screenshots>
+        </S.MainDetails>
       </S.PageContainer>
     </Layout>
   );
@@ -103,7 +111,7 @@ export const getServerSideProps = async ({ query: { slug } }) => {
   try {
     const API_KEY = process.env.API_KEY;
     console.log(API_KEY);
-    const [gameDetails, franchise, trailers] = await Promise.all([
+    const [gameDetails, franchise, screenshots] = await Promise.all([
       fetch(
         encodeURI(`https://api.rawg.io/api/games/${slug}?key=${API_KEY}`)
       ).then(res => res.json()),
@@ -113,7 +121,9 @@ export const getServerSideProps = async ({ query: { slug } }) => {
         )
       ).then(res => res.json()),
       fetch(
-        encodeURI(`https://api.rawg.io/api/games/${slug}/movies?key=${API_KEY}`)
+        encodeURI(
+          `https://api.rawg.io/api/games/${slug}/screenshots?key=${API_KEY}`
+        )
       ).then(res => res.json()),
     ]);
 
@@ -121,7 +131,7 @@ export const getServerSideProps = async ({ query: { slug } }) => {
 
     return {
       props: {
-        game: { gameDetails, franchise, trailers },
+        game: { gameDetails, franchise, screenshots },
         errorCode: 200,
       },
     };
@@ -150,8 +160,9 @@ S.Hero = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 80vh;
+  min-height: 80vh;
   width: 100%;
+  margin-bottom: 5rem;
 
   &::after {
     position: absolute;
@@ -176,20 +187,19 @@ S.Hero = styled.div`
 
 S.HeroContent = styled.div`
   display: flex;
-  align-items: center;
   padding: 0 20rem;
   height: 100%;
   width: 100%;
   z-index: 2;
-  height: 35rem;
+  min-height: 35rem;
   margin-top: 10rem;
+  align-items: flex-start;
 `;
 
 S.CoverImage = styled.div`
   position: relative;
-  width: 100%;
   width: 400px;
-  height: 100%;
+  height: 550px;
   flex: none;
   opacity: 0.8;
 `;
@@ -261,6 +271,14 @@ S.Tags = styled.div`
       background-color: ${({ theme }) => theme.colors.seaBlue};
     }
   }
+`;
+
+S.MainDetails = styled.div`
+  padding: 0 10rem;
+`;
+
+S.Screenshots = styled.div`
+  width: 40%;
 `;
 
 export default Game;

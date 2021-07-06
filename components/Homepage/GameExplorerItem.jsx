@@ -147,8 +147,10 @@ S.RatingContainer = styled.div`
   left: 0;
   display: flex;
   align-items: center;
+  margin-left: 1rem;
 
   @media (min-width: 1024px) {
+    margin-left: 0;
     left: 50%;
   }
 
@@ -273,9 +275,14 @@ S.CoverImage = styled.div`
 
 S.LabelsContainer = styled.div`
   position: absolute;
-  left: 1.25rem;
-  top: 1.25rem;
+  left: 0.5rem;
+  top: 0.5rem;
   z-index: 10;
+
+  @media (min-width: 500px) {
+    left: 1.25rem;
+    top: 1.25rem;
+  }
 `;
 
 S.NewLabel = styled.div`
@@ -301,8 +308,12 @@ S.PlatformContainer = styled.div`
 
   .anticon {
     margin: 0.25rem;
-    font-size: 1.125rem;
+    font-size: 1rem;
     line-height: 0;
+
+    @media (min-width: 500px) {
+      font-size: 1.125rem;
+    }
   }
 `;
 
@@ -324,9 +335,12 @@ S.GameExplorerItem = styled.div`
     transform: scale(1.5);
   }
 
+  @media (min-width: 768px) {
+    width: 20%;
+  }
+
   @media (min-width: 1024px) {
     height: 440px;
-    width: 20%;
     transform: scale(0.9);
   }
 

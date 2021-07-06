@@ -38,10 +38,14 @@ export default GameTrailer;
 const S = {};
 
 S.VideoContainer = styled.div`
-  padding: 5rem 0;
+  padding: 0;
   background-color: ${({ theme }) => theme.colors.primaryLighterBlue};
   display: flex;
   align-items: center;
+
+  @media (min-width: 1024px) {
+    padding: 5rem 0;
+  }
 
   .modal,
   iframe {

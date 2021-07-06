@@ -16,23 +16,28 @@ function error({ errorCode }) {
   };
 
   return (
-    <S.ErrorPageContainer>
-      <Navigation className="navigation" />
-      <S.MainContent>
-        <Image
-          src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623853800/game-portal/pngkit_assassin-png_503045_gbeww0.png"
-          layout="fill"
-          objectFit="cover"
-          className="hero-bg"
-        />
-        {displayErrorCode()}
-        <S.ErrorText>
-          <h1>Oops!</h1>
-          <h5>Error</h5>
-        </S.ErrorText>
-        <button onClick={() => Router.push('/')}>Home page</button>
-      </S.MainContent>
-    </S.ErrorPageContainer>
+    <>
+      <Head>
+        <title>{displayErrorCode() + ' - Game Portal'}</title>
+      </Head>
+      <S.ErrorPageContainer>
+        <Navigation className="navigation" />
+        <S.MainContent>
+          <Image
+            src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623853800/game-portal/pngkit_assassin-png_503045_gbeww0.png"
+            layout="fill"
+            objectFit="cover"
+            className="hero-bg"
+          />
+          {displayErrorCode()}
+          <S.ErrorText>
+            <h1>Oops!</h1>
+            <h5>Error</h5>
+          </S.ErrorText>
+          <button onClick={() => Router.push('/')}>Home page</button>
+        </S.MainContent>
+      </S.ErrorPageContainer>
+    </>
   );
 }
 

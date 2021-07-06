@@ -38,7 +38,7 @@ S.FeaturedContainer = styled.div`
 
 S.FeaturedGame = styled.div`
   height: 14rem;
-  width: 33.333333%;
+  width: 50%;
   position: relative;
   cursor: pointer;
   flex: 1 1 auto;

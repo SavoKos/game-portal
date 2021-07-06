@@ -123,7 +123,7 @@ S.GameTrailerItem = styled.div`
 
 S.Image = styled.div`
   position: relative;
-  width: 90%;
+  width: 100%;
   min-height: 400px;
 
   @media (min-width: 1024px) {
@@ -147,7 +147,7 @@ S.Image = styled.div`
     top: 70%;
     z-index: 10;
     left: 0%;
-    font-size: 16px;
+    font-size: 24px;
     transform: translate(-0%, -70%) rotate(-90deg);
     text-transform: uppercase;
     color: #fff;
