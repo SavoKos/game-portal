@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import Stars from './Stars';
 import Link from 'next/link';
+import GamePlatforms from '@components/GamePlatforms';
 
 function GameExplorerItems({ games, customGameData }) {
   // returns label "NEW" if game is 10 months old or younger
@@ -15,41 +16,6 @@ function GameExplorerItems({ games, customGameData }) {
       <S.NewLabel>
         <h6>NEW</h6>
       </S.NewLabel>
-    );
-  };
-
-  // convert platform names to icon suitable names e.g. playstation5 => icon-playstation
-  const gamePlatforms = (platformsArray = null) => {
-    if (!platformsArray) return '';
-
-    const platforms = platformsArray
-      .map(platform => platform.platform.slug)
-      .map(platform => {
-        if (platform === 'playstation5' || platform === 'playstation4')
-          return 'icon-playstation';
-        if (
-          platform === 'xbox-series-x' ||
-          platform === 'xbox-series-s' ||
-          platform === 'xbox-one'
-        )
-          return 'icon-xbox';
-        if (platform === 'nintendo-switch') return 'icon-nintendo-switch';
-        if (platform === 'pc') return 'icon-socialwindows';
-        if (platform === 'android') return 'icon-socialandroid';
-        if (platform === 'ios' || platform === 'apple')
-          return 'icon-socialapple';
-      });
-
-    const uniquePlatforms = [...new Set(platforms)].filter(
-      platform => platform
-    );
-
-    return (
-      <S.PlatformContainer>
-        {uniquePlatforms.map(platform => (
-          <Icon type={platform} key={platform} />
-        ))}
-      </S.PlatformContainer>
     );
   };
 
@@ -98,7 +64,9 @@ function GameExplorerItems({ games, customGameData }) {
         <Link href={'/games/' + game.slug || ''} key={game.id}>
           <S.GameExplorerItem className="shadow-white explorer-gradient">
             <S.LabelsContainer>
-              {gamePlatforms(game.platforms)}
+              <S.PlatformContainer>
+                <GamePlatforms platformsArray={game.platforms} />
+              </S.PlatformContainer>
               {newGameCheck(+new Date(game.released))}
             </S.LabelsContainer>
             <Image

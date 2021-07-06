@@ -7,7 +7,12 @@ function NavItems({ active }) {
       <S.NavItem active={active === 'home'} onClick={() => Router.push('/')}>
         Home
       </S.NavItem>
-      <S.NavItem active={active === 'game'}>Game</S.NavItem>
+      <S.NavItem
+        active={active === 'games'}
+        onClick={() => Router.push('/games')}
+      >
+        Games
+      </S.NavItem>
       <S.NavItem active={active === 'services'}>Services</S.NavItem>
       <S.NavItem active={active === 'shop'}>Shop</S.NavItem>
     </>

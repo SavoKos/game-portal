@@ -7,8 +7,10 @@ import Image from 'next/image';
 import Stars from '@components/Homepage/Stars';
 import Link from 'next/link';
 import Layout from '@components/Layout';
+import GamePlatforms from '@components/GamePlatforms';
 
 function Game({ game, errorCode }) {
+  const { gameDetails, screenshots, franchise } = game;
   const [fullDesc, setFullDesc] = useState(false);
 
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
@@ -23,27 +25,27 @@ function Game({ game, errorCode }) {
       </S.Error>
     );
 
-  const coverImage = `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${game?.gameDetails?.background_image}`;
-  const currentUrl = `https://gameportal.savokos.com/games/${game?.gameDetails?.slug}`;
-  const title = game?.gameDetails?.name_original + ' - Game Portal';
+  const coverImage = `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${gameDetails?.background_image}`;
+  const currentUrl = `https://gameportal.savokos.com/games/${gameDetails?.slug}`;
+  const title = gameDetails?.name_original + ' - Game Portal';
   return (
     <Layout
       title={title}
       url={currentUrl}
-      description={game?.gameDetails?.description_raw.slice(0, 130) + '...'}
+      description={gameDetails?.description_raw.slice(0, 130) + '...'}
       image={coverImage}
     >
       <S.PageContainer>
         <Navigation />
         <S.Hero id="hero">
           <Image
-            src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1280/${
-              game?.gameDetails?.background_image ||
-              game?.gameDetails?.background_image_additional
+            src={`https://res.cloudinary.com/demo/image/fetch/c_fill/${
+              gameDetails?.background_image ||
+              gameDetails?.background_image_additional
             }`}
             priority
-            alt={`${game?.gameDetails?.name_original} image`}
-            className="hero-img"
+            alt={`${gameDetails?.name_original} image`}
+            className="bg-img"
             objectFit="cover"
             layout="fill"
             objectPosition="top"
@@ -52,28 +54,31 @@ function Game({ game, errorCode }) {
             <S.CoverImage className="explorer-gradient">
               <Image
                 src={coverImage}
-                alt={`${game?.gameDetails?.name_original} image`}
+                alt={`${gameDetails?.name_original} image`}
                 objectFit="cover"
                 layout="fill"
               />
             </S.CoverImage>
             <S.Details fullDesc={fullDesc}>
-              <h1>{game?.gameDetails?.name_original}</h1>
-              {game?.gameDetails?.playtime ? (
-                <p>AVERAGE PLAYTIME: {game?.gameDetails?.playtime} HOURS</p>
+              <h1>{gameDetails?.name_original}</h1>
+              {gameDetails?.playtime ? (
+                <p>AVERAGE PLAYTIME: {gameDetails?.playtime} HOURS</p>
               ) : (
                 ''
               )}
+              <p className="platforms-title">AVAILABLE ON: </p>
+              <S.PlatformsContainer>
+                <GamePlatforms platformsArray={gameDetails?.platforms} />
+              </S.PlatformsContainer>
+
               <S.Stars>
                 <Stars
-                  rating={+Math.trunc(game?.gameDetails?.rating)}
+                  rating={+Math.trunc(gameDetails?.rating)}
                   className="stars"
                 />
               </S.Stars>
               <div>
-                <p className="description">
-                  {game?.gameDetails?.description_raw}
-                </p>
+                <p className="description">{gameDetails?.description_raw}</p>
               </div>
               <span
                 className="truncate-text"
@@ -82,25 +87,38 @@ function Game({ game, errorCode }) {
                 {fullDesc ? 'Show less' : 'Show more'}
               </span>
               <S.Tags>
-                {game?.gameDetails?.tags?.map(tag => (
+                {gameDetails?.tags?.map(tag => (
                   <p className="tag" key={tag.id}>
                     {tag.name}
                   </p>
                 ))}
               </S.Tags>
-              {game?.gameDetails?.website && (
-                <Link href={game?.gameDetails?.website}>
+              {gameDetails?.website && (
+                <Link href={gameDetails?.website}>
                   <h4 className="official-website">Official Website</h4>
                 </Link>
               )}
             </S.Details>
           </S.HeroContent>
         </S.Hero>
-        <S.MainDetails>
-          <S.Screenshots>
-            <h1>Screenshot</h1>
-          </S.Screenshots>
-        </S.MainDetails>
+        <S.MainDetailsContainer>
+          <Image
+            src={`https://res.cloudinary.com/demo/image/fetch/c_fill/${
+              screenshots[0]?.image || gameDetails?.background_image
+            }`}
+            priority
+            alt={`${gameDetails?.name_original} image`}
+            className="bg-img"
+            objectFit="cover"
+            layout="fill"
+            objectPosition="top"
+          />
+          <S.MainDetails className="blue-overlay">
+            <S.Screenshots>
+              <h1>Screenshot</h1>
+            </S.Screenshots>
+          </S.MainDetails>
+        </S.MainDetailsContainer>
       </S.PageContainer>
     </Layout>
   );
@@ -130,7 +148,11 @@ export const getServerSideProps = async ({ query: { slug } }) => {
 
     return {
       props: {
-        game: { gameDetails, franchise, screenshots },
+        game: {
+          gameDetails,
+          franchise: franchise.results,
+          screenshots: screenshots.results,
+        },
         errorCode: 200,
       },
     };
@@ -152,6 +174,15 @@ S.Error = styled.div`
 S.PageContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   min-height: 120vh;
+
+  .bg-img {
+    opacity: 0.2;
+    object-fit: cover;
+    width: 100%;
+    object-position: top;
+    height: 100%;
+    pointer-events: none;
+  }
 `;
 
 S.Hero = styled.div`
@@ -172,15 +203,6 @@ S.Hero = styled.div`
     left: 0;
     background: linear-gradient(to bottom, rgba(255, 0, 0, 0) 0%, #070426 100%);
     background: linear-gradient(to bottom, rgba(255, 0, 0, 0) 0%, #070426 100%);
-  }
-
-  .hero-img {
-    opacity: 0.2;
-    object-fit: cover;
-    width: 100%;
-    object-position: top;
-    height: 100%;
-    pointer-events: none;
   }
 `;
 
@@ -207,6 +229,14 @@ S.Details = styled.div`
   color: #fff;
   height: 100%;
   margin-left: 3rem;
+
+  p:nth-of-type(1) {
+    margin-top: 0.1rem;
+  }
+
+  .platforms-title {
+    display: inline;
+  }
 
   .official-website {
     margin-top: 2rem;
@@ -271,13 +301,41 @@ S.Tags = styled.div`
     }
   }
 `;
+S.MainDetailsContainer = styled.div`
+  padding: 0 10rem;
+  position: relative;
+  min-height: 80vh;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to top, rgba(255, 0, 0, 0) 0%, #070426 100%);
+  }
+`;
 
 S.MainDetails = styled.div`
-  padding: 0 10rem;
+  width: 100%;
+  height: 100%;
 `;
 
 S.Screenshots = styled.div`
   width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+S.PlatformsContainer = styled.div`
+  display: inline;
+  .anticon {
+    margin: 0 0.2rem;
+    cursor: pointer;
+  }
 `;
 
 export default Game;

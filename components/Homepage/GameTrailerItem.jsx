@@ -241,6 +241,7 @@ S.Details = styled.div`
     font-weight: 400;
     margin: 20px 0;
     cursor: pointer;
+    width: fit-content;
   }
 
   .description {
