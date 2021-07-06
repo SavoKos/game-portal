@@ -2,6 +2,7 @@ import Navigation from '@components/Navigation';
 import Image from 'next/image';
 import Router from 'next/router';
 import styled from 'styled-components';
+import Head from 'next/head';
 
 function error({ errorCode }) {
   const displayErrorCode = () => {
@@ -18,7 +19,7 @@ function error({ errorCode }) {
   return (
     <>
       <Head>
-        <title>{displayErrorCode() + ' - Game Portal'}</title>
+        <title>{'Error - Game Portal'}</title>
       </Head>
       <S.ErrorPageContainer>
         <Navigation className="navigation" />

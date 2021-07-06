@@ -259,7 +259,7 @@ S.Tags = styled.div`
 
   .tag {
     flex: 1 1 auto;
-    width: 33.333333%;
+    width: 100%;
     font-family: ${({ theme }) => theme.fontFamily.poppins};
     margin: 0.3rem;
     border-radius: 50px;
@@ -272,6 +272,10 @@ S.Tags = styled.div`
 
     &:hover {
       background-color: ${({ theme }) => theme.colors.seaBlue};
+    }
+
+    @media (min-width: 500px) {
+      width: 33.333333%;
     }
   }
 `;

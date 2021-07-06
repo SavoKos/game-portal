@@ -10,7 +10,6 @@ import Layout from '@components/Layout';
 
 function Game({ game, errorCode }) {
   const [fullDesc, setFullDesc] = useState(false);
-  console.log(game.screenshots);
 
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
   useEffect(() => {
