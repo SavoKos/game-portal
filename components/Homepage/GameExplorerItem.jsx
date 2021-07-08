@@ -1,9 +1,8 @@
-import Icon from '@components/UI/Icon';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Stars from './Stars';
 import Link from 'next/link';
-import GamePlatforms from '@components/GamePlatforms';
+import PlatformsIcons from '@components/PlatformsIcons';
 
 function GameExplorerItems({ games, customGameData }) {
   // returns label "NEW" if game is 10 months old or younger
@@ -18,6 +17,9 @@ function GameExplorerItems({ games, customGameData }) {
       </S.NewLabel>
     );
   };
+
+  const platformIconsSlugs = platforms =>
+    platforms.map(platform => platform.platform.slug);
 
   return (
     <S.GameExplorerItems>
@@ -65,7 +67,9 @@ function GameExplorerItems({ games, customGameData }) {
           <S.GameExplorerItem className="shadow-white explorer-gradient">
             <S.LabelsContainer>
               <S.PlatformContainer>
-                <GamePlatforms platformsArray={game.platforms} />
+                <PlatformsIcons
+                  platformsArray={platformIconsSlugs(game.platforms)}
+                />
               </S.PlatformContainer>
               {newGameCheck(+new Date(game.released))}
             </S.LabelsContainer>

@@ -7,10 +7,12 @@ import Image from 'next/image';
 import Stars from '@components/Homepage/Stars';
 import Link from 'next/link';
 import Layout from '@components/Layout';
-import GamePlatforms from '@components/GamePlatforms';
+import PlatformsIcons from '@components/PlatformsIcons';
+import StoresIcons from '@components/StoresIcons';
 
 function Game({ game, errorCode }) {
-  const { gameDetails, screenshots, franchise } = game;
+  const { gameDetails, screenshots, franchise, stores } = game;
+  console.log(stores);
   const [fullDesc, setFullDesc] = useState(false);
 
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
@@ -24,6 +26,9 @@ function Game({ game, errorCode }) {
         <Spinner />
       </S.Error>
     );
+
+  const platformIconsSlugs = platforms =>
+    platforms.map(platform => platform.platform.slug);
 
   const coverImage = `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${gameDetails?.background_image}`;
   const currentUrl = `https://gameportal.savokos.com/games/${gameDetails?.slug}`;
@@ -39,7 +44,7 @@ function Game({ game, errorCode }) {
         <Navigation />
         <S.Hero id="hero">
           <Image
-            src={`https://res.cloudinary.com/demo/image/fetch/c_fill/${
+            src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${
               gameDetails?.background_image ||
               gameDetails?.background_image_additional
             }`}
@@ -68,7 +73,9 @@ function Game({ game, errorCode }) {
               )}
               <p className="platforms-title">AVAILABLE ON: </p>
               <S.PlatformsContainer>
-                <GamePlatforms platformsArray={gameDetails?.platforms} />
+                <PlatformsIcons
+                  platformsArray={platformIconsSlugs(gameDetails?.platforms)}
+                />
               </S.PlatformsContainer>
 
               <S.Stars>
@@ -103,10 +110,9 @@ function Game({ game, errorCode }) {
         </S.Hero>
         <S.MainDetailsContainer>
           <Image
-            src={`https://res.cloudinary.com/demo/image/fetch/c_fill/${
+            src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${
               screenshots[0]?.image || gameDetails?.background_image
             }`}
-            priority
             alt={`${gameDetails?.name_original} image`}
             className="bg-img"
             objectFit="cover"
@@ -114,9 +120,10 @@ function Game({ game, errorCode }) {
             objectPosition="top"
           />
           <S.MainDetails className="blue-overlay">
-            <S.Screenshots>
-              <h1>Screenshot</h1>
-            </S.Screenshots>
+            <S.StoresContainer>
+              <h1>Buy the game</h1>
+              <StoresIcons storesArray={stores} />
+            </S.StoresContainer>
           </S.MainDetails>
         </S.MainDetailsContainer>
       </S.PageContainer>
@@ -128,7 +135,7 @@ export const getServerSideProps = async ({ query: { slug } }) => {
   try {
     const API_KEY = process.env.API_KEY;
     console.log(API_KEY);
-    const [gameDetails, franchise, screenshots] = await Promise.all([
+    const [gameDetails, franchise, screenshots, stores] = await Promise.all([
       fetch(
         encodeURI(`https://api.rawg.io/api/games/${slug}?key=${API_KEY}`)
       ).then(res => res.json()),
@@ -142,6 +149,9 @@ export const getServerSideProps = async ({ query: { slug } }) => {
           `https://api.rawg.io/api/games/${slug}/screenshots?key=${API_KEY}`
         )
       ).then(res => res.json()),
+      fetch(
+        encodeURI(`https://api.rawg.io/api/games/${slug}/stores?key=${API_KEY}`)
+      ).then(res => res.json()),
     ]);
 
     if (!gameDetails.name) return { props: { errorCode: 404 } };
@@ -152,6 +162,7 @@ export const getServerSideProps = async ({ query: { slug } }) => {
           gameDetails,
           franchise: franchise.results,
           screenshots: screenshots.results,
+          stores: stores.results,
         },
         errorCode: 200,
       },
@@ -301,8 +312,9 @@ S.Tags = styled.div`
     }
   }
 `;
+
 S.MainDetailsContainer = styled.div`
-  padding: 0 10rem;
+  display: flex;
   position: relative;
   min-height: 80vh;
   width: 100%;
@@ -319,15 +331,10 @@ S.MainDetailsContainer = styled.div`
 `;
 
 S.MainDetails = styled.div`
-  width: 100%;
+  padding: 0 20rem;
   height: 100%;
-`;
-
-S.Screenshots = styled.div`
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  z-index: 2;
 `;
 
 S.PlatformsContainer = styled.div`
@@ -336,6 +343,14 @@ S.PlatformsContainer = styled.div`
     margin: 0 0.2rem;
     cursor: pointer;
   }
+`;
+
+S.StoresContainer = styled.div`
+  h1 {
+    color: #fff;
+    margin-bottom: 5rem;
+  }
+  width: 40%;
 `;
 
 export default Game;
