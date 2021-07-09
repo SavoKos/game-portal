@@ -136,8 +136,12 @@ S.TitleContainer = styled.div`
 
   h1 {
     color: #fff;
-    margin-top: 0;
+    margin-top: 12rem;
     margin-left: 1rem;
+
+    @media (min-width: 768px) {
+      margin-top: 0;
+    }
 
     span {
       color: ${({ theme }) => theme.colors.seaBlue};
