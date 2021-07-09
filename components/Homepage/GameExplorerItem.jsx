@@ -307,8 +307,8 @@ S.GameExplorerItem = styled.div`
     transform: scale(1.5);
   }
 
-  @media (min-width: 768px) {
-    width: 20%;
+  @media (min-width: 600px) {
+    width: 23%;
   }
 
   @media (min-width: 1024px) {
