@@ -16,14 +16,27 @@ function Hero() {
 // -------------------------------------------------- styling ----------------------------------------------
 const S = {};
 S.HeroContainer = styled.div`
-  min-height: 115vh;
   width: 100%;
+  min-height: 137vh;
   overflow: hidden;
   z-index: 10;
   position: relative;
   background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/f_webp/v1625241368/game-portal/Grouqwfqfwfqwp_1_mwpith.png');
   background-position: bottom;
   pointer-events: none;
+  background-repeat: no-repeat;
+
+  @media (min-height: 700px) {
+    min-height: 125vh;
+  }
+
+  @media (min-height: 750px) {
+    min-height: 120vh;
+  }
+
+  @media (min-height: 800px) {
+    min-height: 100vh;
+  }
 `;
 
 S.Hero = styled.div`
