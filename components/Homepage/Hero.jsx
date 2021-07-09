@@ -16,7 +16,7 @@ function Hero() {
 // -------------------------------------------------- styling ----------------------------------------------
 const S = {};
 S.HeroContainer = styled.div`
-  min-height: 90vh;
+  min-height: 115vh;
   width: 100%;
   overflow: hidden;
   z-index: 10;
