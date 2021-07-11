@@ -245,13 +245,17 @@ S.Hero = styled.div`
 
 S.HeroContent = styled.div`
   display: flex;
-  padding: 0 20rem;
+  padding: 0 5%;
   height: 100%;
   width: 100%;
   z-index: 2;
   min-height: 35rem;
   margin-top: 10rem;
   align-items: flex-start;
+
+  @media (min-width: 500px) {
+    padding: 0 10%;
+  }
 `;
 
 S.CoverImage = styled.div`
@@ -260,12 +264,21 @@ S.CoverImage = styled.div`
   height: 550px;
   flex: none;
   opacity: 0.8;
+  display: none;
+
+  @media (min-width: 850px) {
+    display: block;
+  }
 `;
 
 S.Details = styled.div`
   color: #fff;
   height: 100%;
-  margin-left: 3rem;
+  margin-left: 0;
+
+  @media (min-width: 850px) {
+    margin-left: 3rem;
+  }
 
   p:nth-of-type(1) {
     margin-top: 0.1rem;
@@ -344,7 +357,11 @@ S.MainDetailsContainer = styled.div`
   position: relative;
   min-height: 80vh;
   width: 100%;
-  padding-top: 10rem;
+  padding-top: 5rem;
+
+  @media (min-width: 500px) {
+    padding-top: 10rem;
+  }
 
   &::after {
     position: absolute;
@@ -358,12 +375,23 @@ S.MainDetailsContainer = styled.div`
 `;
 
 S.MainDetails = styled.div`
-  padding: 0 20rem;
+  padding: 0 5%;
   z-index: 2;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-height: 50vh;
+  height: 100%;
+
+  @media (min-width: 850px) {
+    height: unset;
+    max-height: 50vh;
+    flex-direction: row;
+  }
+
+  @media (min-width: 500px) {
+    padding: 0 10%;
+  }
 `;
 
 S.PlatformsContainer = styled.div`
@@ -377,18 +405,30 @@ S.PlatformsContainer = styled.div`
 S.StoresContainer = styled.div`
   display: grid;
   place-items: center;
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 3rem;
+
+  @media (min-width: 850px) {
+    margin-bottom: 0;
+    max-width: 40%;
+  }
 
   h1 {
     color: #fff;
     margin-bottom: 5rem;
   }
-  max-width: 40%;
 `;
 
 S.ScreenshotsContainer = styled.div`
   flex-wrap: wrap;
-  width: 57%;
+  width: 100%;
   display: flex;
+  height: 100%;
+
+  @media (min-width: 850px) {
+    width: 57%;
+  }
 `;
 
 S.Screenshot = styled.div`
@@ -405,6 +445,11 @@ S.Screenshot = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.primaryLight};
   transition: all ease 0.3s;
+  height: 10rem;
+
+  @media (min-width: 850px) {
+    height: unset;
+  }
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.primary + 'bf'};

@@ -316,6 +316,10 @@ S.GameExplorerItem = styled.div`
     transform: scale(0.9);
   }
 
+  @media (min-width: 1280px) {
+    width: 15%;
+  }
+
   .game-name {
     position: absolute;
     bottom: 1rem;
