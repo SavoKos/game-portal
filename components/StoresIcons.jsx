@@ -1,5 +1,5 @@
 import Icon from '@components/UI/Icon';
-import Router from 'next/router';
+import link from '@components/link';
 import styled from 'styled-components';
 
 // takes one store e.g. steam and converts it into icon sutable name like icon-steam
@@ -77,8 +77,8 @@ function StoresIcons({ storesArray = null }) {
   return (
     <S.Stores>
       {stores.map(store => (
-        <S.StoreItem onClick={() => Router.push(store.url)}>
-          <Icon type={store.icon} key={store.name} />
+        <S.StoreItem onClick={() => link(store.url)} key={store.name}>
+          <Icon type={store.icon} />
           <h3>{store.name}</h3>
         </S.StoreItem>
       ))}

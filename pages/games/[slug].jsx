@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import Navigation from '@components/Navigation';
 import Image from 'next/image';
 import Stars from '@components/Homepage/Stars';
-import Link from 'next/link';
+import link from '@components/link';
 import Layout from '@components/Layout';
 import PlatformsIcons from '@components/PlatformsIcons';
 import StoresIcons from '@components/StoresIcons';
+import Icon from '@components/UI/Icon';
 
 function Game({ game, errorCode }) {
   const { gameDetails, screenshots, franchise, stores } = game;
-  console.log(stores);
   const [fullDesc, setFullDesc] = useState(false);
 
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
@@ -101,9 +101,12 @@ function Game({ game, errorCode }) {
                 ))}
               </S.Tags>
               {gameDetails?.website && (
-                <Link href={gameDetails?.website}>
-                  <h4 className="official-website">Official Website</h4>
-                </Link>
+                <h4
+                  className="official-website"
+                  onClick={() => link(gameDetails?.website)}
+                >
+                  Official Website
+                </h4>
               )}
             </S.Details>
           </S.HeroContent>
@@ -119,11 +122,34 @@ function Game({ game, errorCode }) {
             layout="fill"
             objectPosition="top"
           />
-          <S.MainDetails className="blue-overlay">
+          <S.MainDetails>
             <S.StoresContainer>
-              <h1>Buy the game</h1>
               <StoresIcons storesArray={stores} />
             </S.StoresContainer>
+            <S.ScreenshotsContainer>
+              <S.Screenshot>
+                <Image
+                  src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_1200/${screenshots[0]?.image}`}
+                  alt={`${gameDetails?.name_original} screenshot 1`}
+                  objectFit="cover"
+                  layout="fill"
+                />
+              </S.Screenshot>
+              {screenshots.slice(1, 3).map((screenshot, i) => (
+                <S.Screenshot key={screenshot.id}>
+                  <Image
+                    src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_800/${screenshot?.image}`}
+                    alt={`${gameDetails?.name_original} screenshot ${i}`}
+                    objectFit="cover"
+                    layout="fill"
+                  />
+                </S.Screenshot>
+              ))}
+              <S.Screenshot>
+                <Icon type="icon-moreread" />
+                <h5>View More</h5>
+              </S.Screenshot>
+            </S.ScreenshotsContainer>
           </S.MainDetails>
         </S.MainDetailsContainer>
       </S.PageContainer>
@@ -318,6 +344,7 @@ S.MainDetailsContainer = styled.div`
   position: relative;
   min-height: 80vh;
   width: 100%;
+  padding-top: 10rem;
 
   &::after {
     position: absolute;
@@ -332,9 +359,11 @@ S.MainDetailsContainer = styled.div`
 
 S.MainDetails = styled.div`
   padding: 0 20rem;
-  height: 100%;
-  width: 100%;
   z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-height: 50vh;
 `;
 
 S.PlatformsContainer = styled.div`
@@ -346,11 +375,59 @@ S.PlatformsContainer = styled.div`
 `;
 
 S.StoresContainer = styled.div`
+  display: grid;
+  place-items: center;
+
   h1 {
     color: #fff;
     margin-bottom: 5rem;
   }
-  width: 40%;
+  max-width: 40%;
+`;
+
+S.ScreenshotsContainer = styled.div`
+  flex-wrap: wrap;
+  width: 50%;
+  display: flex;
+`;
+
+S.Screenshot = styled.div`
+  flex: 1 1 auto;
+  width: 32%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 0.1rem;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.primaryLight};
+  transition: all ease 0.3s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary + 'bf'};
+
+    h5,
+    .anticon {
+      color: #fff;
+    }
+  }
+
+  h5 {
+    font-weight: bold;
+    color: ${({ theme }) => theme.colors.primary};
+  }
+
+  .anticon {
+    font-size: 2rem;
+    color: ${({ theme }) => theme.colors.primary};
+  }
+
+  &:nth-of-type(1) {
+    width: 100%;
+  }
 `;
 
 export default Game;
