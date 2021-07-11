@@ -387,7 +387,7 @@ S.StoresContainer = styled.div`
 
 S.ScreenshotsContainer = styled.div`
   flex-wrap: wrap;
-  width: 50%;
+  width: 57%;
   display: flex;
 `;
 
