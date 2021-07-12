@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const Overlay = props => {
-  return props.active && <S.Overlay onClick={props.onClick}></S.Overlay>;
+const Overlay = ({ active, onClick, className }) => {
+  return active && <S.Overlay onClick={onClick} className={className} />;
 };
 
 // -------------------------------------------------- styling ----------------------------------------------
