@@ -7,24 +7,22 @@ import AliceCarousel from 'react-alice-carousel';
 import { useState } from 'react';
 import Icon from '@components/UI/Icon';
 import Spinner from '@components/UI/Spinner';
-import axios from 'axios';
 
 function MainDetails({ screenshots, gameDetails, stores }) {
   const [sliderActive, setSliderActive] = useState(false);
+
   console.log(screenshots);
 
-  const carouselItems = screenshots.map((screenshot, i) => (
+  const carouselItems = screenshots?.map((screenshot, i) => (
     <S.ScreenshotSlide>
       <Image
-        src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_${
-          screenshot.width || 1449
-        },h_${screenshot.height || 815}/${screenshot.image}`}
-        alt={`${gameDetails?.name_original} image ${i}`}
+        src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_1499/${screenshot?.image}`}
+        alt={`${gameDetails?.name_original} image ${i + 1}`}
         className="screenshot"
         objectFit="cover"
         layout="intrinsic"
-        width={screenshot.width || 1449}
-        height={screenshot.height || 815}
+        width={1499}
+        height={815}
       />
       <Spinner />
     </S.ScreenshotSlide>
@@ -32,37 +30,41 @@ function MainDetails({ screenshots, gameDetails, stores }) {
 
   return (
     <S.MainDetailsContainer sliderActive={sliderActive}>
-      <Image
-        src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${
-          screenshots[0]?.image || gameDetails?.background_image
-        }`}
-        alt={`${gameDetails?.name_original} image`}
-        className="bg-img"
-        objectFit="cover"
-        layout="fill"
-        objectPosition="top"
-      />
+      {screenshots && (
+        <Image
+          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${
+            screenshots[0]?.image || gameDetails?.background_image
+          }`}
+          alt={`${gameDetails?.name_original} image`}
+          className="bg-img"
+          objectFit="cover"
+          layout="fill"
+          objectPosition="top"
+        />
+      )}
       <S.MainDetails active={sliderActive}>
         <S.StoresContainer>
           <StoresIcons storesArray={stores} />
         </S.StoresContainer>
         <S.ScreenshotsContainer>
           <S.Screenshot onClick={() => setSliderActive(true)}>
-            <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_1200/${screenshots[0]?.image}`}
-              alt={`${gameDetails?.name_original} screenshot 1`}
-              objectFit="cover"
-              layout="fill"
-            />
+            {screenshots && (
+              <Image
+                src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_1200/${screenshots[0]?.image}`}
+                alt={`${gameDetails?.name_original} screenshot 1`}
+                objectFit="cover"
+                layout="fill"
+              />
+            )}
           </S.Screenshot>
-          {screenshots.slice(1, 3).map((screenshot, i) => (
+          {screenshots?.slice(1, 3).map((screenshot, i) => (
             <S.Screenshot
               key={screenshot.id}
               onClick={() => setSliderActive(true)}
             >
               <Image
                 src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_800/${screenshot?.image}`}
-                alt={`${gameDetails?.name_original} screenshot ${i}`}
+                alt={`${gameDetails?.name_original} screenshot ${i + 1}`}
                 objectFit="cover"
                 layout="fill"
               />

@@ -9,7 +9,7 @@ function Hero({ gameDetails, coverImage }) {
   const [fullDesc, setFullDesc] = useState(false);
 
   const platformIconsSlugs = platforms =>
-    platforms.map(platform => platform.platform.slug);
+    platforms?.map(platform => platform?.platform?.slug);
 
   return (
     <S.Hero id="hero">
