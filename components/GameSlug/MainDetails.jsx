@@ -6,19 +6,27 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import AliceCarousel from 'react-alice-carousel';
 import { useState } from 'react';
 import Icon from '@components/UI/Icon';
+import Spinner from '@components/UI/Spinner';
+import axios from 'axios';
 
 function MainDetails({ screenshots, gameDetails, stores }) {
   const [sliderActive, setSliderActive] = useState(false);
+  console.log(screenshots);
 
   const carouselItems = screenshots.map((screenshot, i) => (
     <S.ScreenshotSlide>
       <Image
-        src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1500/${screenshot.image}`}
+        src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_${
+          screenshot.width || 1449
+        },h_${screenshot.height || 815}/${screenshot.image}`}
         alt={`${gameDetails?.name_original} image ${i}`}
         className="screenshot"
         objectFit="cover"
-        layout="fill"
+        layout="intrinsic"
+        width={screenshot.width || 1449}
+        height={screenshot.height || 815}
       />
+      <Spinner />
     </S.ScreenshotSlide>
   ));
 
@@ -34,7 +42,7 @@ function MainDetails({ screenshots, gameDetails, stores }) {
         layout="fill"
         objectPosition="top"
       />
-      <S.MainDetails>
+      <S.MainDetails active={sliderActive}>
         <S.StoresContainer>
           <StoresIcons storesArray={stores} />
         </S.StoresContainer>
@@ -69,17 +77,29 @@ function MainDetails({ screenshots, gameDetails, stores }) {
           onClick={() => setSliderActive(false)}
           active={sliderActive}
           className="overlay"
-        />
+        >
+          <Icon
+            type="icon-searchclose"
+            className="close-slider"
+            onClick={() => setSliderActive(false)}
+          />
+        </Overlay>
         <AliceCarousel
           mouseTracking
           items={carouselItems}
-          // disableDotsControls={true}
-          // renderPrevButton={() => (
-          //   <Icon type="icon-arrow-left" className="carousel-nav-btn" />
-          // )}
-          // renderNextButton={() => (
-          //   <Icon type="icon-arrow" className="carousel-nav-btn" />
-          // )}
+          keyboardNavigation
+          renderPrevButton={() => (
+            <Icon
+              type="icon-youluPC_common_arrow_th"
+              className="carousel-nav-btn"
+            />
+          )}
+          renderNextButton={() => (
+            <Icon
+              type="icon-youluPC_common_arrow_th1"
+              className="carousel-nav-btn"
+            />
+          )}
         />
       </S.MainDetails>
     </S.MainDetailsContainer>
@@ -128,12 +148,81 @@ S.MainDetails = styled.div`
   }
 
   .alice-carousel {
-    height: 80vh;
     position: fixed;
+    width: 100%;
+    visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
+    opacity: ${({ active }) => (active ? '100' : '0')};
+    z-index: 56;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    transition: all ease 0.3s;
+
+    @media (min-width: 1200px) {
+      width: 60%;
+      height: 60%;
+      top: 40%;
+      transform: translate(-50%, -40%);
+    }
+
+    .alice-carousel__next-btn,
+    .alice-carousel__prev-btn {
+      position: absolute;
+      top: 1rem;
+      background: ${({ theme }) => theme.colors.primaryLight + 'd1'};
+    }
+
+    .alice-carousel__prev-btn {
+      left: 1rem;
+      width: unset !important;
+      border-radius: 50%;
+    }
+
+    .alice-carousel__next-btn {
+      border-radius: 50%;
+      right: 1rem;
+    }
+
+    .carousel-nav-btn {
+      color: ${({ theme }) => theme.colors.seaBlue};
+      font-size: 2rem;
+      border-radius: 50%;
+      padding: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .alice-carousel__dots-item {
+      background-color: #fff;
+
+      &.__active {
+        background-color: ${({ theme }) => theme.colors.seaBlue};
+      }
+    }
+  }
+
+  .overlay {
+    background-color: #000;
+
+    .close-slider {
+      position: absolute;
+      top: 2%;
+      right: 2%;
+      color: ${({ theme }) => theme.colors.seaBlue};
+      font-size: 2rem;
+      background-color: ${({ theme }) => theme.colors.primaryLight};
+      border-radius: 50%;
+      padding: 0.5rem;
+      transition: all ease 0.3s;
+
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 `;
 
@@ -197,12 +286,12 @@ S.Screenshot = styled.div`
 
   h5 {
     font-weight: bold;
-    color: ${({ theme }) => theme.colors.primary};
+    color: #fff;
   }
 
   .anticon {
     font-size: 2rem;
-    color: ${({ theme }) => theme.colors.primary};
+    color: #fff;
   }
 
   &:nth-of-type(1) {
@@ -213,11 +302,19 @@ S.Screenshot = styled.div`
 S.ScreenshotSlide = styled.div`
   position: relative;
   height: 100%;
-  height: 80vh;
   width: 100%;
 
   .screenshot {
-    height: 100%;
+    height: 100% !important;
+    z-index: 2;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
 

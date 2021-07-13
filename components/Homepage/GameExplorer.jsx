@@ -64,10 +64,16 @@ function GameExplorer({ games, customGamesData }) {
         items={carouselItems}
         disableDotsControls={true}
         renderPrevButton={() => (
-          <Icon type="icon-arrow-left" className="carousel-nav-btn" />
+          <Icon
+            type="icon-youluPC_common_arrow_th"
+            className="carousel-nav-btn"
+          />
         )}
         renderNextButton={() => (
-          <Icon type="icon-arrow" className="carousel-nav-btn" />
+          <Icon
+            type="icon-youluPC_common_arrow_th1"
+            className="carousel-nav-btn"
+          />
         )}
       />
     </S.GameExplorerContainer>
@@ -106,7 +112,7 @@ S.GameExplorerContainer = styled.div`
   .carousel-nav-btn {
     color: #9ca3af;
     cursor: pointer;
-    border: 2px solid #9ca3af;
+    border: 1px solid #9ca3af;
     background-color: transparent;
     border-radius: 50%;
     padding: 0.5rem;

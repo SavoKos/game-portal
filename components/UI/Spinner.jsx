@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 function Spinner() {
   return (
-    <S.Spinner>
+    <S.Spinner className="spinner">
       <div></div>
       <div></div>
     </S.Spinner>
