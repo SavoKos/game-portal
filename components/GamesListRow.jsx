@@ -2,9 +2,9 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-export default function FeaturedGames({ games }) {
+export default function FeaturedGames({ games, className = '' }) {
   return (
-    <S.FeaturedContainer>
+    <S.FeaturedContainer className={className}>
       {games?.slice(0, 5).map(game => (
         <Link key={game.id} href={'/games/' + game.slug}>
           <S.FeaturedGame>

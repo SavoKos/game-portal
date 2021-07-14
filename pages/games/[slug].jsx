@@ -6,11 +6,13 @@ import Navigation from '@components/Navigation';
 import Layout from '@components/Layout';
 import Hero from '@components/GameSlug/Hero';
 import MainDetails from '@components/GameSlug/MainDetails';
+import FeaturedGames from '@components/GamesListRow';
 
 function Game({ gameDetails, errorCode, slug }) {
   const [franchise, setFranchise] = useState('');
   const [screenshots, setScreenshots] = useState('');
   const [stores, setStores] = useState('');
+  const [suggestions, setSuggestions] = useState('');
 
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
   console.log(screenshots, isError);
@@ -19,7 +21,7 @@ function Game({ gameDetails, errorCode, slug }) {
 
     try {
       const API_KEY = process.env.API_KEY || 'c542e67aec3a4340908f9de9e86038af';
-      const [franchise, screenshots, stores] = await Promise.all([
+      const [franchise, screenshots, stores, suggested] = await Promise.all([
         fetch(
           encodeURI(
             `https://api.rawg.io/api/games/${slug}/game-series?key=${API_KEY}`
@@ -35,11 +37,17 @@ function Game({ gameDetails, errorCode, slug }) {
             `https://api.rawg.io/api/games/${slug}/stores?key=${API_KEY}`
           )
         ).then(res => res.json()),
+        fetch(
+          encodeURI(
+            `https://api.rawg.io/api/games/${slug}/suggested?key=${API_KEY}`
+          )
+        ).then(res => res.json()),
       ]);
 
       setFranchise(franchise.results);
       setStores(stores.results);
       setScreenshots(screenshots.results);
+      setSuggestions(suggested.results);
     } catch (error) {
       console.log(error);
       Router.push('/error');
@@ -76,6 +84,12 @@ function Game({ gameDetails, errorCode, slug }) {
             screenshots={screenshots}
           />
         )}
+        <S.SuggestedGames>
+          <h1>Similar Games</h1>
+          {suggestions && (
+            <FeaturedGames games={suggestions} className="games-list" />
+          )}
+        </S.SuggestedGames>
       </S.PageContainer>
     </Layout>
   );
@@ -123,6 +137,22 @@ S.PageContainer = styled.div`
     object-position: top;
     height: 100%;
     pointer-events: none;
+  }
+`;
+
+S.SuggestedGames = styled.div`
+  position: relative;
+
+  .games-list {
+    margin: 0;
+  }
+
+  h1 {
+    position: absolute;
+    z-index: 5;
+    left: 1rem;
+    top: -5rem;
+    color: #fff;
   }
 `;
 

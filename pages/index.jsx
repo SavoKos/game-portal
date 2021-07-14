@@ -1,4 +1,4 @@
-import FeaturedGames from '@components/Homepage/FeaturedGames';
+import FeaturedGames from '@components/GamesListRow';
 import GameExplorer from '@components/Homepage/GameExplorer';
 import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';

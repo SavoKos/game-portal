@@ -11,22 +11,22 @@ import Spinner from '@components/UI/Spinner';
 function MainDetails({ screenshots, gameDetails, stores }) {
   const [sliderActive, setSliderActive] = useState(false);
 
-  console.log(screenshots);
-
-  const carouselItems = screenshots?.map((screenshot, i) => (
-    <S.ScreenshotSlide>
-      <Image
-        src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_1499/${screenshot?.image}`}
-        alt={`${gameDetails?.name_original} image ${i + 1}`}
-        className="screenshot"
-        objectFit="cover"
-        layout="intrinsic"
-        width={1499}
-        height={815}
-      />
-      <Spinner />
-    </S.ScreenshotSlide>
-  ));
+  const carouselItems = screenshots?.map((screenshot, i) => {
+    return (
+      <S.ScreenshotSlide>
+        <Image
+          src={screenshot.image}
+          alt={`${gameDetails?.name_original} image ${i + 1}`}
+          className="screenshot"
+          objectFit="cover"
+          layout="intrinsic"
+          width={1499}
+          height={815}
+        />
+        <Spinner />
+      </S.ScreenshotSlide>
+    );
+  });
 
   return (
     <S.MainDetailsContainer sliderActive={sliderActive}>
@@ -114,10 +114,11 @@ const S = {};
 S.MainDetailsContainer = styled.div`
   display: flex;
   position: relative;
-  min-height: 80vh;
+  min-height: 100vh;
   width: 100%;
-  padding-top: 7rem;
+  padding-top: 10rem;
   z-index: ${({ sliderActive }) => (sliderActive ? '60' : 'auto')};
+  padding-bottom: 15rem;
 
   &::after {
     position: absolute;
@@ -127,6 +128,10 @@ S.MainDetailsContainer = styled.div`
     top: 0;
     left: 0;
     background: linear-gradient(to top, rgba(255, 0, 0, 0) 0%, #070426 100%);
+  }
+
+  @media (min-width: 850px) {
+    padding-bottom: 20rem;
   }
 `;
 
