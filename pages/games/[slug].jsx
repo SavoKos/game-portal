@@ -6,13 +6,14 @@ import Navigation from '@components/Navigation';
 import Layout from '@components/Layout';
 import Hero from '@components/GameSlug/Hero';
 import MainDetails from '@components/GameSlug/MainDetails';
-import FeaturedGames from '@components/GamesListRow';
+import GamesListRow from '@components/GamesListRow';
 
 function Game({ gameDetails, errorCode, slug }) {
   const [franchise, setFranchise] = useState('');
   const [screenshots, setScreenshots] = useState('');
   const [stores, setStores] = useState('');
   const [suggestions, setSuggestions] = useState('');
+  console.log(gameDetails);
 
   const isError = errorCode >= 200 && errorCode <= 226 ? false : true;
   console.log(screenshots, isError);
@@ -52,7 +53,7 @@ function Game({ gameDetails, errorCode, slug }) {
       console.log(error);
       Router.push('/error');
     }
-  }, []);
+  }, [slug]);
 
   if (isError)
     return (
@@ -87,7 +88,7 @@ function Game({ gameDetails, errorCode, slug }) {
         <S.SuggestedGames>
           <h1>Similar Games</h1>
           {suggestions && (
-            <FeaturedGames games={suggestions} className="games-list" />
+            <GamesListRow games={suggestions} className="games-list" />
           )}
         </S.SuggestedGames>
       </S.PageContainer>

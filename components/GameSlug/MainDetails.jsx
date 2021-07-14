@@ -15,7 +15,7 @@ function MainDetails({ screenshots, gameDetails, stores }) {
     return (
       <S.ScreenshotSlide>
         <Image
-          src={screenshot.image}
+          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1499,h_815,q_65/${screenshot.image}`}
           alt={`${gameDetails?.name_original} image ${i + 1}`}
           className="screenshot"
           objectFit="cover"

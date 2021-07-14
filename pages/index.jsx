@@ -1,4 +1,4 @@
-import FeaturedGames from '@components/GamesListRow';
+import GamesListRow from '@components/GamesListRow';
 import GameExplorer from '@components/Homepage/GameExplorer';
 import Hero from '@components/Homepage/Hero';
 import Navigation from '@components/Navigation';
@@ -17,7 +17,7 @@ export default function Home({ fetchedCustomGamesData, games }) {
       <S.PageContainer>
         <Navigation active="home" />
         <Hero />
-        <FeaturedGames games={games} />
+        <GamesListRow games={games} />
         <GameExplorer games={games} customGamesData={fetchedCustomGamesData} />
         <GameTrailer customGamesData={fetchedCustomGamesData} />
       </S.PageContainer>
