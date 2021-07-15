@@ -22,7 +22,7 @@ function GameSingleItem({ game }) {
 
   return (
     <Link href={'/games/' + game.slug || ''}>
-      <S.GameExplorerItem className="shadow-white explorer-gradient">
+      <S.GameExplorerItem className="shadow-white explorer-gradient game-item">
         <S.LabelsContainer>
           <S.PlatformContainer>
             <PlatformsIcons
@@ -55,6 +55,9 @@ S.GameExplorerItem = styled.div`
   flex: 1 1 auto;
   cursor: pointer;
   transition: all ease 0.3s;
+  max-width: 400px;
+  border-radius: 0.5rem;
+  overflow: hidden;
 
   .primary-photo {
     transition: all ease 0.3s;
@@ -70,7 +73,7 @@ S.GameExplorerItem = styled.div`
 
   @media (min-width: 1024px) {
     height: 440px;
-    transform: scale(0.9);
+    transform: scale(0.975);
   }
 
   @media (min-width: 1280px) {

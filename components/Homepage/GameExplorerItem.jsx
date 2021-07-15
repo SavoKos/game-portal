@@ -73,6 +73,8 @@ S.FeaturedGame = styled.div`
   height: 440px;
   background-color: ${({ theme }) => theme.colors.primaryLight};
   position: relative;
+  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 
   @media (min-width: 1280px) {
     width: 60%;

@@ -21,13 +21,13 @@ function PlatformsIcons({ platformsArray = null, limited = false }) {
 
   const uniquePlatforms = [...new Set(platforms)].filter(platform => platform);
 
-  if (limited && uniquePlatforms.length > 5) {
+  if (limited && uniquePlatforms.length > 4) {
     return (
       <>
-        {uniquePlatforms.slice(0, 5).map(platform => (
+        {uniquePlatforms.slice(0, 4).map(platform => (
           <Icon type={platform} key={platform} />
         ))}
-        <span>{`+${uniquePlatforms.length - 5}`}</span>
+        <span>{`+${uniquePlatforms.length - 4}`}</span>
       </>
     );
   }

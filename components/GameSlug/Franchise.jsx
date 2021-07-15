@@ -54,7 +54,7 @@ S.FranchiseContainer = styled.div`
 `;
 
 S.Franchise = styled.div`
-  padding: 0 5%;
+  padding: 0;
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -73,11 +73,25 @@ S.Franchise = styled.div`
   }
 
   @media (min-width: 500px) {
-    padding: 0 10%;
+    padding: 0 5%;
   }
 
-  @media (min-width: 768px) {
-    justify-content: flex-start;
+  .game-item {
+    max-height: 300px;
+    box-shadow: none;
+
+    @media (min-width: 500px) {
+      width: 50%;
+    }
+
+    @media (min-width: 800px) {
+      padding: 0 10%;
+      width: 23%;
+    }
+
+    @media (min-width: 1280px) {
+      width: 20%;
+    }
   }
 `;
 
