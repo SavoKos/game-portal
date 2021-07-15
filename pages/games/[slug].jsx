@@ -1,4 +1,3 @@
-import Spinner from '@components/UI/Spinner';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -7,10 +6,11 @@ import Layout from '@components/Layout';
 import Hero from '@components/GameSlug/Hero';
 import MainDetails from '@components/GameSlug/MainDetails';
 import GamesListRow from '@components/GamesListRow';
+import Franchise from '@components/GameSlug/Franchise';
 
 function Game({ slug }) {
   const [franchise, setFranchise] = useState('');
-  const [gameDetails, setGameDetails] = useState('');
+  const [slugDetails, setslugDetails] = useState('');
   const [screenshots, setScreenshots] = useState('');
   const [stores, setStores] = useState('');
   const [suggestions, setSuggestions] = useState('');
@@ -18,7 +18,7 @@ function Game({ slug }) {
   useEffect(async () => {
     try {
       const API_KEY = process.env.API_KEY || 'c542e67aec3a4340908f9de9e86038af';
-      const [gameDetails, franchise, screenshots, stores, suggested] =
+      const [slugDetails, franchise, screenshots, stores, suggested] =
         await Promise.all([
           fetch(
             encodeURI(`https://api.rawg.io/api/games/${slug}?key=${API_KEY}`)
@@ -45,7 +45,7 @@ function Game({ slug }) {
           ).then(res => res.json()),
         ]);
 
-      setGameDetails(gameDetails);
+      setslugDetails(slugDetails);
       setFranchise(franchise.results);
       setStores(stores.results);
       setScreenshots(screenshots.results);
@@ -55,33 +55,33 @@ function Game({ slug }) {
     }
   }, [slug]);
 
-  const coverImage = gameDetails
-    ? `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${gameDetails?.background_image}`
+  const coverImage = slugDetails
+    ? `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${slugDetails?.background_image}`
     : '';
-  const currentUrl = gameDetails
-    ? `https://gameportal.savokos.com/games/${gameDetails?.slug}`
+  const currentUrl = slugDetails
+    ? `https://gameportal.savokos.com/games/${slugDetails?.slug}`
     : 'https://gameportal.savokos.com';
-  const title = gameDetails
-    ? gameDetails?.name_original + ' - Game Portal'
+  const title = slugDetails
+    ? slugDetails?.name_original + ' - Game Portal'
     : 'Game Portal Game';
 
   return (
     <Layout
       title={title}
       url={currentUrl}
-      description={gameDetails?.description_raw?.slice(0, 130) + '...'}
+      description={slugDetails?.description_raw?.slice(0, 130) + '...'}
       image={coverImage}
     >
       <S.PageContainer>
         <Navigation />
-        {gameDetails && (
-          <Hero coverImage={coverImage} gameDetails={gameDetails} />
+        {slugDetails && (
+          <Hero coverImage={coverImage} slugDetails={slugDetails} />
         )}
 
-        {stores && gameDetails && screenshots && (
+        {stores && slugDetails && screenshots && (
           <MainDetails
             stores={stores}
-            gameDetails={gameDetails}
+            slugDetails={slugDetails}
             screenshots={screenshots}
           />
         )}
@@ -91,6 +91,13 @@ function Game({ slug }) {
             <GamesListRow games={suggestions} className="games-list" />
           )}
         </S.SuggestedGames>
+        {franchise && (
+          <Franchise
+            games={franchise}
+            screenshots={screenshots}
+            slugDetails={slugDetails}
+          />
+        )}
       </S.PageContainer>
     </Layout>
   );
@@ -133,6 +140,7 @@ S.SuggestedGames = styled.div`
 
   .games-list {
     margin: 0;
+    height: fit-content;
   }
 
   h1 {

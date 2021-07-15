@@ -8,20 +8,26 @@ import { useState } from 'react';
 import Icon from '@components/UI/Icon';
 import Spinner from '@components/UI/Spinner';
 
-function MainDetails({ screenshots, gameDetails, stores }) {
+function MainDetails({ screenshots, slugDetails, stores }) {
   const [sliderActive, setSliderActive] = useState(false);
 
   const carouselItems = screenshots?.map((screenshot, i) => {
+    const imageWidth =
+      screenshot.width < window.innerWidth + 100
+        ? screenshot.width
+        : window.innerWidth + 100;
+
     return (
       <S.ScreenshotSlide>
         <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1499,h_815,q_65/${screenshot.image}`}
-          alt={`${gameDetails?.name_original} image ${i + 1}`}
+          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_${imageWidth},q_65/${screenshot.image}`}
+          alt={`${slugDetails?.name_original} image ${i + 1}`}
           className="screenshot"
           objectFit="cover"
           layout="intrinsic"
           width={1499}
           height={815}
+          loading={sliderActive ? 'eager' : 'lazy'}
         />
         <Spinner />
       </S.ScreenshotSlide>
@@ -32,10 +38,10 @@ function MainDetails({ screenshots, gameDetails, stores }) {
     <S.MainDetailsContainer sliderActive={sliderActive}>
       {screenshots && (
         <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${
-            screenshots[0]?.image || gameDetails?.background_image
+          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1200/${
+            screenshots[0]?.image || slugDetails?.background_image
           }`}
-          alt={`${gameDetails?.name_original} image`}
+          alt={`${slugDetails?.name_original} image`}
           className="bg-img"
           objectFit="cover"
           layout="fill"
@@ -51,7 +57,7 @@ function MainDetails({ screenshots, gameDetails, stores }) {
             {screenshots && (
               <Image
                 src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_1200/${screenshots[0]?.image}`}
-                alt={`${gameDetails?.name_original} screenshot 1`}
+                alt={`${slugDetails?.name_original} screenshot 1`}
                 objectFit="cover"
                 layout="fill"
               />
@@ -64,7 +70,7 @@ function MainDetails({ screenshots, gameDetails, stores }) {
             >
               <Image
                 src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_800/${screenshot?.image}`}
-                alt={`${gameDetails?.name_original} screenshot ${i + 1}`}
+                alt={`${slugDetails?.name_original} screenshot ${i + 1}`}
                 objectFit="cover"
                 layout="fill"
               />

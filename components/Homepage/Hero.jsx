@@ -6,7 +6,7 @@ function Hero() {
       <S.Hero>
         <h3>GAME PORTAL</h3>
         <S.Triangle />
-        <h4 className="game-portal">Game Portal</h4>
+        <h4 className="game-portal">Place with Millions of games</h4>
         <h4>Discover your next favorite game</h4>
       </S.Hero>
     </S.HeroContainer>

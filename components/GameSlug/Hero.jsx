@@ -5,7 +5,7 @@ import PlatformsIcons from '@components/PlatformsIcons';
 import { useState } from 'react';
 import Image from 'next/image';
 
-function Hero({ gameDetails, coverImage }) {
+function Hero({ slugDetails, coverImage }) {
   const [fullDesc, setFullDesc] = useState(false);
 
   const platformIconsSlugs = platforms =>
@@ -14,12 +14,12 @@ function Hero({ gameDetails, coverImage }) {
   return (
     <S.Hero id="hero">
       <Image
-        src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${
-          gameDetails?.background_image ||
-          gameDetails?.background_image_additional
+        src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1200/${
+          slugDetails?.background_image ||
+          slugDetails?.background_image_additional
         }`}
         priority
-        alt={`${gameDetails?.name_original} image`}
+        alt={`${slugDetails?.name_original} image`}
         className="bg-img"
         objectFit="cover"
         layout="fill"
@@ -30,7 +30,7 @@ function Hero({ gameDetails, coverImage }) {
         <S.CoverImage className="explorer-gradient">
           <Image
             src={coverImage}
-            alt={`${gameDetails?.name_original} image`}
+            alt={`${slugDetails?.name_original} image`}
             objectFit="cover"
             layout="fill"
             loading="eager"
@@ -38,27 +38,27 @@ function Hero({ gameDetails, coverImage }) {
           />
         </S.CoverImage>
         <S.Details fullDesc={fullDesc}>
-          <h1>{gameDetails?.name_original}</h1>
-          {gameDetails?.playtime ? (
-            <p>AVERAGE PLAYTIME: {gameDetails?.playtime} HOURS</p>
+          <h1>{slugDetails?.name_original}</h1>
+          {slugDetails?.playtime ? (
+            <p>AVERAGE PLAYTIME: {slugDetails?.playtime} HOURS</p>
           ) : (
             ''
           )}
           <p className="platforms-title">AVAILABLE ON: </p>
           <S.PlatformsContainer>
             <PlatformsIcons
-              platformsArray={platformIconsSlugs(gameDetails?.platforms)}
+              platformsArray={platformIconsSlugs(slugDetails?.platforms)}
             />
           </S.PlatformsContainer>
 
           <S.Stars>
             <Stars
-              rating={+Math.trunc(gameDetails?.rating)}
+              rating={+Math.trunc(slugDetails?.rating)}
               className="stars"
             />
           </S.Stars>
           <div>
-            <p className="description">{gameDetails?.description_raw}</p>
+            <p className="description">{slugDetails?.description_raw}</p>
           </div>
           <span
             className="truncate-text"
@@ -67,16 +67,16 @@ function Hero({ gameDetails, coverImage }) {
             {fullDesc ? 'Show less' : 'Show more'}
           </span>
           <S.Tags>
-            {gameDetails?.tags?.map(tag => (
+            {slugDetails?.tags?.map(tag => (
               <p className="tag" key={tag.id}>
                 {tag.name}
               </p>
             ))}
           </S.Tags>
-          {gameDetails?.website && (
+          {slugDetails?.website && (
             <h4
               className="official-website"
-              onClick={() => link(gameDetails?.website)}
+              onClick={() => link(slugDetails?.website)}
             >
               Official Website
             </h4>
