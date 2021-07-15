@@ -44,10 +44,12 @@ function Hero({ slugDetails, coverImage }) {
           ) : (
             ''
           )}
-          <p className="platforms-title">AVAILABLE ON: </p>
+          {slugDetails?.parent_platforms && (
+            <p className="platforms-title">AVAILABLE ON: </p>
+          )}
           <S.PlatformsContainer>
             <PlatformsIcons
-              platformsArray={platformIconsSlugs(slugDetails?.platforms)}
+              platformsArray={platformIconsSlugs(slugDetails?.parent_platforms)}
             />
           </S.PlatformsContainer>
 

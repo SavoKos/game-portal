@@ -20,7 +20,7 @@ function Franchise({ franchiseGames, screenshots, slugDetails }) {
       <S.Franchise>
         <h1>Franchise</h1>
         {franchiseGames.map(game => (
-          <GameSingleItem game={game} />
+          <GameSingleItem game={game} key={game.id} />
         ))}
       </S.Franchise>
     </S.FranchiseContainer>

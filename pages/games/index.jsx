@@ -6,7 +6,7 @@ function Games() {
   return (
     <S.PageContainer>
       <Navigation active="games" />
-      <h1>This is games page</h1>
+      <h1>All Games</h1>
     </S.PageContainer>
   );
 }

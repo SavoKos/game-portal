@@ -26,7 +26,8 @@ function GameSingleItem({ game }) {
         <S.LabelsContainer>
           <S.PlatformContainer>
             <PlatformsIcons
-              platformsArray={platformIconsSlugs(game.platforms)}
+              platformsArray={platformIconsSlugs(game.parent_platforms)}
+              limited
             />
           </S.PlatformContainer>
           {newGameCheck(+new Date(game.released))}
