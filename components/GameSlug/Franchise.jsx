@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import GameSingleItem from '@components/GameSingleItem';
 
-function Franchise({ games, screenshots, slugDetails }) {
-  console.log(games);
+function Franchise({ franchiseGames, screenshots, slugDetails }) {
   return (
     <S.FranchiseContainer>
       {screenshots && (
@@ -20,7 +19,7 @@ function Franchise({ games, screenshots, slugDetails }) {
       )}
       <S.Franchise>
         <h1>Franchise</h1>
-        {games.map(game => (
+        {franchiseGames.map(game => (
           <GameSingleItem game={game} />
         ))}
       </S.Franchise>

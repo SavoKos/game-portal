@@ -65,6 +65,8 @@ function Game({ slug }) {
     ? slugDetails?.name_original + ' - Game Portal'
     : 'Game Portal Game';
 
+  console.log(franchise);
+
   return (
     <Layout
       title={title}
@@ -91,9 +93,9 @@ function Game({ slug }) {
             <GamesListRow games={suggestions} className="games-list" />
           )}
         </S.SuggestedGames>
-        {franchise && (
+        {franchise && franchise.length > 0 && (
           <Franchise
-            games={franchise}
+            franchiseGames={franchise}
             screenshots={screenshots}
             slugDetails={slugDetails}
           />
