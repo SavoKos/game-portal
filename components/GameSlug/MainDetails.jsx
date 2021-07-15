@@ -56,7 +56,7 @@ function MainDetails({ screenshots, slugDetails, stores }) {
           <S.Screenshot onClick={() => setSliderActive(true)}>
             {screenshots && (
               <Image
-                src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_1200/${screenshots[0]?.image}`}
+                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${screenshots[0]?.image}`}
                 alt={`${slugDetails?.name_original} screenshot 1`}
                 objectFit="cover"
                 layout="fill"
@@ -69,7 +69,7 @@ function MainDetails({ screenshots, slugDetails, stores }) {
               onClick={() => setSliderActive(true)}
             >
               <Image
-                src={`https://res.cloudinary.com/demo/image/fetch/c_scale,w_800/${screenshot?.image}`}
+                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_500/${screenshot?.image}`}
                 alt={`${slugDetails?.name_original} screenshot ${i + 1}`}
                 objectFit="cover"
                 layout="fill"
