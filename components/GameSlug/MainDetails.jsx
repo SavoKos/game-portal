@@ -184,11 +184,11 @@ S.MainDetails = styled.div`
       position: absolute;
       top: 1rem;
       background: ${({ theme }) => theme.colors.primaryLight + 'd1'};
+      width: unset !important;
     }
 
     .alice-carousel__prev-btn {
       left: 1rem;
-      width: unset !important;
       border-radius: 50%;
     }
 
@@ -199,13 +199,17 @@ S.MainDetails = styled.div`
 
     .carousel-nav-btn {
       color: ${({ theme }) => theme.colors.seaBlue};
-      font-size: 2rem;
+      font-size: 1rem;
       border-radius: 50%;
       padding: 0.5rem;
       cursor: pointer;
 
       &:hover {
         color: #fff;
+      }
+
+      @media (min-width: 600px) {
+        font-size: 2rem;
       }
     }
 
