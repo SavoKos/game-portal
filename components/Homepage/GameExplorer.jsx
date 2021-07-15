@@ -7,7 +7,6 @@ import GameExplorerItem from './GameExplorerItem';
 
 function GameExplorer({ games, customGamesData }) {
   const [isCarouselIntersecting, setIsCarouselIntersecting] = useState(false);
-  console.log(isCarouselIntersecting);
 
   const carouselIntersectingHandler = () => {
     const callback = (entries, _) => {

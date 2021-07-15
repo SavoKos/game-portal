@@ -5,7 +5,6 @@ import GameTrailerItem from './GameTrailerItem';
 function GameTrailer({ customGamesData: { gtav, cyberpunk, valhalla } }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  console.log(currentSlide);
   const carouselItems = [
     <GameTrailerItem
       game={gtav}

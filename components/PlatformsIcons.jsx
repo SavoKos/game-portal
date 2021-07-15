@@ -3,7 +3,6 @@ import Icon from '@components/UI/Icon';
 // takes one platform e.g. playstation5 and converts it into icon sutable name like icon-playstation
 
 function PlatformsIcons({ platformsArray = null }) {
-  console.log(platformsArray);
   if (!platformsArray) return '';
 
   const platforms = platformsArray.map(platform => {

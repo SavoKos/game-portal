@@ -24,6 +24,7 @@ function Hero({ gameDetails, coverImage }) {
         objectFit="cover"
         layout="fill"
         objectPosition="top"
+        loading="eager"
       />
       <S.HeroContent>
         <S.CoverImage className="explorer-gradient">
@@ -32,6 +33,8 @@ function Hero({ gameDetails, coverImage }) {
             alt={`${gameDetails?.name_original} image`}
             objectFit="cover"
             layout="fill"
+            loading="eager"
+            priority
           />
         </S.CoverImage>
         <S.Details fullDesc={fullDesc}>
