@@ -22,13 +22,11 @@ function Navigation({ className = '', active }) {
           <NavItems active={active} />
         </S.NavItems>
         <S.RightSideNav>
-          <input type="search" placeholder="Search" />
           <Icon
             type="icon-menu"
             className="menu"
             onClick={() => setSidebarActive(true)}
           />
-          <Icon type="icon-loupe" className="loupe" />
         </S.RightSideNav>
       </S.Nav>
 
@@ -130,31 +128,6 @@ S.RightSideNav = styled.div`
   }
 
   @media (min-width: 1024px) {
-    &:hover,
-    &:focus {
-      input {
-        color: ${({ theme }) => theme.colors.primary};
-        &::placeholder {
-          color: ${({ theme }) => theme.colors.primary};
-        }
-        background-color: #fff;
-      }
-
-      .anticon.loupe {
-        color: ${({ theme }) => theme.colors.primary};
-      }
-    }
-    input {
-      display: block;
-      margin-left: -1.75rem;
-    }
-
-    .anticon.loupe {
-      font-size: 1rem;
-      line-height: 1.5rem;
-      line-height: 0;
-    }
-
     .anticon.menu {
       display: none;
     }

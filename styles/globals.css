@@ -195,3 +195,76 @@ p {
     transform: rotate(360deg);
   }
 }
+
+.dropdown-menu {
+  position: relative;
+  transition: all ease 500ms;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+}
+
+.dropdown-menu ul li {
+  padding: 0.5rem;
+  padding-right: 2rem;
+  color: #070426;
+  transition: all ease 0.3s;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 400px) {
+  .dropdown-menu ul li {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
+
+.dropdown-menu ul li:hover {
+  border-radius: 0.3rem;
+  background-color: #cccccc;
+  overflow: hidden;
+}
+
+.menu-primary-enter {
+  transform: translateX(-110%);
+}
+
+.menu-primary-enter-active {
+  position: relative;
+  transform: translateX(0%);
+  transition: all ease 500ms;
+}
+
+.menu-primary-enter-exit {
+  transition: all ease 500ms;
+}
+
+.menu-primary-exit-active {
+  position: absolute;
+  transition: all ease 500ms;
+  transform: translateX(-110%);
+}
+
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+
+.menu-secondary-enter-active {
+  position: relative;
+  transform: translateX(0%);
+  transition: all ease 500ms;
+}
+
+.menu-secondary-enter-exit {
+  transition: all ease 500ms;
+}
+
+.menu-secondary-exit-active {
+  position: absolute;
+  transition: all ease 500ms;
+  transform: translateX(110%);
+}
