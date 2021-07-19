@@ -17,7 +17,7 @@ function Hero() {
 const S = {};
 S.HeroContainer = styled.div`
   width: 100%;
-  min-height: 137vh;
+  min-height: 128vh;
   overflow: hidden;
   z-index: 10;
   position: relative;
