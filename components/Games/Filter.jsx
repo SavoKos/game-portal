@@ -3,13 +3,11 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SecondaryMenu from './SecondaryMenu';
 import PrimaryMenu from './PrimaryMenu';
-import useFilters from 'context/Filters';
 
 function Filter(props) {
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
-  const filters = useFilters();
 
   useEffect(() => {
     return setDropdownOpened(false);
@@ -21,7 +19,7 @@ function Filter(props) {
   };
 
   const filterName = (
-    <span style={{ fontWeight: '600' }}>{props.currentFilter.name || ''}</span>
+    <span style={{ fontWeight: '600' }}>{props.currentFilter?.name || ''}</span>
   );
   return (
     <S.Filter>

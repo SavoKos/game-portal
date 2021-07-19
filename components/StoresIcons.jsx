@@ -1,5 +1,5 @@
 import Icon from '@components/UI/Icon';
-import link from '@components/link';
+import link from 'functions/link';
 import styled from 'styled-components';
 
 // takes one store e.g. steam and converts it into icon sutable name like icon-steam

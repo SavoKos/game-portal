@@ -5,74 +5,26 @@ import Layout from '@components/Layout';
 import Navigation from '@components/Navigation';
 import Spinner from '@components/UI/Spinner';
 import useFilters from 'context/Filters';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
+import {
+  orderOptions,
+  platformOptions as platformOpt,
+} from 'functions/dropdownOptions';
+import { useEffect, useState } from 'react';
 
 function Games() {
-  const orderOptions = [
-    { name: 'Relevance', value: '-relevance' },
-    { name: 'Date added', value: '-created' },
-    { name: 'Name', value: 'name' },
-    { name: 'Release date', value: '-released' },
-    { name: 'Popularity', value: '-added' },
-    { name: 'Average rating', value: '-rating' },
-  ];
-  const apiKey = process.env.API_KEY || 'c542e67aec3a4340908f9de9e86038af';
-  const [fetchedPlatforms, setFetchedPlatforms] = useState('');
-  const [platforms, setPlatforms] = useState('');
-  const [subPlatforms, setSubPlatforms] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  const { games, Order, Platforms } = useFilters();
+  const { games, Order, Platforms, ParentPlatforms } = useFilters();
+  const [platformOptions, setPlatformOptions] = useState(null);
 
   useEffect(async () => {
-    setLoading(false);
-    const platforms = await fetch(
-      `https://api.rawg.io/api/platforms/lists/parents?key=${apiKey}`
-    ).then(res => res.json());
-    setFetchedPlatforms(platforms.results);
+    const options = await platformOpt();
+    console.log(options);
+    setPlatformOptions(options);
   }, []);
 
-  // remove platforms with no results and make subOptions for playstation and xbox
-  let platformOptions = '';
-  if (fetchedPlatforms)
-    platformOptions = fetchedPlatforms
-      ?.filter(
-        platform =>
-          platform.slug !== 'sega' &&
-          platform.slug !== '3do' &&
-          platform.slug !== 'commodore-amiga' &&
-          platform.slug !== 'neo-geo' &&
-          platform.slug !== 'atari'
-      )
-      .map(platform => {
-        if (platform.slug === 'playstation' || platform.slug === 'xbox')
-          return {
-            name: platform.name,
-            value: platform.id,
-            subOptions: platform.platforms
-              .filter(
-                platform =>
-                  platform.slug !== 'playstation3' &&
-                  platform.slug !== 'playstation2' &&
-                  platform.slug !== 'playstation1' &&
-                  platform.slug !== 'psp' &&
-                  platform.slug !== 'xbox360' &&
-                  platform.slug !== 'xbox-old'
-              )
-              .map(platform => {
-                return { name: platform.name, value: platform.id };
-              }),
-          };
-
-        return {
-          name: platform.name,
-          value: platform.id,
-        };
-      });
-
-  if (!games && loading)
+  console.log(orderOptions);
+  if (!games)
     return (
       <S.PageContainer>
         <Navigation active="games" />
@@ -102,13 +54,11 @@ function Games() {
                     title="Order by"
                     options={orderOptions}
                     currentFilter={Order}
-                    setSubPlatforms={setSubPlatforms}
                   />
                   <Filter
                     title="Platforms"
                     options={platformOptions}
-                    currentFilter={subPlatforms || Platforms}
-                    setSubPlatforms={setSubPlatforms}
+                    currentFilter={ParentPlatforms || Platforms}
                   />
                 </S.Filters>
                 <h5>Advanced options</h5>

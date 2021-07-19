@@ -15,6 +15,25 @@ function SecondaryMenu({
 
   const filterObject = options.filter(option => option.name === menuName);
 
+  const backButton = (
+    <li className="back" onClick={() => setActiveMenu('main')}>
+      Go Back
+      <Icon type="icon--arrowleft" className="back-icon" />
+    </li>
+  );
+
+  const selectAllButton = (
+    <li
+      className="select-all"
+      onClick={() => {
+        setParentPlatforms(filterObject[0]);
+        setPlatforms(null);
+      }}
+    >
+      Select All
+    </li>
+  );
+
   return (
     <CSSTransition
       in={activeMenu === menuName}
@@ -25,10 +44,7 @@ function SecondaryMenu({
     >
       <S.DropdownMenu className="dropdown-menu">
         <ul>
-          <li className="back" onClick={() => setActiveMenu('main')}>
-            Go Back
-            <Icon type="icon--arrowleft" className="back-icon" />
-          </li>
+          {backButton}
           {filterObject
             .flatMap(option => option.subOptions)
             .map(filter => (
@@ -42,20 +58,14 @@ function SecondaryMenu({
                 {filter.name}
               </li>
             ))}
-          <li
-            className="select-all"
-            onClick={() => {
-              setParentPlatforms(filterObject[0]);
-              setPlatforms(null);
-            }}
-          >
-            Select All
-          </li>
+          {selectAllButton}
         </ul>
       </S.DropdownMenu>
     </CSSTransition>
   );
 }
+
+// -------------------------------------------------- styling ----------------------------------------------
 
 const S = {};
 S.DropdownMenu = styled.div`

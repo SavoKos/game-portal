@@ -10,13 +10,21 @@ function PrimaryMenu({
   calcHeight,
   title,
 }) {
-  const { setOrder, setParentPlatforms } = useFilters();
+  const { setOrder, setParentPlatforms, setPlatforms } = useFilters();
 
   const dropdownItemClicked = filter => {
     if (filter.subOptions) return setActiveMenu(filter.name);
-    if (title !== 'Platforms') setOrder(filter);
-    return setParentPlatforms(filter);
+    if (title !== 'Platforms') return setOrder(filter);
+    setParentPlatforms(filter);
+    setPlatforms(null);
   };
+
+  const dropdownItems = options.map(filter => (
+    <li onClick={() => dropdownItemClicked(filter)} key={uuid()}>
+      {filter.name}
+      {filter.subOptions && <Icon type="icon-youluPC_common_arrow_th1" />}
+    </li>
+  ));
 
   return (
     <CSSTransition
@@ -27,16 +35,7 @@ function PrimaryMenu({
       onEnter={calcHeight}
     >
       <div className="dropdown-menu">
-        <ul>
-          {options.map(filter => (
-            <li onClick={() => dropdownItemClicked(filter)} key={uuid()}>
-              {filter.name}
-              {filter.subOptions && (
-                <Icon type="icon-youluPC_common_arrow_th1" />
-              )}
-            </li>
-          ))}
-        </ul>
+        <ul>{dropdownItems}</ul>
       </div>
     </CSSTransition>
   );

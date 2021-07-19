@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Stars from '@components/Homepage/Stars';
-import link from '@components/link';
+import link from 'functions/link';
 import PlatformsIcons from '@components/PlatformsIcons';
 import { useState } from 'react';
 import Image from 'next/image';
