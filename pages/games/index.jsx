@@ -1,4 +1,3 @@
-import { SearchOutlined } from '@ant-design/icons';
 import AdvancedOptions from '@components/Games/AdvancedOptions';
 import Filter from '@components/Games/Filter';
 import GameSingleItem from '@components/GameSingleItem';
@@ -21,12 +20,11 @@ function Games() {
   ];
   const apiKey = process.env.API_KEY || 'c542e67aec3a4340908f9de9e86038af';
   const [fetchedPlatforms, setFetchedPlatforms] = useState('');
-  const [order, setOrder] = useState(orderOptions[0]);
   const [platforms, setPlatforms] = useState('');
   const [subPlatforms, setSubPlatforms] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const { games } = useFilters();
+  const { games, Order, Platforms } = useFilters();
 
   useEffect(async () => {
     setLoading(false);
@@ -101,17 +99,15 @@ function Games() {
                 <input type="search" placeholder="Search..." />
                 <S.Filters>
                   <Filter
-                    setFilter={setOrder}
                     title="Order by"
                     options={orderOptions}
-                    currentFilter={order}
+                    currentFilter={Order}
                     setSubPlatforms={setSubPlatforms}
                   />
                   <Filter
-                    setFilter={setPlatforms}
                     title="Platforms"
                     options={platformOptions}
-                    currentFilter={subPlatforms || platforms}
+                    currentFilter={subPlatforms || Platforms}
                     setSubPlatforms={setSubPlatforms}
                   />
                 </S.Filters>

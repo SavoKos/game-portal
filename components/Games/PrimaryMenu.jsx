@@ -8,16 +8,14 @@ function PrimaryMenu({
   options,
   setActiveMenu,
   calcHeight,
-  setSubPlatforms,
   title,
 }) {
-  const { setOrder } = useFilters();
+  const { setOrder, setParentPlatforms } = useFilters();
 
   const dropdownItemClicked = filter => {
     if (filter.subOptions) return setActiveMenu(filter.name);
-    console.log(options, activeMenu);
     if (title !== 'Platforms') setOrder(filter);
-    setSubPlatforms('');
+    return setParentPlatforms(filter);
   };
 
   return (

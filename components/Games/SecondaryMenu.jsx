@@ -1,24 +1,20 @@
 import Icon from '@components/UI/Icon';
+import useFilters from 'context/Filters';
 import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
 function SecondaryMenu({
   menuName,
-  setFilter,
   options,
   setActiveMenu,
   activeMenu,
   calcHeight,
-  setSubPlatforms,
 }) {
-  const updateFilter = (mainPlatform, subPlatform) => {
-    setSubPlatforms(subPlatform);
-    setFilter(mainPlatform);
-  };
+  const { setPlatforms, setParentPlatforms } = useFilters();
 
   const filterObject = options.filter(option => option.name === menuName);
-  console.log(filterObject);
+
   return (
     <CSSTransition
       in={activeMenu === menuName}
@@ -36,13 +32,22 @@ function SecondaryMenu({
           {filterObject
             .flatMap(option => option.subOptions)
             .map(filter => (
-              <li onClick={() => updateFilter('', filter)} key={uuid()}>
+              <li
+                onClick={() => {
+                  setPlatforms(filter);
+                  setParentPlatforms(null);
+                }}
+                key={uuid()}
+              >
                 {filter.name}
               </li>
             ))}
           <li
             className="select-all"
-            onClick={() => updateFilter(filterObject[0], '')}
+            onClick={() => {
+              setParentPlatforms(filterObject[0]);
+              setPlatforms(null);
+            }}
           >
             Select All
           </li>
