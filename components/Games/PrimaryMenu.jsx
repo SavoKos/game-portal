@@ -1,18 +1,22 @@
 import Icon from '@components/UI/Icon';
+import useFilters from 'context/Filters';
 import { CSSTransition } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 
 function PrimaryMenu({
   activeMenu,
   options,
-  setFilter,
   setActiveMenu,
   calcHeight,
   setSubPlatforms,
+  title,
 }) {
+  const { setOrder } = useFilters();
+
   const dropdownItemClicked = filter => {
     if (filter.subOptions) return setActiveMenu(filter.name);
-    setFilter(filter);
+    console.log(options, activeMenu);
+    if (title !== 'Platforms') setOrder(filter);
     setSubPlatforms('');
   };
 

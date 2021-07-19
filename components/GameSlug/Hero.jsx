@@ -58,6 +58,7 @@ function Hero({ slugDetails, coverImage }) {
               rating={+Math.trunc(slugDetails?.rating)}
               className="stars"
             />
+            <span className="rating-number"> {slugDetails?.rating}</span>
           </S.Stars>
           <div>
             <p className="description">{slugDetails?.description_raw}</p>
@@ -210,6 +211,12 @@ S.PlatformsContainer = styled.div`
 
 S.Stars = styled.div`
   margin: 1rem 0;
+  display: flex;
+  align-items: flex-start;
+
+  .rating-number {
+    margin-left: 0.65rem;
+  }
 `;
 
 S.Tags = styled.div`

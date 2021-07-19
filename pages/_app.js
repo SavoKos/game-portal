@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import NProgress from 'nprogress';
+import { FiltersProvider } from 'context/Filters';
 
 function Application({ Component, pageProps }) {
   NProgress.configure({ showSpinner: false });
@@ -24,7 +25,9 @@ function Application({ Component, pageProps }) {
 
   return (
     <SCTheme>
-      <Component {...pageProps} />
+      <FiltersProvider>
+        <Component {...pageProps} />
+      </FiltersProvider>
     </SCTheme>
   );
 }

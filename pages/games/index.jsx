@@ -1,8 +1,11 @@
+import { SearchOutlined } from '@ant-design/icons';
+import AdvancedOptions from '@components/Games/AdvancedOptions';
 import Filter from '@components/Games/Filter';
 import GameSingleItem from '@components/GameSingleItem';
 import Layout from '@components/Layout';
 import Navigation from '@components/Navigation';
 import Spinner from '@components/UI/Spinner';
+import useFilters from 'context/Filters';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
@@ -22,24 +25,11 @@ function Games() {
   const [platforms, setPlatforms] = useState('');
   const [subPlatforms, setSubPlatforms] = useState('');
   const [loading, setLoading] = useState(true);
-  const [games, setGames] = useState('');
-  console.log(subPlatforms, platforms);
+
+  const { games } = useFilters();
 
   useEffect(async () => {
-    let platformsQuery = platforms
-      ? `&parent_platforms=${platforms.value}`
-      : `&platforms=${subPlatforms.value}`;
-    if (!platforms && !subPlatforms) platformsQuery = '';
-
-    const games = await fetch(
-      `https://rawg.io/api/games/lists/main?discover=true&ordering=${order.value}${platformsQuery}&page=1&page_size=40&key=${apiKey}`
-    ).then(res => res.json());
-
-    setGames(games.results);
     setLoading(false);
-  }, [order, platforms, subPlatforms]);
-
-  useEffect(async () => {
     const platforms = await fetch(
       `https://api.rawg.io/api/platforms/lists/parents?key=${apiKey}`
     ).then(res => res.json());
@@ -84,7 +74,7 @@ function Games() {
         };
       });
 
-  if (loading)
+  if (!games && loading)
     return (
       <S.PageContainer>
         <Navigation active="games" />
@@ -105,7 +95,7 @@ function Games() {
           <S.BackgroundImage />
           <h1>All Games</h1>
           <S.GamesContent>
-            <S.Aside></S.Aside>
+            <AdvancedOptions />
             <S.MainContent>
               <S.TopBarContainer>
                 <input type="search" placeholder="Search..." />
@@ -128,7 +118,7 @@ function Games() {
                 <h5>Advanced options</h5>
               </S.TopBarContainer>
               <S.Games>
-                {games.map(game => (
+                {games?.map(game => (
                   <GameSingleItem game={game} key={uuid()} />
                 ))}
               </S.Games>
@@ -176,18 +166,6 @@ S.GamesContent = styled.div`
   display: flex;
   width: 100%;
   margin-top: 5rem;
-`;
-
-S.Aside = styled.div`
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.primary};
-  width: 25%;
-  border-radius: 5px;
-  display: none;
-
-  @media (min-width: 1024px) {
-    display: block;
-  }
 `;
 
 S.MainContent = styled.div`
