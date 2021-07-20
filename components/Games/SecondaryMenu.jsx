@@ -26,6 +26,8 @@ function SecondaryMenu({
     <li
       className="select-all"
       onClick={() => {
+        setPage(1);
+        setGames(null);
         setParentPlatforms(filterObject[0]);
         setPlatforms(null);
       }}
@@ -50,6 +52,8 @@ function SecondaryMenu({
             .map(filter => (
               <li
                 onClick={() => {
+                  setPage(1);
+                  setGames(null);
                   setPlatforms(filter);
                   setParentPlatforms(null);
                 }}

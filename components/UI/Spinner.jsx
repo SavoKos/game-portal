@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-function Spinner() {
+function Spinner({ className }) {
   return (
-    <S.Spinner className="spinner">
+    <S.Spinner className={`spinner ${className}`}>
       <div></div>
       <div></div>
     </S.Spinner>

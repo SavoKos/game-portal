@@ -1,30 +1,59 @@
-import Slider from 'rc-slider';
+import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Icon from '@components/UI/Icon';
 import styled from 'styled-components';
 import useFilters from 'context/Filters';
+import { useState } from 'react';
 
-function Metacritic({ title, openAccordion, currentAccordion }) {
-  const { createSliderWithTooltip } = Slider;
-  const Range = createSliderWithTooltip(Slider.Range);
-  const { setMetacritic, metacritic } = useFilters();
+function Metacritic({ title, toggleAccordion, currentAccordion }) {
+  const { setMetacritic, Metacritic, setGames, setPage } = useFilters();
+  const [metacriticValue, setMetacriticValue] = useState(
+    Metacritic || [1, 100]
+  );
+
+  const rangeChangeHandler = value => setMetacriticValue(value);
+  const isMetacriticChanged =
+    metacriticValue.join(',') !== Metacritic.join(',');
 
   return (
     <S.Accordion>
-      <S.AccordionHead onClick={() => openAccordion(title)}>
-        <p>{title}</p>
+      <S.AccordionHead onClick={() => toggleAccordion(title)}>
+        <p>
+          {title}(
+          {isMetacriticChanged
+            ? metacriticValue[0] + ',' + metacriticValue[1]
+            : Metacritic[0] + ',' + Metacritic[1]}
+          )
+        </p>
         <Icon type="icon-iov-arrow-down" />
       </S.AccordionHead>
       {currentAccordion === title && (
         <S.AccordionContent>
           <Range
-            min={0}
+            marks={{
+              1: `1`,
+              100: `100`,
+            }}
+            min={1}
             max={100}
-            step={5}
-            value={metacritic}
-            defaultValue={[20, 80]}
-            onChange={value => setMetacritic(value)}
-            tipFormatter={value => `${value}`}
+            step={1}
+            value={metacriticValue}
+            defaultValue={[1, 100]}
+            onChange={rangeChangeHandler}
+          />
+          <Icon
+            currentMetacritic={Metacritic}
+            metacriticValue={metacriticValue}
+            className="apply-metacritic"
+            type="icon-open_icon_successx"
+            onClick={() => {
+              setPage(1);
+              setGames(null);
+              setMetacritic(metacriticValue);
+            }}
+            style={{
+              visibility: isMetacriticChanged ? 'visible' : 'hidden',
+            }}
           />
         </S.AccordionContent>
       )}
@@ -43,7 +72,7 @@ S.Accordion = styled.div`
 `;
 
 S.AccordionHead = styled.div`
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -51,6 +80,10 @@ S.AccordionHead = styled.div`
   justify-content: space-between;
   transition: all ease 0.3s;
   cursor: pointer;
+
+  .anticon {
+    color: #ffffff33;
+  }
 
   p {
     font-size: 1.05rem;
@@ -64,9 +97,19 @@ S.AccordionHead = styled.div`
 S.AccordionContent = styled.div`
   width: 100%;
   background-color: #12102e;
-  border-radius: 0 0 0.5rem 0.5rem;
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
 
+  .apply-metacritic {
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
+  .rc-slider {
+    margin: 1.5rem;
+    margin-right: 1rem;
+  }
   .rc-slider-track {
     background-color: ${({ theme }) => theme.colors.seaBlue};
   }

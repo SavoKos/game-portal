@@ -1,29 +1,15 @@
 import AdvancedOptions from '@components/Games/AdvancedOptions';
-import Filter from '@components/Games/Filter';
-import GameSingleItem from '@components/GameSingleItem';
 import Layout from '@components/Layout';
 import Navigation from '@components/Navigation';
 import Spinner from '@components/UI/Spinner';
 import useFilters from 'context/Filters';
 import styled from 'styled-components';
-import { v4 as uuid } from 'uuid';
-import {
-  orderOptions,
-  platformOptions as platformOpt,
-} from 'functions/dropdownOptions';
-import { useEffect, useState } from 'react';
+import Filters from '@components/Games/Filters';
+import GamesList from '@components/Games/GamesList';
 
 function Games() {
-  const { games, Order, Platforms, ParentPlatforms } = useFilters();
-  const [platformOptions, setPlatformOptions] = useState(null);
+  const { games } = useFilters();
 
-  useEffect(async () => {
-    const options = await platformOpt();
-    console.log(options);
-    setPlatformOptions(options);
-  }, []);
-
-  console.log(orderOptions);
   if (!games)
     return (
       <S.PageContainer>
@@ -49,25 +35,10 @@ function Games() {
             <S.MainContent>
               <S.TopBarContainer>
                 <input type="search" placeholder="Search..." />
-                <S.Filters>
-                  <Filter
-                    title="Order by"
-                    options={orderOptions}
-                    currentFilter={Order}
-                  />
-                  <Filter
-                    title="Platforms"
-                    options={platformOptions}
-                    currentFilter={ParentPlatforms || Platforms}
-                  />
-                </S.Filters>
+                <Filters />
                 <h5>Advanced options</h5>
               </S.TopBarContainer>
-              <S.Games>
-                {games?.map(game => (
-                  <GameSingleItem game={game} key={uuid()} />
-                ))}
-              </S.Games>
+              <GamesList />
             </S.MainContent>
           </S.GamesContent>
         </S.GamesContainer>
@@ -85,7 +56,7 @@ S.PageContainer = styled.div`
 
 S.BackgroundImage = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 150vh;
   background-image: url('https://res.cloudinary.com/dicynt7ms/image/upload/v1626363456/game-portal/all-games-hero_clryn2.png');
   background-position: top center;
   background-size: cover;
@@ -94,6 +65,10 @@ S.BackgroundImage = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+
+  @media (min-width: 600px) {
+    height: 100vh;
+  }
 `;
 
 S.GamesContainer = styled.div`
@@ -163,61 +138,6 @@ S.TopBarContainer = styled.div`
       margin-bottom: 1rem;
       padding: 1rem 2rem;
     }
-  }
-`;
-
-S.Filters = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-S.Games = styled.div`
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  padding-top: 0;
-  padding-bottom: 15rem;
-  padding: 0;
-  z-index: 2;
-  width: 100%;
-  flex-wrap: wrap;
-  padding-bottom: 10rem;
-  justify-content: center;
-  margin-top: 5rem;
-  display: flex;
-  position: relative;
-
-  .game-item {
-    box-shadow: none;
-    max-height: 400px;
-    width: 100%;
-    margin: 0.5rem 0;
-    max-width: unset;
-
-    @media (min-width: 500px) {
-      max-height: 300px;
-      max-width: 400px;
-    }
-
-    @media (min-width: 600px) {
-      margin: 0.5rem;
-      max-height: 300px;
-      width: 50%;
-    }
-
-    @media (min-width: 800px) {
-      width: 23%;
-      max-height: 350px;
-    }
-
-    @media (min-width: 1280px) {
-      margin: 0 0.5rem;
-      width: 20%;
-    }
-  }
-
-  @media (min-width: 850px) {
-    padding-bottom: 20rem;
   }
 `;
 

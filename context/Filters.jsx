@@ -18,11 +18,24 @@ export const FiltersProvider = ({ children }) => {
   const [Developers, setDevelopers] = useState('');
   const [Publishers, setPublishers] = useState('');
   const [Genres, setGenres] = useState('');
-  const [Metacritic, setMetacritic] = useState([0, 100]);
+  const [Metacritic, setMetacritic] = useState([1, 100]);
   const [games, setGames] = useState(null);
-  console.log(Platforms, ParentPlatforms);
+  const [page, setPage] = useState(1);
 
   useEffect(async () => {
+    return fetchGames();
+  }, [
+    Order,
+    Platforms,
+    Stores,
+    Developers,
+    Publishers,
+    Genres,
+    Metacritic,
+    ParentPlatforms,
+  ]);
+
+  const fetchGames = async () => {
     const parentPlatformsQuery = ParentPlatforms
       ? `&parent_platforms=${ParentPlatforms?.value}`
       : '';
@@ -38,19 +51,17 @@ export const FiltersProvider = ({ children }) => {
       : '';
 
     const games = await fetch(
-      `https://rawg.io/api/games?discover=true&filter=true${finalPlatformsQuery}&ordering=${Order.value}${storesQuery}${developersQuery}${publishersQuery}${genresQuery}${metacriticQuery}&page=1&page_size=40&key=${apiKey}`
+      `https://rawg.io/api/games?discover=true&filter=true${finalPlatformsQuery}&ordering=${
+        Order.value
+      }${storesQuery}${developersQuery}${publishersQuery}${genresQuery}${metacriticQuery}&page=${page.toString()}&page_size=40&key=${apiKey}`
     ).then(res => res.json());
-    return setGames(games.results);
-  }, [
-    Order,
-    Platforms,
-    Stores,
-    Developers,
-    Publishers,
-    Genres,
-    Metacritic,
-    ParentPlatforms,
-  ]);
+    setPage(prevPage => +prevPage + 1);
+    return setGames(prevGames => {
+      console.log(prevGames, games.results);
+      if (prevGames === null) return games.results;
+      return [...prevGames, ...games.results];
+    });
+  };
 
   const value = {
     Order,
@@ -70,6 +81,9 @@ export const FiltersProvider = ({ children }) => {
     setGenres,
     setMetacritic,
     games,
+    setGames,
+    fetchGames,
+    setPage,
   };
   console.log(value);
 

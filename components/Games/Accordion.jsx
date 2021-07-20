@@ -2,9 +2,16 @@ import Icon from '@components/UI/Icon';
 import useFilters from 'context/Filters';
 import styled from 'styled-components';
 
-function Accordion({ data, title, openAccordion, currentAccordion }) {
+function Accordion({ data, title, toggleAccordion, currentAccordion }) {
   const filters = useFilters();
-  const { setStores, setDevelopers, setPublishers, setGenres } = filters;
+  const {
+    setStores,
+    setDevelopers,
+    setPublishers,
+    setGenres,
+    setGames,
+    setPage,
+  } = filters;
   const currentFilter = filters[currentAccordion];
 
   const dataItemClass = dataItem => {
@@ -19,6 +26,8 @@ function Accordion({ data, title, openAccordion, currentAccordion }) {
   };
 
   const applyFilter = value => {
+    setPage(1);
+    setGames(null);
     const updateFilter = prevFilter => {
       if (!prevFilter) return value.toString();
       if (prevFilter.includes(value)) {
@@ -44,7 +53,7 @@ function Accordion({ data, title, openAccordion, currentAccordion }) {
 
   return (
     <S.Accordion>
-      <S.AccordionHead onClick={() => openAccordion(title)}>
+      <S.AccordionHead onClick={() => toggleAccordion(title)}>
         <p>{title}</p>
         <Icon type="icon-iov-arrow-down" />
       </S.AccordionHead>
@@ -76,10 +85,11 @@ const S = {};
 S.Accordion = styled.div`
   width: 100%;
   color: #fff;
+  border-bottom: 1px solid #ffffff33;
 `;
 
 S.AccordionHead = styled.div`
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -87,6 +97,10 @@ S.AccordionHead = styled.div`
   justify-content: space-between;
   transition: all ease 0.3s;
   cursor: pointer;
+
+  .anticon {
+    color: #ffffff33;
+  }
 
   p {
     font-size: 1.05rem;
@@ -100,10 +114,9 @@ S.AccordionHead = styled.div`
 S.AccordionContent = styled.div`
   width: 100%;
   background-color: #12102e;
-  border-radius: 0 0 0.5rem 0.5rem;
 
   .data-item {
-    padding: 0.5rem 1rem;
+    padding: 1rem 2rem;
     transition: all ease 0.3s;
     cursor: pointer;
 

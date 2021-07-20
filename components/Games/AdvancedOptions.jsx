@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Accordion from './Accordion';
 import Metacritic from './Metacritic';
 
-function AdvancedOptions({ applyFilters }) {
+function AdvancedOptions() {
   const [storesList, setStoresList] = useState(false);
   const [developersList, setDevelopersList] = useState(false);
   const [publishersList, setPublishersList] = useState(false);
@@ -44,36 +44,43 @@ function AdvancedOptions({ applyFilters }) {
     setMetacritic('');
   };
 
+  const toggleAccordion = accordion => {
+    setOpenedAccordion(prevAccordion => {
+      if (prevAccordion === accordion) return '';
+      return accordion;
+    });
+  };
+
   return (
     <S.AdvancedOptions>
       <Accordion
         data={storesList}
         title="Stores"
         currentAccordion={openedAccordion}
-        openAccordion={setOpenedAccordion}
+        toggleAccordion={toggleAccordion}
       />
       <Accordion
         data={developersList}
         title="Developers"
         currentAccordion={openedAccordion}
-        openAccordion={setOpenedAccordion}
+        toggleAccordion={toggleAccordion}
       />
       <Accordion
         data={publishersList}
         title="Publishers"
         currentAccordion={openedAccordion}
-        openAccordion={setOpenedAccordion}
+        toggleAccordion={toggleAccordion}
       />
       <Accordion
         data={genresList}
         title="Genres"
         currentAccordion={openedAccordion}
-        openAccordion={setOpenedAccordion}
+        toggleAccordion={toggleAccordion}
       />
       <Metacritic
         title="Metacritic"
         currentAccordion={openedAccordion}
-        openAccordion={setOpenedAccordion}
+        toggleAccordion={toggleAccordion}
       />
     </S.AdvancedOptions>
   );
@@ -83,7 +90,7 @@ function AdvancedOptions({ applyFilters }) {
 const S = {};
 S.AdvancedOptions = styled.div`
   width: 30%;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   display: none;
   overflow: hidden;
   height: fit-content;

@@ -10,9 +10,12 @@ function PrimaryMenu({
   calcHeight,
   title,
 }) {
-  const { setOrder, setParentPlatforms, setPlatforms } = useFilters();
+  const { setOrder, setParentPlatforms, setPlatforms, setPage, setGames } =
+    useFilters();
 
   const dropdownItemClicked = filter => {
+    setPage(1);
+    setGames(null);
     if (filter.subOptions) return setActiveMenu(filter.name);
     if (title !== 'Platforms') return setOrder(filter);
     setParentPlatforms(filter);
