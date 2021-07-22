@@ -58,6 +58,7 @@ export const FiltersProvider = ({ children }) => {
     setPage(prevPage => +prevPage + 1);
     return setGames(prevGames => {
       console.log(prevGames, games.results);
+      if (!games?.results) return [];
       if (prevGames === null) return games.results;
       return [...prevGames, ...games.results];
     });

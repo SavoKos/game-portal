@@ -18,7 +18,7 @@ function GameSingleItem({ game }) {
   };
 
   const platformIconsSlugs = platforms =>
-    platforms.map(platform => platform.platform.slug);
+    platforms?.map(platform => platform.platform.slug);
 
   return (
     <Link href={'/games/' + game.slug || ''}>
