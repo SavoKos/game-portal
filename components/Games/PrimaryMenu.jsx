@@ -14,9 +14,9 @@ function PrimaryMenu({
     useFilters();
 
   const dropdownItemClicked = filter => {
+    if (filter.subOptions) return setActiveMenu(filter.name);
     setPage(1);
     setGames(null);
-    if (filter.subOptions) return setActiveMenu(filter.name);
     if (title !== 'Platforms') return setOrder(filter);
     setParentPlatforms(filter);
     setPlatforms(null);

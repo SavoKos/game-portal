@@ -11,7 +11,7 @@ function SecondaryMenu({
   activeMenu,
   calcHeight,
 }) {
-  const { setPlatforms, setParentPlatforms } = useFilters();
+  const { setPlatforms, setParentPlatforms, setPage, setGames } = useFilters();
 
   const filterObject = options.filter(option => option.name === menuName);
 
