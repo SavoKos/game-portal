@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Accordion from './Accordion';
 import Metacritic from './Metacritic';
 
-function AdvancedOptions() {
+function AdvancedOptions({ style }) {
   const [storesList, setStoresList] = useState(false);
   const [developersList, setDevelopersList] = useState(false);
   const [publishersList, setPublishersList] = useState(false);
@@ -52,7 +52,7 @@ function AdvancedOptions() {
   };
 
   return (
-    <S.AdvancedOptions>
+    <S.AdvancedOptions className="advanced-options" style={style}>
       <Accordion
         data={storesList}
         title="Stores"

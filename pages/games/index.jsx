@@ -6,9 +6,12 @@ import useFilters from 'context/Filters';
 import styled from 'styled-components';
 import Filters from '@components/Games/Filters';
 import GamesList from '@components/Games/GamesList';
+import { useState } from 'react';
+import AdvancedOptionsSidebar from '@components/Games/AdvancedOptionsSidebar';
 
 function Games() {
   const { games } = useFilters();
+  const [advancedSidebarActive, setAdvancedSidebarActive] = useState(false);
 
   if (!games)
     return (
@@ -27,16 +30,29 @@ function Games() {
     >
       <S.PageContainer>
         <Navigation active="games" />
+        <AdvancedOptionsSidebar
+          sidebarActive={advancedSidebarActive}
+          setSidebarActive={setAdvancedSidebarActive}
+        />
         <S.GamesContainer>
           <S.BackgroundImage />
           <h1>All Games</h1>
           <S.GamesContent>
-            <AdvancedOptions />
+            {!advancedSidebarActive && <AdvancedOptions />}
             <S.MainContent>
               <S.TopBarContainer>
                 <input type="search" placeholder="Search..." />
-                <Filters />
-                <h5>Advanced options</h5>
+                <Filters
+                  sidebarActive={advancedSidebarActive}
+                  setSidebarActive={setAdvancedSidebarActive}
+                />
+                <h5
+                  onClick={() =>
+                    setAdvancedSidebarActive(!advancedSidebarActive)
+                  }
+                >
+                  Advanced options
+                </h5>
               </S.TopBarContainer>
               <GamesList />
             </S.MainContent>

@@ -1,14 +1,14 @@
 import useFilters from 'context/Filters';
 import Filter from '@components/Games/Filter';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import {
   orderOptions,
   platformOptions as platformOpt,
 } from 'functions/dropdownOptions';
 import Icon from '@components/UI/Icon';
+import styled from 'styled-components';
 
-function Filters() {
+function Filters({ sidebarActive, setSidebarActive }) {
   const [filtersIntersecting, setFiltersIntersecting] = useState(true);
   const [platformOptions, setPlatformOptions] = useState(null);
   const { Order, Platforms, ParentPlatforms } = useFilters();
@@ -53,6 +53,14 @@ function Filters() {
       >
         <Icon type="icon-iov-arrow-up" />
       </S.ScrollToTop>
+      {!sidebarActive && (
+        <S.OpenSlider
+          isIntersecting={filtersIntersecting}
+          onClick={() => setSidebarActive(true)}
+        >
+          <p>Advanced</p>
+        </S.OpenSlider>
+      )}
     </S.Filters>
   );
 }
@@ -80,9 +88,25 @@ S.ScrollToTop = styled.div`
   border-radius: 50%;
   cursor: pointer;
   background-color: ${({ theme }) => theme.colors.seaBlue};
+  z-index: 40;
 
   .anticon {
     font-size: 1.3rem;
+  }
+`;
+
+S.OpenSlider = styled(S.ScrollToTop)`
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: ${({ theme }) => theme.colors.primaryLight};
+  width: fit-content;
+
+  @media (min-width: 1024px) {
+    display: none;
   }
 `;
 
