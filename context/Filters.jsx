@@ -18,6 +18,7 @@ export const FiltersProvider = ({ children }) => {
   const [Developers, setDevelopers] = useState('');
   const [Publishers, setPublishers] = useState('');
   const [Genres, setGenres] = useState('');
+  const [Tags, setTags] = useState('');
   const [Metacritic, setMetacritic] = useState([1, 100]);
   const [games, setGames] = useState(null);
   const [page, setPage] = useState(1);
@@ -33,7 +34,10 @@ export const FiltersProvider = ({ children }) => {
     Genres,
     Metacritic,
     ParentPlatforms,
+    Tags,
   ]);
+
+  console.log(Tags);
 
   const fetchGames = async () => {
     const parentPlatformsQuery = ParentPlatforms
@@ -44,6 +48,7 @@ export const FiltersProvider = ({ children }) => {
 
     const storesQuery = Stores ? `&stores=${Stores}` : '';
     const developersQuery = Developers ? `&developers=${Developers}` : '';
+    const tagsQuery = Tags ? `&tags=${Tags}` : '';
     const publishersQuery = Publishers ? `&publishers=${Publishers}` : '';
     const genresQuery = Genres ? `&genres=${Genres}` : '';
     const metacriticQuery = Metacritic
@@ -53,11 +58,10 @@ export const FiltersProvider = ({ children }) => {
     const games = await fetch(
       `https://rawg.io/api/games?discover=true&filter=true${finalPlatformsQuery}&ordering=${
         Order.value
-      }${storesQuery}${developersQuery}${publishersQuery}${genresQuery}${metacriticQuery}&page=${page.toString()}&page_size=40&key=${apiKey}`
+      }${storesQuery}${developersQuery}${publishersQuery}${genresQuery}${metacriticQuery}${tagsQuery}&page=${page.toString()}&page_size=40&key=${apiKey}`
     ).then(res => res.json());
     setPage(prevPage => +prevPage + 1);
     return setGames(prevGames => {
-      console.log(prevGames, games.results);
       if (!games?.results) return [];
       if (prevGames === null) return games.results;
       return [...prevGames, ...games.results];
@@ -72,6 +76,7 @@ export const FiltersProvider = ({ children }) => {
     Developers,
     Publishers,
     Genres,
+    Tags,
     Metacritic,
     setOrder,
     setPlatforms,
@@ -85,8 +90,8 @@ export const FiltersProvider = ({ children }) => {
     setGames,
     fetchGames,
     setPage,
+    setTags,
   };
-  console.log(value);
 
   return (
     <FiltersContext.Provider value={value}>{children}</FiltersContext.Provider>

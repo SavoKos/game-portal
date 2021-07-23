@@ -3,8 +3,19 @@ import styled from 'styled-components';
 import Stars from './Stars';
 import Link from 'next/link';
 import GameSingleItem from '@components/GameSingleItem';
+import Router from 'next/router';
+import useFilters from 'context/Filters';
 
 function GameExplorerItems({ games, customGameData }) {
+  const { setTags, setPage, setGames } = useFilters();
+
+  const tagClickedHandler = tag => {
+    Router.push('/games');
+    setPage(1);
+    setGames(null);
+    setTags(tag);
+  };
+
   return (
     <S.GameExplorerItems>
       <S.FeaturedGame
@@ -30,7 +41,9 @@ function GameExplorerItems({ games, customGameData }) {
           <p className="description">{customGameData?.description_raw}</p>
           <S.TagsContainer>
             {customGameData?.tags?.slice(0, 5).map(tag => (
-              <S.Tag key={tag.id}>{tag.name}</S.Tag>
+              <S.Tag key={tag.id} onClick={() => tagClickedHandler(tag.slug)}>
+                {tag.name}
+              </S.Tag>
             ))}
           </S.TagsContainer>
           <Link href={'/games/' + customGameData?.slug || ''}>

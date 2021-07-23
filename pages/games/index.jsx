@@ -10,8 +10,35 @@ import { useState } from 'react';
 import AdvancedOptionsSidebar from '@components/Games/AdvancedOptionsSidebar';
 
 function Games() {
-  const { games } = useFilters();
+  const {
+    games,
+    setStores,
+    setDevelopers,
+    setPublishers,
+    setGenres,
+    setMetacritic,
+    setPage,
+    setTags,
+    setParentPlatforms,
+    setPlatforms,
+    setOrder,
+    setGames,
+  } = useFilters();
   const [advancedSidebarActive, setAdvancedSidebarActive] = useState(false);
+
+  const clearFilters = () => {
+    setGames('');
+    setPage(1);
+    setStores('');
+    setDevelopers('');
+    setPublishers('');
+    setGenres('');
+    setMetacritic([1, 100]);
+    setTags('');
+    setOrder('');
+    setPlatforms('');
+    setParentPlatforms('');
+  };
 
   if (!games)
     return (
@@ -46,13 +73,19 @@ function Games() {
                   sidebarActive={advancedSidebarActive}
                   setSidebarActive={setAdvancedSidebarActive}
                 />
-                <h5
-                  onClick={() =>
-                    setAdvancedSidebarActive(!advancedSidebarActive)
-                  }
-                >
-                  Advanced options
-                </h5>
+                <S.Buttons>
+                  <h5
+                    className="advanced-options"
+                    onClick={() =>
+                      setAdvancedSidebarActive(!advancedSidebarActive)
+                    }
+                  >
+                    Advanced options
+                  </h5>
+                  <h5 className="clear" onClick={clearFilters}>
+                    Clear
+                  </h5>
+                </S.Buttons>
               </S.TopBarContainer>
               <GamesList />
             </S.MainContent>
@@ -121,18 +154,6 @@ S.TopBarContainer = styled.div`
   padding: 0.5rem;
   flex-direction: column;
 
-  h5 {
-    color: ${({ theme }) => theme.colors.seaBlue};
-    cursor: pointer;
-    padding: 0.5rem;
-    padding-top: 1rem;
-    display: block;
-
-    @media (min-width: 1024px) {
-      display: none;
-    }
-  }
-
   p::selection,
   span::selection,
   li::selection,
@@ -154,6 +175,33 @@ S.TopBarContainer = styled.div`
       margin-bottom: 1rem;
       padding: 1rem 2rem;
     }
+  }
+`;
+
+S.Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h5.advanced-options {
+    color: ${({ theme }) => theme.colors.seaBlue};
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-top: 1rem;
+    display: block;
+    width: fit-content;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  h5.clear {
+    width: fit-content;
+    color: red;
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-top: 1rem;
   }
 `;
 

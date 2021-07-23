@@ -7,16 +7,24 @@ import Metacritic from './Metacritic';
 function AdvancedOptions({ style }) {
   const [storesList, setStoresList] = useState(false);
   const [developersList, setDevelopersList] = useState(false);
+  const [tagsList, setTagsList] = useState(false);
   const [publishersList, setPublishersList] = useState(false);
   const [genresList, setGenresList] = useState(false);
   const [openedAccordion, setOpenedAccordion] = useState(false);
+  console.log(tagsList);
 
-  const { setStores, setDevelopers, setPublishers, setGenres, setMetacritic } =
-    useFilters();
+  const {
+    setStores,
+    setDevelopers,
+    setPublishers,
+    setGenres,
+    setMetacritic,
+    setTags,
+  } = useFilters();
 
   useEffect(async () => {
     const apiKey = process.env.API_KEY || 'ffc0c5b2524a475993fa130a0f55334c';
-    const [stores, developers, publishers, genres] = await Promise.all([
+    const [stores, developers, publishers, genres, tags] = await Promise.all([
       fetch(`https://api.rawg.io/api/stores?key=${apiKey}`).then(res =>
         res.json()
       ),
@@ -29,20 +37,16 @@ function AdvancedOptions({ style }) {
       fetch(`https://api.rawg.io/api/genres?key=${apiKey}`).then(res =>
         res.json()
       ),
+      fetch(`https://api.rawg.io/api/tags?page_size=40&key=${apiKey}`).then(
+        res => res.json()
+      ),
     ]);
     setStoresList(stores.results);
     setDevelopersList(developers.results);
     setPublishersList(publishers.results);
     setGenresList(genres.results);
+    setTagsList(tags.results);
   }, []);
-
-  const clearFilters = () => {
-    setStores('');
-    setDevelopers('');
-    setPublishers('');
-    setGenres('');
-    setMetacritic('');
-  };
 
   const toggleAccordion = accordion => {
     setOpenedAccordion(prevAccordion => {
@@ -74,6 +78,12 @@ function AdvancedOptions({ style }) {
       <Accordion
         data={genresList}
         title="Genres"
+        currentAccordion={openedAccordion}
+        toggleAccordion={toggleAccordion}
+      />
+      <Accordion
+        data={tagsList}
+        title="Tags"
         currentAccordion={openedAccordion}
         toggleAccordion={toggleAccordion}
       />

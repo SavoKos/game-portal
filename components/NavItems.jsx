@@ -13,8 +13,18 @@ function NavItems({ active }) {
       >
         Games
       </S.NavItem>
-      <S.NavItem active={active === 'services'}>Services</S.NavItem>
-      <S.NavItem active={active === 'shop'}>Shop</S.NavItem>
+      <S.NavItem
+        active={active === 'news'}
+        onClick={() => Router.push('/news')}
+      >
+        News
+      </S.NavItem>
+      <S.NavItem
+        active={active === 'events'}
+        onClick={() => Router.push('/events')}
+      >
+        Events
+      </S.NavItem>
     </>
   );
 }

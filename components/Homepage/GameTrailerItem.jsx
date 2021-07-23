@@ -4,10 +4,20 @@ import Icon from '@components/UI/Icon';
 import Modal from '@components/UI/Modal';
 import Stars from './Stars';
 import Link from 'next/link';
+import Router from 'next/router';
 import { useState } from 'react';
+import useFilters from 'context/Filters';
 
 function GameTrailerItem({ game, changeSlide, currentSlide }) {
   const [isModalActive, setIsModalActive] = useState(false);
+  const { setTags, setPage, setGames } = useFilters();
+
+  const tagClickedHandler = tag => {
+    Router.push('/games');
+    setPage(1);
+    setGames(null);
+    setTags(tag);
+  };
 
   const displayDetailsTitle = () => {
     if (!game?.name_original) return '';
@@ -89,7 +99,11 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
         <hr />
         <S.Tags>
           {game?.tags?.slice(0, 5).map(tag => (
-            <p className="tag" key={tag.id}>
+            <p
+              className="tag"
+              key={tag.id}
+              onClick={() => tagClickedHandler(tag.slug)}
+            >
               {tag.name}
             </p>
           ))}

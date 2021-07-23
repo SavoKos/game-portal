@@ -7,6 +7,7 @@ import Spinner from '@components/UI/Spinner';
 
 function GamesList() {
   const { games, fetchGames } = useFilters();
+  console.log(games);
 
   useEffect(() => {
     gamesListIntersecting();
@@ -31,6 +32,15 @@ function GamesList() {
 
     observer.observe(target);
   };
+
+  if (games.length === 0)
+    return (
+      <S.GamesList className="games-list">
+        <h2 className="missing-game">
+          We could not find any game. Try with a different filter
+        </h2>
+      </S.GamesList>
+    );
 
   return (
     <S.GamesList className="games-list">
@@ -59,6 +69,10 @@ S.GamesList = styled.div`
   margin-top: 5rem;
   display: flex;
   position: relative;
+
+  .missing-game {
+    color: #fff;
+  }
 
   .game-fetch-spinner {
     position: absolute;

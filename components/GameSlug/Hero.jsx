@@ -4,12 +4,22 @@ import link from 'functions/link';
 import PlatformsIcons from '@components/PlatformsIcons';
 import { useState } from 'react';
 import Image from 'next/image';
+import Router from 'next/router';
+import useFilters from 'context/Filters';
 
 function Hero({ slugDetails, coverImage }) {
   const [fullDesc, setFullDesc] = useState(false);
+  const { setTags, setPage, setGames } = useFilters();
 
   const platformIconsSlugs = platforms =>
     platforms?.map(platform => platform?.platform?.slug);
+
+  const tagClickedHandler = tag => {
+    Router.push('/games');
+    setPage(1);
+    setGames(null);
+    setTags(tag);
+  };
 
   return (
     <S.Hero id="hero">
@@ -71,7 +81,11 @@ function Hero({ slugDetails, coverImage }) {
           </span>
           <S.Tags>
             {slugDetails?.tags?.map(tag => (
-              <p className="tag" key={tag.id}>
+              <p
+                className="tag"
+                key={tag.id}
+                onClick={() => tagClickedHandler(tag.slug)}
+              >
                 {tag.name}
               </p>
             ))}
