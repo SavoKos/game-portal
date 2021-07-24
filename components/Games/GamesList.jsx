@@ -7,7 +7,6 @@ import Spinner from '@components/UI/Spinner';
 
 function GamesList() {
   const { games, fetchGames } = useFilters();
-  console.log(games);
 
   useEffect(() => {
     gamesListIntersecting();

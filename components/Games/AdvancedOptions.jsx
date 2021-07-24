@@ -11,7 +11,6 @@ function AdvancedOptions({ style }) {
   const [publishersList, setPublishersList] = useState(false);
   const [genresList, setGenresList] = useState(false);
   const [openedAccordion, setOpenedAccordion] = useState(false);
-  console.log(tagsList);
 
   const {
     setStores,

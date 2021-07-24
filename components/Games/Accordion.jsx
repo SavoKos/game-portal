@@ -14,10 +14,8 @@ function Accordion({ data, title, toggleAccordion, currentAccordion }) {
     setTags,
   } = filters;
   const currentFilter = filters[currentAccordion];
-  console.log(filters);
 
   const dataItemClass = dataItem => {
-    console.log(currentFilter, dataItem.slug);
     if (currentAccordion === 'Stores')
       return currentFilter?.includes(dataItem.id)
         ? 'data-item active'

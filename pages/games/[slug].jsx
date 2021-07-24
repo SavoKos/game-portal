@@ -65,8 +65,6 @@ function Game({ slug }) {
     ? slugDetails?.name_original + ' - Game Portal'
     : 'Game Portal Game';
 
-  console.log(franchise);
-
   return (
     <Layout
       title={title}

@@ -89,7 +89,7 @@ S.NavItems = styled.div`
     margin-left: 40px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: flex;
   }
 `;
@@ -141,7 +141,7 @@ S.SidebarNavItems = styled.div`
   line-height: 2.25rem;
   display: flex;
   flex-direction: column;
-  height: 40%;
+  height: 15%;
   justify-content: space-between;
 `;
 

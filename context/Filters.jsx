@@ -37,8 +37,6 @@ export const FiltersProvider = ({ children }) => {
     Tags,
   ]);
 
-  console.log(Tags);
-
   const fetchGames = async () => {
     const parentPlatformsQuery = ParentPlatforms
       ? `&parent_platforms=${ParentPlatforms?.value}`
