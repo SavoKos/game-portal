@@ -1,4 +1,3 @@
-import useFilters from 'context/Filters';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Accordion from './Accordion';
@@ -11,15 +10,6 @@ function AdvancedOptions({ style }) {
   const [publishersList, setPublishersList] = useState(false);
   const [genresList, setGenresList] = useState(false);
   const [openedAccordion, setOpenedAccordion] = useState(false);
-
-  const {
-    setStores,
-    setDevelopers,
-    setPublishers,
-    setGenres,
-    setMetacritic,
-    setTags,
-  } = useFilters();
 
   useEffect(async () => {
     const apiKey = process.env.API_KEY || 'ffc0c5b2524a475993fa130a0f55334c';

@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import Image from 'next/image';
 import Icon from './UI/Icon';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import NavItems from './NavItems';
 import styled from 'styled-components';
 

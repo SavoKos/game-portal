@@ -66,6 +66,20 @@ export const FiltersProvider = ({ children }) => {
     });
   };
 
+  const clearFilters = () => {
+    setGames('');
+    setPage(1);
+    setStores('');
+    setDevelopers('');
+    setPublishers('');
+    setGenres('');
+    setMetacritic([1, 100]);
+    setTags('');
+    setOrder('');
+    setPlatforms('');
+    setParentPlatforms('');
+  };
+
   const value = {
     Order,
     Platforms,
@@ -89,6 +103,7 @@ export const FiltersProvider = ({ children }) => {
     fetchGames,
     setPage,
     setTags,
+    clearFilters,
   };
 
   return (

@@ -8,37 +8,11 @@ import Filters from '@components/Games/Filters';
 import GamesList from '@components/Games/GamesList';
 import { useState } from 'react';
 import AdvancedOptionsSidebar from '@components/Games/AdvancedOptionsSidebar';
+import SearchGames from '@components/Games/SearchGames';
 
 function Games() {
-  const {
-    games,
-    setStores,
-    setDevelopers,
-    setPublishers,
-    setGenres,
-    setMetacritic,
-    setPage,
-    setTags,
-    setParentPlatforms,
-    setPlatforms,
-    setOrder,
-    setGames,
-  } = useFilters();
+  const { games, clearFilters } = useFilters();
   const [advancedSidebarActive, setAdvancedSidebarActive] = useState(false);
-
-  const clearFilters = () => {
-    setGames('');
-    setPage(1);
-    setStores('');
-    setDevelopers('');
-    setPublishers('');
-    setGenres('');
-    setMetacritic([1, 100]);
-    setTags('');
-    setOrder('');
-    setPlatforms('');
-    setParentPlatforms('');
-  };
 
   if (!games)
     return (
@@ -68,7 +42,7 @@ function Games() {
             {!advancedSidebarActive && <AdvancedOptions />}
             <S.MainContent>
               <S.TopBarContainer>
-                <input type="search" placeholder="Search..." />
+                <SearchGames />
                 <Filters
                   sidebarActive={advancedSidebarActive}
                   setSidebarActive={setAdvancedSidebarActive}
@@ -159,22 +133,6 @@ S.TopBarContainer = styled.div`
   li::selection,
   ul::selection {
     background: transparent;
-  }
-
-  input[type='search'] {
-    background-color: ${({ theme }) => theme.colors.primaryLight};
-    border: 0;
-    border-radius: 0.3rem;
-    outline: 0;
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 1rem;
-
-    @media (min-width: 900px) {
-      margin-bottom: 1rem;
-      padding: 1rem 2rem;
-    }
   }
 `;
 
