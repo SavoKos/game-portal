@@ -19,22 +19,18 @@ function PlatformsIcons({ platformsArray = null, limited = false }) {
     if (platform === 'atari') return 'icon-atari';
   });
 
-  const uniquePlatforms = [...new Set(platforms)].filter(platform => platform);
-
-  if (limited && uniquePlatforms.length > 4) {
+  if (limited && platforms.length > 4) {
     return (
       <>
-        {uniquePlatforms.slice(0, 4).map(platform => (
+        {platforms.slice(0, 4).map(platform => (
           <Icon type={platform} key={platform} />
         ))}
-        <span>{`+${uniquePlatforms.length - 4}`}</span>
+        <span>{`+${platforms.length - 4}`}</span>
       </>
     );
   }
 
-  return uniquePlatforms.map(platform => (
-    <Icon type={platform} key={platform} />
-  ));
+  return platforms.map(platform => <Icon type={platform} key={platform} />);
 }
 
 export default PlatformsIcons;

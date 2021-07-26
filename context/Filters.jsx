@@ -37,6 +37,8 @@ export const FiltersProvider = ({ children }) => {
     Tags,
   ]);
 
+  console.log(ParentPlatforms);
+
   const fetchGames = async () => {
     const parentPlatformsQuery = ParentPlatforms
       ? `&parent_platforms=${ParentPlatforms?.value}`
@@ -75,7 +77,10 @@ export const FiltersProvider = ({ children }) => {
     setGenres('');
     setMetacritic([1, 100]);
     setTags('');
-    setOrder('');
+    setOrder({
+      name: 'Relevance',
+      value: '-relevance',
+    });
     setPlatforms('');
     setParentPlatforms('');
   };
