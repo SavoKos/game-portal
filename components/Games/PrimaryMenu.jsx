@@ -1,3 +1,4 @@
+import { OrderedListOutlined } from '@ant-design/icons';
 import Icon from '@components/UI/Icon';
 import useFilters from 'context/Filters';
 import { CSSTransition } from 'react-transition-group';
@@ -10,16 +11,32 @@ function PrimaryMenu({
   calcHeight,
   title,
 }) {
-  const { setOrder, setParentPlatforms, setPlatforms, setPage, setGames } =
-    useFilters();
+  const {
+    setOrder,
+    setParentPlatforms,
+    setPlatforms,
+    setPage,
+    setGames,
+    ParentPlatforms,
+    Order,
+  } = useFilters();
 
   const dropdownItemClicked = filter => {
+    if (Order.name === filter.name) return null;
     if (filter.subOptions) return setActiveMenu(filter.name);
-    setPage(1);
-    setGames(null);
-    if (title !== 'Platforms') return setOrder(filter);
-    setParentPlatforms(filter);
-    setPlatforms(null);
+
+    if (title !== 'Platforms') {
+      setGames(null);
+      setPage(1);
+      return setOrder(filter);
+    }
+
+    if (ParentPlatforms.name !== filter.name) {
+      setPage(1);
+      setGames(null);
+      setPlatforms(null);
+      setParentPlatforms(filter);
+    }
   };
 
   const dropdownItems = options.map(filter => (
