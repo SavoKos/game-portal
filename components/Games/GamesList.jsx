@@ -2,35 +2,9 @@ import { v4 as uuid } from 'uuid';
 import GameSingleItem from '@components/GameSingleItem';
 import styled from 'styled-components';
 import useFilters from 'context/Filters';
-import { useEffect } from 'react';
-import Spinner from '@components/UI/Spinner';
 
 function GamesList() {
-  const { games, fetchGames } = useFilters();
-
-  useEffect(() => {
-    gamesListIntersecting();
-  }, []);
-
-  const gamesListIntersecting = () => {
-    const callback = (entries, _) => {
-      entries.forEach(ent => {
-        if (ent.isIntersecting) return fetchGames();
-      });
-    };
-
-    const options = {
-      root: null,
-      rootMargin: '1000px',
-      threshold: 0.01,
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-    const target = document.querySelector('.game-fetch-spinner');
-    if (!target) return;
-
-    observer.observe(target);
-  };
+  const { games, setPage } = useFilters();
 
   if (games.length === 0)
     return (
@@ -46,7 +20,12 @@ function GamesList() {
       {games.map(game => (
         <GameSingleItem game={game} key={uuid()} />
       ))}
-      <Spinner className="game-fetch-spinner" />
+      <a
+        className="load-more"
+        onClick={() => setPage(prevPage => prevPage + 1)}
+      >
+        Load more
+      </a>
     </S.GamesList>
   );
 }
@@ -69,13 +48,21 @@ S.GamesList = styled.div`
   display: flex;
   position: relative;
 
-  .missing-game {
+  .load-more {
+    padding: 1rem;
+    border-radius: 0.3rem;
     color: #fff;
+    background-color: ${({ theme }) => theme.colors.seaBlue};
+    position: absolute;
+    bottom: 5rem;
+    outline: 0;
+    border: 0;
+    font-size: 1.05rem;
+    cursor: pointer;
   }
 
-  .game-fetch-spinner {
-    position: absolute;
-    bottom: 1rem;
+  .missing-game {
+    color: #fff;
   }
 
   .game-item {

@@ -23,7 +23,8 @@ export const FiltersProvider = ({ children }) => {
   const [games, setGames] = useState(null);
   const [page, setPage] = useState(1);
 
-  useEffect(async () => {
+  console.log(page);
+  useEffect(() => {
     return fetchGames();
   }, [
     Order,
@@ -35,11 +36,11 @@ export const FiltersProvider = ({ children }) => {
     Metacritic,
     ParentPlatforms,
     Tags,
+    page,
   ]);
 
-  console.log(ParentPlatforms);
-
   const fetchGames = async () => {
+    window.scrollTo(0, window.scrollY - 200);
     const parentPlatformsQuery = ParentPlatforms
       ? `&parent_platforms=${ParentPlatforms?.value}`
       : '';
@@ -56,12 +57,10 @@ export const FiltersProvider = ({ children }) => {
       : '';
 
     const games = await fetch(
-      `https://rawg.io/api/games?discover=true&filter=true${finalPlatformsQuery}&ordering=${
-        Order.value
-      }${storesQuery}${developersQuery}${publishersQuery}${genresQuery}${metacriticQuery}${tagsQuery}&page=${page.toString()}&page_size=40&key=${apiKey}`
+      `https://rawg.io/api/games?discover=true&filter=true${finalPlatformsQuery}&ordering=${Order.value}${storesQuery}${developersQuery}${publishersQuery}${genresQuery}${metacriticQuery}${tagsQuery}&page=${page}&page_size=40&key=${apiKey}`
     ).then(res => res.json());
-    setPage(prevPage => +prevPage + 1);
-    return setGames(prevGames => {
+
+    setGames(prevGames => {
       if (!games?.results) return [];
       if (prevGames === null) return games.results;
       return [...prevGames, ...games.results];
@@ -109,6 +108,7 @@ export const FiltersProvider = ({ children }) => {
     setPage,
     setTags,
     clearFilters,
+    page,
   };
 
   return (
