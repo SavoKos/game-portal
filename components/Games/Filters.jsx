@@ -1,22 +1,20 @@
 import useFilters from 'context/Filters';
 import Filter from '@components/Games/Filter';
-import { useEffect, useState } from 'react';
-import {
-  orderOptions,
-  platformOptions as platformOpt,
-} from 'functions/dropdownOptions';
+import { memo, useEffect, useState } from 'react';
+
 import Icon from '@components/UI/Icon';
 import styled from 'styled-components';
+import useDropdownOptions from 'context/dropdownOptions';
 
-function Filters({ sidebarActive, setSidebarActive }) {
+const Filters = memo(({ sidebarActive, setSidebarActive }) => {
   const [filtersIntersecting, setFiltersIntersecting] = useState(true);
-  const [platformOptions, setPlatformOptions] = useState(null);
+  const { platformOptions, orderOptions } = useDropdownOptions(null);
   const { Order, Platforms, ParentPlatforms } = useFilters();
 
-  useEffect(async () => {
-    const options = await platformOpt();
-    setPlatformOptions(options);
-    filtersIntersectingHandler();
+  console.log(platformOptions);
+
+  useEffect(() => {
+    return filtersIntersectingHandler();
   }, []);
 
   const filtersIntersectingHandler = () => {
@@ -41,12 +39,16 @@ function Filters({ sidebarActive, setSidebarActive }) {
 
   return (
     <S.Filters className="filters">
-      <Filter title="Order by" options={orderOptions} currentFilter={Order} />
-      <Filter
-        title="Platforms"
-        options={platformOptions}
-        currentFilter={ParentPlatforms || Platforms}
-      />
+      {orderOptions && (
+        <Filter title="Order by" options={orderOptions} currentFilter={Order} />
+      )}
+      {platformOptions && (
+        <Filter
+          title="Platforms"
+          options={platformOptions}
+          currentFilter={ParentPlatforms || Platforms}
+        />
+      )}
       <S.ScrollToTop
         isIntersecting={filtersIntersecting}
         onClick={() => window.scrollTo(0, 0)}
@@ -63,7 +65,7 @@ function Filters({ sidebarActive, setSidebarActive }) {
       )}
     </S.Filters>
   );
-}
+});
 
 // -------------------------------------------------- styling ----------------------------------------------
 const S = {};

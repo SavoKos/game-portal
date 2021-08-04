@@ -1,41 +1,12 @@
-import { useEffect, useState } from 'react';
+import useAdvancedOptions from 'context/advancedOptions';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Accordion from './Accordion';
 import Metacritic from './Metacritic';
 
 function AdvancedOptions({ style }) {
-  const [storesList, setStoresList] = useState(false);
-  const [developersList, setDevelopersList] = useState(false);
-  const [tagsList, setTagsList] = useState(false);
-  const [publishersList, setPublishersList] = useState(false);
-  const [genresList, setGenresList] = useState(false);
   const [openedAccordion, setOpenedAccordion] = useState(false);
-
-  useEffect(async () => {
-    const apiKey = process.env.API_KEY || 'ffc0c5b2524a475993fa130a0f55334c';
-    const [stores, developers, publishers, genres, tags] = await Promise.all([
-      fetch(`https://api.rawg.io/api/stores?key=${apiKey}`).then(res =>
-        res.json()
-      ),
-      fetch(`https://api.rawg.io/api/developers?key=${apiKey}`).then(res =>
-        res.json()
-      ),
-      fetch(`https://api.rawg.io/api/publishers?key=${apiKey}`).then(res =>
-        res.json()
-      ),
-      fetch(`https://api.rawg.io/api/genres?key=${apiKey}`).then(res =>
-        res.json()
-      ),
-      fetch(`https://api.rawg.io/api/tags?page_size=40&key=${apiKey}`).then(
-        res => res.json()
-      ),
-    ]);
-    setStoresList(stores.results);
-    setDevelopersList(developers.results);
-    setPublishersList(publishers.results);
-    setGenresList(genres.results);
-    setTagsList(tags.results);
-  }, []);
+  const { stores, developers, genres, tags, publishers } = useAdvancedOptions();
 
   const toggleAccordion = accordion => {
     setOpenedAccordion(prevAccordion => {
@@ -47,31 +18,31 @@ function AdvancedOptions({ style }) {
   return (
     <S.AdvancedOptions className="advanced-options" style={style}>
       <Accordion
-        data={storesList}
+        data={stores}
         title="Stores"
         currentAccordion={openedAccordion}
         toggleAccordion={toggleAccordion}
       />
       <Accordion
-        data={developersList}
+        data={developers}
         title="Developers"
         currentAccordion={openedAccordion}
         toggleAccordion={toggleAccordion}
       />
       <Accordion
-        data={publishersList}
+        data={publishers}
         title="Publishers"
         currentAccordion={openedAccordion}
         toggleAccordion={toggleAccordion}
       />
       <Accordion
-        data={genresList}
+        data={genres}
         title="Genres"
         currentAccordion={openedAccordion}
         toggleAccordion={toggleAccordion}
       />
       <Accordion
-        data={tagsList}
+        data={tags}
         title="Tags"
         currentAccordion={openedAccordion}
         toggleAccordion={toggleAccordion}

@@ -78,7 +78,7 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
         className="trailer"
       >
         <h1 className="loading">
-          {game.trailer
+          {game?.trailer
             ? 'Loading...'
             : 'We could not find trailer for this game'}
         </h1>

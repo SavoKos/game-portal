@@ -41,6 +41,7 @@ export const FiltersProvider = ({ children }) => {
 
   const fetchGames = async () => {
     window.scrollTo(0, window.scrollY - 200);
+
     const parentPlatformsQuery = ParentPlatforms
       ? `&parent_platforms=${ParentPlatforms?.value}`
       : '';

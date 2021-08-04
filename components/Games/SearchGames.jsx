@@ -8,7 +8,7 @@ function SearchGames() {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    if (!searchValue) return;
+    if (!searchValue) return setSearchResults([]);
 
     const delayDebounceFn = setTimeout(() => {
       fetch(
@@ -32,7 +32,7 @@ function SearchGames() {
       <S.SearchResults>
         {searchResults.length > 0 &&
           searchResults.map(searchResult => (
-            <SearchResult game={searchResult} />
+            <SearchResult game={searchResult} key={searchResult.id} />
           ))}
       </S.SearchResults>
     </S.SearchGames>

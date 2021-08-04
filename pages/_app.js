@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import NProgress from 'nprogress';
 import { FiltersProvider } from 'context/Filters';
+import { AdvancedOptionsProvider } from 'context/advancedOptions';
+import { DropdownOptionsProvider } from 'context/dropdownOptions';
 
 function Application({ Component, pageProps }) {
   NProgress.configure({ showSpinner: false });
@@ -25,9 +27,13 @@ function Application({ Component, pageProps }) {
 
   return (
     <SCTheme>
-      <FiltersProvider>
-        <Component {...pageProps} />
-      </FiltersProvider>
+      <AdvancedOptionsProvider>
+        <FiltersProvider>
+          <DropdownOptionsProvider>
+            <Component {...pageProps} />
+          </DropdownOptionsProvider>
+        </FiltersProvider>
+      </AdvancedOptionsProvider>
     </SCTheme>
   );
 }

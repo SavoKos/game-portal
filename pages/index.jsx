@@ -5,8 +5,31 @@ import Navigation from '@components/Navigation';
 import styled from 'styled-components';
 import GameTrailer from '@components/Homepage/GameTrailer';
 import Layout from '@components/Layout';
+import { useEffect, useState } from 'react';
+import Router from 'next/router';
 
-export default function Home({ fetchedCustomGamesData, games }) {
+export default function Homepage() {
+  const [customGamesData, setCustomGamesData] = useState([]);
+  const [games, setGames] = useState([]);
+
+  useEffect(async () => {
+    const apiKey = process.env.API_KEY || 'c542e67aec3a4340908f9de9e86038af';
+
+    const [customGamesData, games] = await Promise.all([
+      fetch('https://gameportal.savokos.com/customGamesData.json').then(res =>
+        res.json()
+      ),
+      fetch(
+        `https://api.rawg.io/api/games?key=${apiKey}&dates=2020-09-30,2999-01-01&platforms=18,1,7&page_size=28`
+      ).then(res => res.json()),
+    ]);
+
+    if (!games?.results) return Router.push('/404');
+
+    setCustomGamesData(customGamesData);
+    setGames(games.results);
+  }, []);
+
   return (
     <Layout
       title="Game portal - Discover your next favorite game."
@@ -18,42 +41,12 @@ export default function Home({ fetchedCustomGamesData, games }) {
         <Navigation active="home" />
         <Hero />
         <GamesListRow games={games} />
-        <GameExplorer games={games} customGamesData={fetchedCustomGamesData} />
-        <GameTrailer customGamesData={fetchedCustomGamesData} />
+        <GameExplorer games={games} customGamesData={customGamesData} />
+        <GameTrailer customGamesData={customGamesData} />
       </S.PageContainer>
     </Layout>
   );
 }
-
-export const getStaticProps = async () => {
-  try {
-    const hostname =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000'
-        : 'https://gameportal.savokos.com';
-
-    const [customGamesData, games] = await Promise.all([
-      fetch(`${hostname}/customGamesData.json`).then(res => res.json()),
-      fetch(
-        'https://api.rawg.io/api/games?key=ffc0c5b2524a475993fa130a0f55334c&dates=2020-09-30,2999-01-01&platforms=18,1,7&page_size=28'
-      ).then(res => res.json()),
-    ]);
-
-    return {
-      props: {
-        fetchedCustomGamesData: customGamesData,
-        games: games.results,
-        fallback: false,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        error,
-      },
-    };
-  }
-};
 
 // -------------------------------------------------- styling ----------------------------------------------
 const S = {};
