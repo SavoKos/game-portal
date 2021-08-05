@@ -25,6 +25,7 @@ S.HeroContainer = styled.div`
   background-position: bottom;
   pointer-events: none;
   background-repeat: no-repeat;
+  background-size: cover;
 
   @media (min-height: 700px) {
     min-height: 125vh;
