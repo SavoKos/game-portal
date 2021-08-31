@@ -4,10 +4,9 @@
 <br>
 
 ![Project Image](https://res.cloudinary.com/dicynt7ms/image/upload/v1630440609/important/screencapture-gameportal-savokos-2021-08-31-22_06_28_ga67bi.png)
-<br>
 ![Project Image1](https://res.cloudinary.com/dicynt7ms/image/upload/v1630440610/important/screencapture-gameportal-savokos-games-2021-08-31-22_07_11_snaq03.png)
-<br>
 ![Project Image2](https://res.cloudinary.com/dicynt7ms/image/upload/v1630440567/important/screencapture-gameportal-savokos-games-grand-theft-auto-v-2021-08-31-22_07_56_kalb8o.png)
+
 <br>
 
 ## Table of Contents
@@ -34,9 +33,7 @@ $ npm run dev
 
 ## Description
 
-Game portal is the place where you can search and discover your next favorite game. There are over 245 000 game titles.
-Sort and filter games by tags, genres, stores, developers.
-Read detailed reviews about games, find similar games and stores where you can purchase it.
+Game portal is the place where you can search and discover your next favorite game.<br>There are over 245 000 game titles. <br>Sort and filter games by tags, genres, stores, developers.<br>Read detailed reviews about games, find similar games and stores where you can purchase it.
 
 ## Built with
 
