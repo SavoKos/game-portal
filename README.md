@@ -3,7 +3,7 @@
 
 <br>
 
-![Project Image](https://res.cloudinary.com/dicynt7ms/image/upload/q_65/v1630440609/important/screencapture-gameportal-savokos-2021-08-31-22_06_28_ga67bi.png) <br>
+![Project Image](https://res.cloudinary.com/dicynt7ms/image/upload/v1630440609/important/screencapture-gameportal-savokos-2021-08-31-22_06_28_ga67bi.jpg) <br>
 ![Project Image1](https://res.cloudinary.com/dicynt7ms/image/upload/q_65/v1630440610/important/screencapture-gameportal-savokos-games-2021-08-31-22_07_11_snaq03.png) <br>
 ![Project Image2](https://res.cloudinary.com/dicynt7ms/image/upload/v1630440567/important/screencapture-gameportal-savokos-games-grand-theft-auto-v-2021-08-31-22_07_56_kalb8o.png)
 
