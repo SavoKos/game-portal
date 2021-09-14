@@ -23,7 +23,6 @@ export const FiltersProvider = ({ children }) => {
   const [games, setGames] = useState(null);
   const [page, setPage] = useState(1);
 
-  console.log(page);
   useEffect(() => {
     return fetchGames();
   }, [
@@ -59,9 +58,9 @@ export const FiltersProvider = ({ children }) => {
 
     const games = await fetch(
       `https://rawg.io/api/games?discover=true&filter=true${finalPlatformsQuery}&ordering=${Order.value}${storesQuery}${developersQuery}${publishersQuery}${genresQuery}${metacriticQuery}${tagsQuery}&page=${page}&page_size=40&key=${apiKey}`
-    ).then(res => res.json());
+    ).then((res) => res.json());
 
-    setGames(prevGames => {
+    setGames((prevGames) => {
       if (!games?.results) return [];
       if (prevGames === null) return games.results;
       return [...prevGames, ...games.results];

@@ -11,15 +11,13 @@ const Filters = memo(({ sidebarActive, setSidebarActive }) => {
   const { platformOptions, orderOptions } = useDropdownOptions(null);
   const { Order, Platforms, ParentPlatforms } = useFilters();
 
-  console.log(platformOptions);
-
   useEffect(() => {
     return filtersIntersectingHandler();
   }, []);
 
   const filtersIntersectingHandler = () => {
     const callback = (entries, _) => {
-      entries.forEach(ent => {
+      entries.forEach((ent) => {
         if (ent.isIntersecting) return setFiltersIntersecting(true);
         setFiltersIntersecting(false);
       });
@@ -38,13 +36,13 @@ const Filters = memo(({ sidebarActive, setSidebarActive }) => {
   };
 
   return (
-    <S.Filters className="filters">
+    <S.Filters className='filters'>
       {orderOptions && (
-        <Filter title="Order by" options={orderOptions} currentFilter={Order} />
+        <Filter title='Order by' options={orderOptions} currentFilter={Order} />
       )}
       {platformOptions && (
         <Filter
-          title="Platforms"
+          title='Platforms'
           options={platformOptions}
           currentFilter={ParentPlatforms || Platforms}
         />
@@ -53,7 +51,7 @@ const Filters = memo(({ sidebarActive, setSidebarActive }) => {
         isIntersecting={filtersIntersecting}
         onClick={() => window.scrollTo(0, 0)}
       >
-        <Icon type="icon-iov-arrow-up" />
+        <Icon type='icon-iov-arrow-up' />
       </S.ScrollToTop>
       {!sidebarActive && (
         <S.OpenSlider
