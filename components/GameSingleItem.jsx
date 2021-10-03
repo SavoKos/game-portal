@@ -17,12 +17,12 @@ function GameSingleItem({ game }) {
     );
   };
 
-  const platformIconsSlugs = platforms =>
-    platforms?.map(platform => platform.platform.slug);
+  const platformIconsSlugs = (platforms) =>
+    platforms?.map((platform) => platform.platform.slug);
 
   return (
     <Link href={'/games/' + game.slug || ''}>
-      <S.GameExplorerItem className="shadow-white explorer-gradient game-item">
+      <S.GameExplorerItem className='shadow-white explorer-gradient game-item'>
         <S.LabelsContainer>
           <S.PlatformContainer>
             <PlatformsIcons
@@ -34,11 +34,11 @@ function GameSingleItem({ game }) {
         </S.LabelsContainer>
         <Image
           src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_300,h_400,q_100/${game.background_image}`}
-          layout="fill"
-          objectFit="cover"
-          className="primary-photo"
+          layout='fill'
+          objectFit='cover'
+          className='primary-photo'
         />
-        <h3 className="game-name">{game.name}</h3>
+        <h3 className='game-name'>{game.name}</h3>
       </S.GameExplorerItem>
     </Link>
   );
@@ -73,7 +73,7 @@ S.GameExplorerItem = styled.div`
 
   @media (min-width: 1024px) {
     height: 440px;
-    transform: scale(0.975);
+    transform: scale(0.95);
   }
 
   @media (min-width: 1280px) {

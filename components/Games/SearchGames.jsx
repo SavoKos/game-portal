@@ -1,3 +1,4 @@
+import Spinner from '@components/UI/Spinner';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchResult from './SearchResult';
@@ -7,6 +8,8 @@ function SearchGames() {
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  console.log(searchResults);
+
   useEffect(() => {
     if (!searchValue) return setSearchResults([]);
 
@@ -14,8 +17,11 @@ function SearchGames() {
       fetch(
         `https://rawg.io/api/games?page_size=20&search=${searchValue}&key=${apiKey}`
       )
-        .then(res => res.json())
-        .then(data => setSearchResults(data?.results));
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.results?.length === 0) return setSearchResults(null);
+          return setSearchResults(data?.results);
+        });
     }, 700);
 
     return () => clearTimeout(delayDebounceFn);
@@ -24,16 +30,22 @@ function SearchGames() {
   return (
     <S.SearchGames>
       <input
-        type="search"
-        placeholder="Search..."
+        type='search'
+        placeholder='Search...'
         value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={(e) => setSearchValue(e.target.value)}
       />
       <S.SearchResults>
-        {searchResults.length > 0 &&
-          searchResults.map(searchResult => (
+        {searchResults === null && (
+          <>
+            <h3>We couldn't find any game with that name. Try again.</h3>
+          </>
+        )}
+        {searchResults?.length > 0 &&
+          searchResults.map((searchResult) => (
             <SearchResult game={searchResult} key={searchResult.id} />
           ))}
+        {searchValue && searchResults?.length === 0 && <Spinner />}
       </S.SearchResults>
     </S.SearchGames>
   );
@@ -69,6 +81,17 @@ S.SearchResults = styled.div`
   width: 100%;
   z-index: 11;
   border-radius: 0.3rem;
+
+  .spinner {
+    margin: 0 auto;
+    display: block;
+  }
+
+  h3 {
+    color: #fff;
+    text-align: center;
+    margin: 1rem 0;
+  }
 `;
 
 export default SearchGames;

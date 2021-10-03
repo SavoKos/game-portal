@@ -12,19 +12,16 @@ function MainDetails({ screenshots, slugDetails, stores }) {
   const [sliderActive, setSliderActive] = useState(false);
 
   const carouselItems = screenshots?.map((screenshot, i) => {
-    const imageWidth =
-      screenshot.width < window.innerWidth + 100
-        ? screenshot.width
-        : window.innerWidth + 100;
+    const imageWidth = screenshot.width || 1000;
 
     return (
       <S.ScreenshotSlide>
         <Image
           src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_${imageWidth},q_65/${screenshot.image}`}
           alt={`${slugDetails?.name_original} image ${i + 1}`}
-          className="screenshot"
-          objectFit="cover"
-          layout="intrinsic"
+          className='screenshot'
+          objectFit='cover'
+          layout='intrinsic'
           width={1499}
           height={815}
           loading={sliderActive ? 'eager' : 'lazy'}
@@ -42,10 +39,10 @@ function MainDetails({ screenshots, slugDetails, stores }) {
             screenshots[0]?.image || slugDetails?.background_image
           }`}
           alt={`${slugDetails?.name_original} image`}
-          className="bg-img"
-          objectFit="cover"
-          layout="fill"
-          objectPosition="top"
+          className='bg-img'
+          objectFit='cover'
+          layout='fill'
+          objectPosition='top'
         />
       )}
       <S.MainDetails active={sliderActive}>
@@ -56,10 +53,10 @@ function MainDetails({ screenshots, slugDetails, stores }) {
           <S.Screenshot onClick={() => setSliderActive(true)}>
             {screenshots && (
               <Image
-                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${screenshots[0]?.image}`}
+                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1000/${screenshots[0]?.image}`}
                 alt={`${slugDetails?.name_original} screenshot 1`}
-                objectFit="cover"
-                layout="fill"
+                objectFit='cover'
+                layout='fill'
               />
             )}
           </S.Screenshot>
@@ -69,26 +66,22 @@ function MainDetails({ screenshots, slugDetails, stores }) {
               onClick={() => setSliderActive(true)}
             >
               <Image
-                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_500/${screenshot?.image}`}
+                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${screenshot?.image}`}
                 alt={`${slugDetails?.name_original} screenshot ${i + 1}`}
-                objectFit="cover"
-                layout="fill"
+                objectFit='cover'
+                layout='fill'
               />
             </S.Screenshot>
           ))}
           <S.Screenshot onClick={() => setSliderActive(true)}>
-            <Icon type="icon-moreread" />
+            <Icon type='icon-moreread' />
             <h5>View More</h5>
           </S.Screenshot>
         </S.ScreenshotsContainer>
-        <Overlay
-          onClick={() => setSliderActive(false)}
-          active={sliderActive}
-          className="overlay"
-        >
+        <Overlay active={sliderActive} className='overlay'>
           <Icon
-            type="icon-searchclose"
-            className="close-slider"
+            type='icon-searchclose'
+            className='close-slider'
             onClick={() => setSliderActive(false)}
           />
         </Overlay>
@@ -98,14 +91,14 @@ function MainDetails({ screenshots, slugDetails, stores }) {
           keyboardNavigation
           renderPrevButton={() => (
             <Icon
-              type="icon-youluPC_common_arrow_th"
-              className="carousel-nav-btn"
+              type='icon-youluPC_common_arrow_th'
+              className='carousel-nav-btn'
             />
           )}
           renderNextButton={() => (
             <Icon
-              type="icon-youluPC_common_arrow_th1"
-              className="carousel-nav-btn"
+              type='icon-youluPC_common_arrow_th1'
+              className='carousel-nav-btn'
             />
           )}
         />

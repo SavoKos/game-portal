@@ -14,8 +14,8 @@ function AdvancedOptionsSidebar({ sidebarActive, setSidebarActive }) {
       <S.AdvancedOptionsSidebar className={sidebarActive ? 'active' : ''}>
         <AdvancedOptions style={advancedOptionsStyle} />
         <Icon
-          type="icon--arrowleft"
-          className="close-slider"
+          type='icon--arrowleft'
+          className='close-slider'
           onClick={() => setSidebarActive(false)}
         />
       </S.AdvancedOptionsSidebar>
@@ -53,6 +53,10 @@ S.AdvancedOptionsSidebar = styled.div`
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.3rem;
+  }
+
+  @media (min-width: 1024px) {
+    width: 55%;
   }
 `;
 

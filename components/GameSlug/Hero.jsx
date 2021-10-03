@@ -11,10 +11,10 @@ function Hero({ slugDetails, coverImage }) {
   const [fullDesc, setFullDesc] = useState(false);
   const { setTags, setPage, setGames } = useFilters();
 
-  const platformIconsSlugs = platforms =>
-    platforms?.map(platform => platform?.platform?.slug);
+  const platformIconsSlugs = (platforms) =>
+    platforms?.map((platform) => platform?.platform?.slug);
 
-  const tagClickedHandler = tag => {
+  const tagClickedHandler = (tag) => {
     Router.push('/games');
     setPage(1);
     setGames(null);
@@ -22,7 +22,7 @@ function Hero({ slugDetails, coverImage }) {
   };
 
   return (
-    <S.Hero id="hero">
+    <S.Hero id='hero'>
       <Image
         src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1200/${
           slugDetails?.background_image ||
@@ -30,20 +30,20 @@ function Hero({ slugDetails, coverImage }) {
         }`}
         priority
         alt={`${slugDetails?.name_original} image`}
-        className="bg-img"
-        objectFit="cover"
-        layout="fill"
-        objectPosition="top"
-        loading="eager"
+        className='bg-img'
+        objectFit='cover'
+        layout='fill'
+        objectPosition='top'
+        loading='eager'
       />
       <S.HeroContent>
-        <S.CoverImage className="explorer-gradient">
+        <S.CoverImage className='explorer-gradient'>
           <Image
             src={coverImage}
             alt={`${slugDetails?.name_original} image`}
-            objectFit="cover"
-            layout="fill"
-            loading="eager"
+            objectFit='cover'
+            layout='fill'
+            loading='eager'
             priority
           />
         </S.CoverImage>
@@ -55,7 +55,7 @@ function Hero({ slugDetails, coverImage }) {
             ''
           )}
           {slugDetails?.parent_platforms && (
-            <p className="platforms-title">AVAILABLE ON: </p>
+            <p className='platforms-title'>AVAILABLE ON: </p>
           )}
           <S.PlatformsContainer>
             <PlatformsIcons
@@ -63,26 +63,28 @@ function Hero({ slugDetails, coverImage }) {
             />
           </S.PlatformsContainer>
 
-          <S.Stars>
-            <Stars
-              rating={+Math.trunc(slugDetails?.rating)}
-              className="stars"
-            />
-            <span className="rating-number"> {slugDetails?.rating}</span>
-          </S.Stars>
+          {slugDetails?.rating !== 0 && (
+            <S.Stars>
+              <Stars
+                rating={+Math.trunc(slugDetails.rating)}
+                className='stars'
+              />
+              <span className='rating-number'>{slugDetails.rating}</span>
+            </S.Stars>
+          )}
           <div>
-            <p className="description">{slugDetails?.description_raw}</p>
+            <p className='description'>{slugDetails?.description_raw}</p>
           </div>
           <span
-            className="truncate-text"
-            onClick={() => setFullDesc(prevValue => !prevValue)}
+            className='truncate-text'
+            onClick={() => setFullDesc((prevValue) => !prevValue)}
           >
             {fullDesc ? 'Show less' : 'Show more'}
           </span>
           <S.Tags>
-            {slugDetails?.tags?.map(tag => (
+            {slugDetails?.tags?.map((tag) => (
               <p
-                className="tag"
+                className='tag'
                 key={tag.id}
                 onClick={() => tagClickedHandler(tag.slug)}
               >
@@ -92,7 +94,7 @@ function Hero({ slugDetails, coverImage }) {
           </S.Tags>
           {slugDetails?.website && (
             <h4
-              className="official-website"
+              className='official-website'
               onClick={() => link(slugDetails?.website)}
             >
               Official Website
@@ -173,6 +175,10 @@ S.Details = styled.div`
     margin-top: 0.1rem;
   }
 
+  .description {
+    margin-top: 0.6rem !important;
+  }
+
   .platforms-title {
     display: inline;
   }
@@ -224,7 +230,7 @@ S.PlatformsContainer = styled.div`
 `;
 
 S.Stars = styled.div`
-  margin: 1rem 0;
+  margin: 1rem 0 0.5rem 0;
   display: flex;
   align-items: flex-start;
 
