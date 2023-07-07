@@ -12,12 +12,10 @@ function MainDetails({ screenshots, slugDetails, stores }) {
   const [sliderActive, setSliderActive] = useState(false);
 
   const carouselItems = screenshots?.map((screenshot, i) => {
-    const imageWidth = screenshot.width || 1000;
-
     return (
       <S.ScreenshotSlide>
         <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_${imageWidth},q_65/${screenshot.image}`}
+          src={screenshot.image}
           alt={`${slugDetails?.name_original} image ${i + 1}`}
           className='screenshot'
           objectFit='cover'
@@ -35,9 +33,7 @@ function MainDetails({ screenshots, slugDetails, stores }) {
     <S.MainDetailsContainer sliderActive={sliderActive}>
       {screenshots && (
         <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1200/${
-            screenshots[0]?.image || slugDetails?.background_image
-          }`}
+          src={screenshots[0]?.image || slugDetails?.background_image}
           alt={`${slugDetails?.name_original} image`}
           className='bg-img'
           objectFit='cover'
@@ -53,7 +49,7 @@ function MainDetails({ screenshots, slugDetails, stores }) {
           <S.Screenshot onClick={() => setSliderActive(true)}>
             {screenshots && (
               <Image
-                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1000/${screenshots[0]?.image}`}
+                src={screenshots[0]?.image}
                 alt={`${slugDetails?.name_original} screenshot 1`}
                 objectFit='cover'
                 layout='fill'
@@ -66,7 +62,7 @@ function MainDetails({ screenshots, slugDetails, stores }) {
               onClick={() => setSliderActive(true)}
             >
               <Image
-                src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_800/${screenshot?.image}`}
+                src={screenshot?.image}
                 alt={`${slugDetails?.name_original} screenshot ${i + 1}`}
                 objectFit='cover'
                 layout='fill'

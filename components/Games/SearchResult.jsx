@@ -3,16 +3,14 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 function SearchResult({ game }) {
-  const platformIconsSlugs = platforms =>
-    platforms?.map(platform => platform?.platform?.slug);
+  const platformIconsSlugs = (platforms) =>
+    platforms?.map((platform) => platform?.platform?.slug);
 
   if (!game?.background_image) return '';
   return (
     <Link href={'/games/' + game.slug || ''}>
       <S.SearchResult>
-        <img
-          src={`https://res.cloudinary.com/dicynt7ms/image/fetch/c_fill,w_75,h_75/${game?.background_image}`}
-        />
+        <img src={game?.background_image} />
         <S.GameDetails>
           <S.PlatformsIcons>
             <PlatformsIcons

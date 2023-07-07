@@ -12,7 +12,9 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
   const [isModalActive, setIsModalActive] = useState(false);
   const { setTags, setPage, setGames } = useFilters();
 
-  const tagClickedHandler = tag => {
+  console.log(game);
+
+  const tagClickedHandler = (tag) => {
     Router.push('/games');
     setPage(1);
     setGames(null);
@@ -36,11 +38,11 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
 
   const prevSlideHandler = () => {
     if (currentSlide === 0) return;
-    changeSlide(currSlide => currSlide - 1);
+    changeSlide((currSlide) => currSlide - 1);
   };
 
   const nextSlideHandler = () => {
-    changeSlide(currSlide => currSlide + 1);
+    changeSlide((currSlide) => currSlide + 1);
   };
 
   const trailerThumbnailSrc = () =>
@@ -51,15 +53,15 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
     <S.GameTrailerItem>
       <S.Image>
         {game?.trailer_thumbnail && (
-          <Image src={trailerThumbnailSrc()} objectFit="cover" layout="fill" />
+          <Image src={trailerThumbnailSrc()} objectFit='cover' layout='fill' />
         )}
         <S.PlayBtn onClick={() => setIsModalActive(true)}>
           <Image
-            src="https://res.cloudinary.com/dicynt7ms/image/upload/c_fill/v1624627114/game-portal/play-btn_dnzyqo.png"
-            objectFit="cover"
+            src='https://res.cloudinary.com/dicynt7ms/image/upload/c_fill/v1624627114/game-portal/play-btn_dnzyqo.png'
+            objectFit='cover'
             width={150}
             height={150}
-            className="play-btn"
+            className='play-btn'
           />
         </S.PlayBtn>
         <h1>
@@ -68,25 +70,25 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
           Video
         </h1>
         <S.Controls>
-          <Icon type="icon--arrowleft" onClick={prevSlideHandler} />
-          <Icon type="icon-iov-arrow-right" onClick={nextSlideHandler} />
+          <Icon type='icon--arrowleft' onClick={prevSlideHandler} />
+          <Icon type='icon-iov-arrow-right' onClick={nextSlideHandler} />
         </S.Controls>
       </S.Image>
       <Modal
         active={isModalActive}
         closeModal={() => setIsModalActive(false)}
-        className="trailer"
+        className='trailer'
       >
-        <h1 className="loading">
+        <h1 className='loading'>
           {game?.trailer
             ? 'Loading...'
             : 'We could not find trailer for this game'}
         </h1>
         <iframe
           src={(isModalActive && game.trailer) || ''}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          title='YouTube video player'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
           allowFullScreen
         ></iframe>
       </Modal>
@@ -95,12 +97,12 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
           <span>V</span>IDEO GAME
         </h1>
         {displayDetailsTitle() || ''}
-        <p className="description">{game?.description_raw}</p>
+        <p className='description'>{game?.description_raw}</p>
         <hr />
         <S.Tags>
-          {game?.tags?.slice(0, 5).map(tag => (
+          {game?.tags?.slice(0, 5).map((tag) => (
             <p
-              className="tag"
+              className='tag'
               key={tag.id}
               onClick={() => tagClickedHandler(tag.slug)}
             >
@@ -109,7 +111,7 @@ function GameTrailerItem({ game, changeSlide, currentSlide }) {
           ))}
         </S.Tags>
         <S.Rating>
-          <div className="rating-circle">
+          <div className='rating-circle'>
             <h3>{game?.rating}</h3>
           </div>
           <div>

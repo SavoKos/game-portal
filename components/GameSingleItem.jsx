@@ -33,7 +33,7 @@ function GameSingleItem({ game }) {
           {newGameCheck(+new Date(game.released))}
         </S.LabelsContainer>
         <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_300,h_400,q_100/${game.background_image}`}
+          src={game.background_image}
           layout='fill'
           objectFit='cover'
           className='primary-photo'

@@ -7,19 +7,17 @@ function Franchise({ franchiseGames, screenshots, slugDetails }) {
     <S.FranchiseContainer>
       {screenshots && (
         <Image
-          src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1200/${
-            screenshots[2]?.image || slugDetails?.background_image
-          }`}
+          src={screenshots[2]?.image || slugDetails?.background_image}
           alt={`${slugDetails?.name_original} screenshot`}
-          className="bg-img"
-          objectFit="cover"
-          layout="fill"
-          objectPosition="top"
+          className='bg-img'
+          objectFit='cover'
+          layout='fill'
+          objectPosition='top'
         />
       )}
       <S.Franchise>
         <h1>Franchise</h1>
-        {franchiseGames.map(game => (
+        {franchiseGames.map((game) => (
           <GameSingleItem game={game} key={game.id} />
         ))}
       </S.Franchise>

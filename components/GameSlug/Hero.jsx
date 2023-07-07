@@ -24,10 +24,10 @@ function Hero({ slugDetails, coverImage }) {
   return (
     <S.Hero id='hero'>
       <Image
-        src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_1200/${
+        src={
           slugDetails?.background_image ||
           slugDetails?.background_image_additional
-        }`}
+        }
         priority
         alt={`${slugDetails?.name_original} image`}
         className='bg-img'

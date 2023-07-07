@@ -5,13 +5,13 @@ import Link from 'next/link';
 export default function FeaturedGames({ games, className = '' }) {
   return (
     <S.FeaturedContainer className={className}>
-      {games?.slice(0, 5).map(game => (
+      {games?.slice(0, 5).map((game) => (
         <Link key={game.id} href={'/games/' + game.slug}>
           <S.FeaturedGame>
             <Image
-              src={`https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_300,g_north/${game.background_image}`}
-              layout="fill"
-              objectFit="cover"
+              src={game.background_image}
+              layout='fill'
+              objectFit='cover'
             />
             <h3>{game.name}</h3>
           </S.FeaturedGame>

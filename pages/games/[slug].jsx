@@ -55,9 +55,7 @@ function Game({ slug }) {
     }
   }, [slug]);
 
-  const coverImage = slugDetails
-    ? `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${slugDetails?.background_image}`
-    : '';
+  const coverImage = slugDetails ? slugDetails?.background_image : '';
   const currentUrl = slugDetails
     ? `https://gameportal.savo-kos.com/games/${slugDetails?.slug}`
     : 'https://gameportal.savo-kos.com';
