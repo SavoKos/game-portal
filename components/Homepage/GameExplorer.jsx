@@ -10,7 +10,7 @@ function GameExplorer({ games, customGamesData }) {
 
   const carouselIntersectingHandler = () => {
     const callback = (entries, _) => {
-      entries.forEach(ent => {
+      entries.forEach((ent) => {
         if (ent.isIntersecting) return setIsCarouselIntersecting(true);
         setIsCarouselIntersecting(false);
       });
@@ -64,14 +64,14 @@ function GameExplorer({ games, customGamesData }) {
         disableDotsControls={true}
         renderPrevButton={() => (
           <Icon
-            type="icon-youluPC_common_arrow_th"
-            className="carousel-nav-btn"
+            type='icon-youluPC_common_arrow_th'
+            className='carousel-nav-btn'
           />
         )}
         renderNextButton={() => (
           <Icon
-            type="icon-youluPC_common_arrow_th1"
-            className="carousel-nav-btn"
+            type='icon-youluPC_common_arrow_th1'
+            className='carousel-nav-btn'
           />
         )}
       />

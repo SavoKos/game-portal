@@ -17,20 +17,20 @@ function Games() {
   if (!games)
     return (
       <S.PageContainer>
-        <Navigation active="games" />
+        <Navigation active='games' />
         <Spinner />
       </S.PageContainer>
     );
 
   return (
     <Layout
-      title="All Games - Game Portal"
-      url="https://gameportal.savokos.com/games"
-      decription="Search, filter and find your favorite game among others"
-      image="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png"
+      title='All Games - Game Portal'
+      url='https://gameportal.savo-kos.com/games'
+      decription='Search, filter and find your favorite game among others'
+      image='https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png'
     >
       <S.PageContainer>
-        <Navigation active="games" />
+        <Navigation active='games' />
         <AdvancedOptionsSidebar
           sidebarActive={advancedSidebarActive}
           setSidebarActive={setAdvancedSidebarActive}
@@ -49,14 +49,14 @@ function Games() {
                 />
                 <S.Buttons>
                   <h5
-                    className="advanced-options"
+                    className='advanced-options'
                     onClick={() =>
                       setAdvancedSidebarActive(!advancedSidebarActive)
                     }
                   >
                     Advanced options
                   </h5>
-                  <h5 className="clear" onClick={clearFilters}>
+                  <h5 className='clear' onClick={clearFilters}>
                     Clear
                   </h5>
                 </S.Buttons>

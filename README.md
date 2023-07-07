@@ -1,5 +1,5 @@
-<p align="center"><a href="https://gameportal.savokos.com" target="_blank" rel="noopener noreferrer"><img src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png"></a></p>
-<h1 align="center"><a href="https://gameportal.savokos.com" target="_blank" rel="noopener noreferrer"  style="color:#152974;">Game Portal</a></h1>
+<p align="center"><a href="https://gameportal.savo-kos.com" target="_blank" rel="noopener noreferrer"><img src="https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png"></a></p>
+<h1 align="center"><a href="https://gameportal.savo-kos.com" target="_blank" rel="noopener noreferrer"  style="color:#152974;">Game Portal</a></h1>
 
 <br>
 
@@ -8,7 +8,7 @@
 ![Project Image2](https://res.cloudinary.com/dicynt7ms/image/upload/v1630440567/important/screencapture-gameportal-savokos-games-grand-theft-auto-v-2021-08-31-22_07_56_kalb8o.png)
 <br>
 
-![LiveWebsite](https://res.cloudinary.com/dicynt7ms/image/upload/w_20,h_20/v1630442590/important/NicePng_website-png_187940_pizwnr.png) <span>Live website - <a href="https://gameportal.savokos.com" target="_blank" rel="noopener noreferrer"> gameportal.savokos.com</a></span>
+![LiveWebsite](https://res.cloudinary.com/dicynt7ms/image/upload/w_20,h_20/v1630442590/important/NicePng_website-png_187940_pizwnr.png) <span>Live website - <a href="https://gameportal.savo-kos.com" target="_blank" rel="noopener noreferrer"> gameportal.savo-kos.com</a></span>
 
 ## Table of Contents
 
@@ -71,5 +71,5 @@ SOFTWARE.
 
 ## Author Info
 
-- Upwork - [Savo Kos](https://links.savokos.com/upwork)
-- Website - [savokos.com](https://savokos.com)
+- Upwork - [Savo Kos](https://links.savo-kos.com/upwork)
+- Website - [savo-kos.com](https://savo-kos.com)

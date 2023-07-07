@@ -22,27 +22,27 @@ function Game({ slug }) {
         await Promise.all([
           fetch(
             encodeURI(`https://api.rawg.io/api/games/${slug}?key=${API_KEY}`)
-          ).then(res => res.json()),
+          ).then((res) => res.json()),
           fetch(
             encodeURI(
               `https://api.rawg.io/api/games/${slug}/game-series?key=${API_KEY}`
             )
-          ).then(res => res.json()),
+          ).then((res) => res.json()),
           fetch(
             encodeURI(
               `https://api.rawg.io/api/games/${slug}/screenshots?key=${API_KEY}&page_size=40`
             )
-          ).then(res => res.json()),
+          ).then((res) => res.json()),
           fetch(
             encodeURI(
               `https://api.rawg.io/api/games/${slug}/stores?key=${API_KEY}`
             )
-          ).then(res => res.json()),
+          ).then((res) => res.json()),
           fetch(
             encodeURI(
               `https://api.rawg.io/api/games/${slug}/suggested?key=${API_KEY}`
             )
-          ).then(res => res.json()),
+          ).then((res) => res.json()),
         ]);
 
       setslugDetails(slugDetails);
@@ -59,8 +59,8 @@ function Game({ slug }) {
     ? `https://res.cloudinary.com/demo/image/fetch/c_fill,w_400,h_600/${slugDetails?.background_image}`
     : '';
   const currentUrl = slugDetails
-    ? `https://gameportal.savokos.com/games/${slugDetails?.slug}`
-    : 'https://gameportal.savokos.com';
+    ? `https://gameportal.savo-kos.com/games/${slugDetails?.slug}`
+    : 'https://gameportal.savo-kos.com';
   const title = slugDetails
     ? slugDetails?.name_original + ' - Game Portal'
     : 'Game Portal Game';
@@ -88,7 +88,7 @@ function Game({ slug }) {
         <S.SuggestedGames>
           <h1>Similar Games</h1>
           {suggestions && (
-            <GamesListRow games={suggestions} className="games-list" />
+            <GamesListRow games={suggestions} className='games-list' />
           )}
         </S.SuggestedGames>
         {franchise && franchise.length > 0 && (

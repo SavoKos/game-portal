@@ -15,7 +15,7 @@ function Accordion({ data, title, toggleAccordion, currentAccordion }) {
   } = filters;
   const currentFilter = filters[currentAccordion];
 
-  const dataItemClass = dataItem => {
+  const dataItemClass = (dataItem) => {
     if (currentAccordion === 'Stores')
       return currentFilter?.includes(dataItem.id)
         ? 'data-item active'
@@ -26,15 +26,15 @@ function Accordion({ data, title, toggleAccordion, currentAccordion }) {
       : 'data-item';
   };
 
-  const applyFilter = value => {
+  const applyFilter = (value) => {
     setPage(1);
     setGames(null);
-    const updateFilter = prevFilter => {
+    const updateFilter = (prevFilter) => {
       if (!prevFilter) return value.toString();
       if (prevFilter.includes(value)) {
         return prevFilter
           .split(',')
-          .filter(filterValue => filterValue !== value.toString())
+          .filter((filterValue) => filterValue !== value.toString())
           .join(',');
       }
       return prevFilter + ',' + value;
@@ -42,15 +42,15 @@ function Accordion({ data, title, toggleAccordion, currentAccordion }) {
 
     switch (currentAccordion) {
       case 'Stores':
-        return setStores(prevStores => updateFilter(prevStores));
+        return setStores((prevStores) => updateFilter(prevStores));
       case 'Developers':
-        return setDevelopers(prevDevelopers => updateFilter(prevDevelopers));
+        return setDevelopers((prevDevelopers) => updateFilter(prevDevelopers));
       case 'Publishers':
-        return setPublishers(prevPublishers => updateFilter(prevPublishers));
+        return setPublishers((prevPublishers) => updateFilter(prevPublishers));
       case 'Genres':
-        return setGenres(prevGenres => updateFilter(prevGenres));
+        return setGenres((prevGenres) => updateFilter(prevGenres));
       case 'Tags':
-        return setTags(prevTags => updateFilter(prevTags));
+        return setTags((prevTags) => updateFilter(prevTags));
     }
   };
 
@@ -59,7 +59,7 @@ function Accordion({ data, title, toggleAccordion, currentAccordion }) {
       <S.Accordion>
         <S.AccordionHead onClick={() => toggleAccordion(title)}>
           <p>{title}</p>
-          <Icon type="icon-iov-arrow-down" />
+          <Icon type='icon-iov-arrow-down' />
         </S.AccordionHead>
       </S.Accordion>
     );
@@ -68,12 +68,12 @@ function Accordion({ data, title, toggleAccordion, currentAccordion }) {
     <S.Accordion>
       <S.AccordionHead onClick={() => toggleAccordion(title)}>
         <p>{title}</p>
-        <Icon type="icon-iov-arrow-down" />
+        <Icon type='icon-iov-arrow-down' />
       </S.AccordionHead>
 
       {currentAccordion === title && (
         <S.AccordionContent>
-          {data?.map(dataItem => (
+          {data?.map((dataItem) => (
             <p
               className={`${dataItemClass(dataItem)}`}
               key={dataItem.id}
@@ -117,10 +117,6 @@ S.AccordionHead = styled.div`
 
   p {
     font-size: 1.05rem;
-  }
-
-  &:hover {
-    filter: brightness(1.5);
   }
 `;
 
