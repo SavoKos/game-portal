@@ -4,6 +4,6 @@ module.exports = {
     SERVER: process.env.SERVER,
   },
   images: {
-    domains: ['media.rawg.io', 'res.cloudinary.com', 'links.savo-kos.com'],
+    domains: ['media.rawg.io', 'res.cloudinary.com', 'links.savokos.com'],
   },
 };

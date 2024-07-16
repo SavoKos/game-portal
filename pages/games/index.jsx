@@ -25,7 +25,7 @@ function Games() {
   return (
     <Layout
       title='All Games - Game Portal'
-      url='https://gameportal.savo-kos.com/games'
+      url='https://gameportal.savokos.com/games'
       decription='Search, filter and find your favorite game among others'
       image='https://res.cloudinary.com/dicynt7ms/image/upload/v1623090690/game-portal/logo_pj7xg0.png'
     >

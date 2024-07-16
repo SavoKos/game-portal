@@ -29,7 +29,7 @@ export default function Layout({
         <meta property='og:description' content={description} />
         <meta property='og:image' content={image}></meta>
         <meta property='og:site_name' content='Discover your favorite game' />
-        <meta property='article:publisher' content='https://savo-kos.com' />
+        <meta property='article:publisher' content='https://savokos.com' />
       </Head>
       {children}
     </>

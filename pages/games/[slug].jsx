@@ -57,8 +57,8 @@ function Game({ slug }) {
 
   const coverImage = slugDetails ? slugDetails?.background_image : '';
   const currentUrl = slugDetails
-    ? `https://gameportal.savo-kos.com/games/${slugDetails?.slug}`
-    : 'https://gameportal.savo-kos.com';
+    ? `https://gameportal.savokos.com/games/${slugDetails?.slug}`
+    : 'https://gameportal.savokos.com';
   const title = slugDetails
     ? slugDetails?.name_original + ' - Game Portal'
     : 'Game Portal Game';
